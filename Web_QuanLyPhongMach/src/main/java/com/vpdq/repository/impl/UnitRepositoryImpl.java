@@ -45,14 +45,5 @@ public class UnitRepositoryImpl implements UnitRepository {
         return query.getResultList();
     }
 
-//    @Override
-//    public String getUnitById(Unit unit ) {
-//        String rs = "";
-//        Session s = this.sessionFactory.getObject().getCurrentSession();
-//        Query q = s.createQuery("Select U.name From Unit U Where U.id= :unitid");
-//        q.setParameter("unitid", unit.getId());
-//        rs = q.toString();
-//        return rs;
-//    }
     
 }

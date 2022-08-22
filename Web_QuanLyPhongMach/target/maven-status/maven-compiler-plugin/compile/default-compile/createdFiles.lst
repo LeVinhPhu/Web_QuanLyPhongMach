@@ -28,6 +28,7 @@ com\vpdq\configs\HibernateConfig.class
 com\vpdq\repository\EmployeeRepository.class
 com\vpdq\pojo\Prescription.class
 com\vpdq\pojo\Status.class
+com\vpdq\controllers\ApiMedicineController.class
 com\vpdq\configs\DispatcherServletInit.class
 com\vpdq\repository\PositionRepository.class
 com\vpdq\service\impl\MedicineServiceImpl.class

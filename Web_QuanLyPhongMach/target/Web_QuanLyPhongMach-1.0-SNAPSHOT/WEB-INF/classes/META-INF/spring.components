@@ -2,6 +2,7 @@ com.vpdq.configs.HibernateConfig=org.springframework.stereotype.Component
 com.vpdq.configs.TilesConfig=org.springframework.stereotype.Component
 com.vpdq.configs.WebAppContextConfig=org.springframework.stereotype.Component
 com.vpdq.controllers.AdminController=org.springframework.stereotype.Component
+com.vpdq.controllers.ApiMedicineController=org.springframework.stereotype.Component
 com.vpdq.controllers.CustomerController=org.springframework.stereotype.Component
 com.vpdq.controllers.EmployeeController=org.springframework.stereotype.Component
 com.vpdq.controllers.HomeController=org.springframework.stereotype.Component

@@ -5,11 +5,101 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 
 <div class="col-md-2 col-12 mb-2 btn btn-success">
     <a 
         href="<c:url value="/admins/adminIndex"/>" 
         style="text-decoration: none; color: white">Quay lại</a>
 </div>
+
+<h1 class="text-center">QUẢN LÝ THUỐC</h1>
+
+<div style="overflow: hidden">
+    <div style="width:24%; float:left; margin-right: 1%">
+        <h3>Thêm Thuốc</h3>
+        <c:url value="/admins/medicinesManager" var="action" />
+        <%--<c:if>
+
+        </c:if>--%>
+        <form:form method="post" action="${action}" modelAttribute="medicine">
+            <form:errors path="*" element="div" cssClass="alert alert-danger" />
+            <div class="form-floating mb-2 mt-3">
+                <form:input type="text" path="name" class="form-control" id="name" placeholder="Nhap ten" name="name" />
+                <label for="name">Tên thuốc</label>
+            </div>
+            <div class="form-floating mb-3 mt-3">
+                <form:input type="number" path="unitPrice" class="form-control" id="unitPrice" placeholder="Nhap gia" name="name" />
+                <label for="name">Giá thuốc</label>
+            </div>
+            <div class="form-floating mb-3 mt-3">
+                <form:select path="unitId" class="form-select" id="unit" name="unit">
+                    <c:forEach items="${units}" var="u">
+                        <option value="${u.id}">${u.name}</option>
+                    </c:forEach>
+                </form:select>
+                <label for="sel1" class="form-label">Đơn vị</label>
+            </div>
+            <div class="form-floating mb-3 mt-3">
+                <form:select path="unitId" class="form-select" id="unit" name="unit">
+                    <option  disabled="disabled" selected="selected" value="null">Chọn nhà cung cấp</option>
+                    <c:forEach items="${units}" var="u">
+                        <option value="${u.id}">${u.name}</option>
+                    </c:forEach>
+                </form:select>
+                <label for="sel1" class="form-label">Nhà cung cấp</label>
+            </div>
+             
+            <div style="overflow: hidden">              
+                <label for="mDay">Ngày sản xuất</label>
+                <input type="date" id="mDay" name="mDay" style="float: right">
+            </div>
+            
+            <br>
+
+            <div style="overflow: hidden"s>              
+                <label for="eDay">Hạn sử dụng</label>
+                <input type="date" id="mDay" name="eDay" style="float: right">
+            </div>
+
+            
+            <input type="submit" value="Thêm thuốc" class="btn btn-warning mb-3 mt-3" />
+        </form:form>    
+    </div>
+
+
+    <div style="width:74%; float: left; margin-left: 1%">
+        <table class="table">
+            <tr>
+                <th></th>
+                <th>Tên thuốc</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Đơn vị</th>
+                <th></th>
+                <th></th>
+                <th></th>
+
+            </tr>
+            <tbody id="myMedicine">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+<!--sử dụng api lấy danh sách thuốc-->
+<script src="<c:url value="/js/medicine.js" />"></script>
+<script>
+    <c:url value="/api/medicines" var="m" />
+    window.onload = function () {
+        getMedicines('${m}');
+    };
+
+</script>

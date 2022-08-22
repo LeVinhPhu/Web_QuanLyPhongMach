@@ -66,12 +66,10 @@ public class Medicine implements Serializable {
     @Column(name = "quantity")
     private Integer quantity;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "manufacturing_date")
     @Temporal(TemporalType.DATE)
     private Date manufacturingDate;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "expiry_date")
     @Temporal(TemporalType.DATE)
     private Date expiryDate;
