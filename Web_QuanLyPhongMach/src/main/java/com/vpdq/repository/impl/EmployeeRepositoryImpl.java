@@ -29,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-@PropertySource("classpath:message.properties")
+@PropertySource("classpath:messages.properties")
 public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     // lien ket voi pojo
