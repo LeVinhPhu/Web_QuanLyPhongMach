@@ -4,6 +4,8 @@
  */
 package com.vpdq.configs;
 
+import com.vpdq.formatters.MedicalRecordFormatter;
+import com.vpdq.formatters.SupplierFormatter;
 import com.vpdq.formatters.UnitFormatter;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -71,7 +73,10 @@ public class WebAppContextConfig implements WebMvcConfigurer {
     @Override
     public void addFormatters(FormatterRegistry r) {
         r.addFormatter(new UnitFormatter());
+        r.addFormatter(new SupplierFormatter());
+//        r.addFormatter(new MedicalRecordFormatter());
     }
+
 
     @Override
     public Validator getValidator() {

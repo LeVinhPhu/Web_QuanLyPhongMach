@@ -7,6 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
@@ -16,10 +17,8 @@
         style="text-decoration: none; color: white">Quay lại</a>
 </div>
 
-<h1 class="text-center">QUẢN LÝ THUỐC</h1>
-
-<div style="overflow: hidden">
-    <div style="width:24%; float:left; margin-right: 1%">
+<div class="row">
+    <div class="col-md-3 col-xs-12">
         <h3>Thêm Thuốc</h3>
         <c:url value="/admins/medicinesManager" var="action" />
         <%--<c:if>
@@ -37,7 +36,7 @@
                         <option value="${u.id}">${u.name}</option>
                     </c:forEach>
                 </form:select>
-                <label for="sel1" class="form-label">Đơn vị</label>
+                <label for="unit" class="form-label">Đơn vị</label>
             </div>
             <div class="form-floating mb-3 mt-3">
                 <form:input type="number" path="unitPrice" class="form-control" id="unitPrice" placeholder="Nhap gia" name="name" />
@@ -49,13 +48,14 @@
                 <label for="name">Số lượng</label>
             </div>
             <div class="form-floating mb-3 mt-3">
-                <form:select path="unitId" class="form-select" id="unit" name="unit">
+                <form:select path="supplierId" class="form-select" id="sup" name="sup">
                     <option  disabled="disabled" selected="selected" value="null">Chọn nhà cung cấp</option>
-                    <c:forEach items="${units}" var="u">
-                        <option value="${u.id}">${u.name}</option>
+                    
+                    <c:forEach items="${suppliers}" var="s">
+                        <option value="${s.id}">${s.companyName}</option>
                     </c:forEach>
                 </form:select>
-                <label for="sel1" class="form-label">Nhà cung cấp</label>
+                <label for="sup" class="form-label">Nhà cung cấp</label>
             </div>
             <div class="form-floating mb-2 mt-3">
                 <form:input type="text" path="note" class="form-control" id="name" placeholder="Ghi chu" name="note" />
@@ -78,8 +78,10 @@
         </form:form>    
     </div>
 
-
-    <div style="width:74%; float: left; margin-left: 1%">
+        <div class="col-md-1 col-xs-12"></div>
+        
+       
+    <div class="col-md-8 col-xs-12">
         <table class="table">
             <tr>
                 <th></th>

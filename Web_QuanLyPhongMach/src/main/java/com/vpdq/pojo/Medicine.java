@@ -7,7 +7,6 @@ package com.vpdq.pojo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,9 +20,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -31,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author vinhp
+ * @author phamt
  */
 @Entity
 @Table(name = "medicine")
@@ -42,8 +38,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Medicine.findByName", query = "SELECT m FROM Medicine m WHERE m.name = :name"),
     @NamedQuery(name = "Medicine.findByUnitPrice", query = "SELECT m FROM Medicine m WHERE m.unitPrice = :unitPrice"),
     @NamedQuery(name = "Medicine.findByQuantity", query = "SELECT m FROM Medicine m WHERE m.quantity = :quantity"),
-    @NamedQuery(name = "Medicine.findByManufacturingDate", query = "SELECT m FROM Medicine m WHERE m.manufacturingDate = :manufacturingDate"),
-    @NamedQuery(name = "Medicine.findByExpiryDate", query = "SELECT m FROM Medicine m WHERE m.expiryDate = :expiryDate"),
     @NamedQuery(name = "Medicine.findByImage", query = "SELECT m FROM Medicine m WHERE m.image = :image"),
     @NamedQuery(name = "Medicine.findByNote", query = "SELECT m FROM Medicine m WHERE m.note = :note")})
 public class Medicine implements Serializable {
@@ -56,24 +50,15 @@ public class Medicine implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50, message = "{medicine.name.nullErr}")
+    @Size(min = 1, max = 50)
     @Column(name = "name")
     private String name;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "unit_price")
-    @Min(value = 10000, message = "{medicine.unitPrice.minErr}")
     private BigDecimal unitPrice;
     @Column(name = "quantity")
     private Integer quantity;
-    @Basic(optional = false)
-    @Column(name = "manufacturing_date")
-    @Temporal(TemporalType.DATE)
-    private Date manufacturingDate;
-    @Basic(optional = false)
-    @Column(name = "expiry_date")
-    @Temporal(TemporalType.DATE)
-    private Date expiryDate;
-    @Size(max = 100)
+    @Size(max = 300)
     @Column(name = "image")
     private String image;
     @Size(max = 200)
@@ -95,11 +80,9 @@ public class Medicine implements Serializable {
         this.id = id;
     }
 
-    public Medicine(Integer id, String name, Date manufacturingDate, Date expiryDate) {
+    public Medicine(Integer id, String name) {
         this.id = id;
         this.name = name;
-        this.manufacturingDate = manufacturingDate;
-        this.expiryDate = expiryDate;
     }
 
     public Integer getId() {
@@ -132,22 +115,6 @@ public class Medicine implements Serializable {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-    }
-
-    public Date getManufacturingDate() {
-        return manufacturingDate;
-    }
-
-    public void setManufacturingDate(Date manufacturingDate) {
-        this.manufacturingDate = manufacturingDate;
-    }
-
-    public Date getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(Date expiryDate) {
-        this.expiryDate = expiryDate;
     }
 
     public String getImage() {

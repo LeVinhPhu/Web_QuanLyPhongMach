@@ -37,5 +37,10 @@ public class MedicineServiceImpl implements MedicineService {
 //        m.setImage("");  XỬ LÝ UPLOAD ẢNH
         return this.medicineRepository.addMedicine(m);
     }
+
+    @Override
+    public List<Medicine> getMedicines2(Map<String, String> params, int page) {
+        return this.medicineRepository.getMedicines2(params, page);
+    }
     
 }

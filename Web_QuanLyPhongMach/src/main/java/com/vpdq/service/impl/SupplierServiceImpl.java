@@ -4,9 +4,9 @@
  */
 package com.vpdq.service.impl;
 
-import com.vpdq.pojo.Unit;
-import com.vpdq.repository.UnitRepository;
-import com.vpdq.service.UnitService;
+import com.vpdq.pojo.Supplier;
+import com.vpdq.repository.SupplierRepository;
+import com.vpdq.service.SupplierService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,20 +16,12 @@ import org.springframework.stereotype.Service;
  * @author phamt
  */
 @Service
-public class UnitServiceImpl implements UnitService {
+public class SupplierServiceImpl implements SupplierService {
     @Autowired
-    private UnitRepository unitRepository;
+    private SupplierRepository supplierRepository;
 
     @Override
-    public List<Unit> getUnits() {
-        return this.unitRepository.getUnits();
+    public List<Supplier> getSuppliers() {
+        return this.supplierRepository.getSuppliers();
     }
-
-//    @Override
-//    public String getUnitById(Unit unit) {
-//        return this.unitRepository.getUnitById(unit);
-//    }
-    
-    
-
 }

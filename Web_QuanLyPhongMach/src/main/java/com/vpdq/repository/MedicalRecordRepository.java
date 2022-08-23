@@ -4,7 +4,6 @@
  */
 package com.vpdq.repository;
 
-import com.vpdq.pojo.Medicine;
 import java.util.List;
 import java.util.Map;
 
@@ -12,11 +11,9 @@ import java.util.Map;
  *
  * @author phamt
  */
-public interface MedicineRepository {
-    List<Object[]> getMedicines(Map<String, String> params, int page);
-    List<Medicine> getMedicines2(Map<String, String> params, int page);
-    
-    boolean deleteMedicine(int id);
-    boolean addMedicine(Medicine m);
-    
+public interface MedicalRecordRepository {
+//    List<Object[]> revenueStatistics();
+    List<Object[]> revenueStatistics();
+//    List<Object[]> revenueStatisticsByYear(int year);
+    List<Object[]> revenueStatisticsByQuarter(int quarter, int year);
 }

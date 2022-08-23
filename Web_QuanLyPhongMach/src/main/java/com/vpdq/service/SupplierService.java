@@ -4,14 +4,13 @@
  */
 package com.vpdq.service;
 
-import com.vpdq.pojo.Unit;
+import com.vpdq.pojo.Supplier;
 import java.util.List;
 
 /**
  *
  * @author phamt
  */
-public interface UnitService {
-    List<Unit> getUnits();
-//    String getUnitById(Unit unit);
+public interface SupplierService {
+    List<Supplier> getSuppliers();
 }

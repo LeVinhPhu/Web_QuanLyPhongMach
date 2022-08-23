@@ -6,8 +6,10 @@ package com.vpdq.controllers;
 
 import com.vpdq.pojo.Medicine;
 import com.vpdq.service.EmployeeService;
+import com.vpdq.service.MedicalRecordService;
 import com.vpdq.service.MedicineService;
 import com.vpdq.service.PositionService;
+import com.vpdq.service.SupplierService;
 import com.vpdq.service.UnitService;
 import java.util.Map;
 import javax.validation.Valid;
@@ -41,12 +43,20 @@ public class AdminController {
     @Autowired
     private UnitService unitService;
 
+    @Autowired
+    private SupplierService supplierService;
+    
+    @Autowired
+    private MedicalRecordService medicalRecordService;
+    
     
     //dung chung
     @ModelAttribute
     public void commonAttribute(Model model) {
         model.addAttribute("positions", this.positionService.getPosition());
         model.addAttribute("units", this.unitService.getUnits());
+        model.addAttribute("suppliers", this.supplierService.getSuppliers());
+//        model.addAttribute("revenueStats", this.medicalRecordService.revenueStatistics());
     }
 
     
@@ -71,17 +81,27 @@ public class AdminController {
     }
     
     @GetMapping("/reportsManager")
-    public String reportsManager (){
+    public String reportsManager (Model model){
+//            @RequestParam(value = "quarter", defaultValue = "0") int quarter,
+//            @RequestParam(value = "year", defaultValue = "2022") int year){
+        model.addAttribute("revenueStats", this.medicalRecordService.revenueStatistics());
+//        model.addAttribute("revenueStatsByQuarter", this.medicalRecordService.revenueStatisticsByQuarter(quarter, year));
         return "reportsManager";
     }
+  
+  
     
     @GetMapping("/medicinesManager")
-    public String listMedicine (Model model){
+    public String listMedicine (Model model) {
         model.addAttribute("medicine", new Medicine());
+        
+//        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+//        model.addAttribute("medicine2", this.medicineService.getMedicines2(params, page));
+        
         return "medicinesManager";
     }
     
-      @PostMapping("/medicinesManager")
+    @PostMapping("/medicinesManager")
     public String addMedicine(@ModelAttribute(value = "medicine") @Valid Medicine m, 
             BindingResult rs) {
         if (rs.hasErrors())

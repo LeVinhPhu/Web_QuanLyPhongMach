@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author vinhp
+ * @author phamt
  */
 @Entity
 @Table(name = "admin")
@@ -89,7 +89,7 @@ public class Admin implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "type_of_admin")
     private String typeOfAdmin;
-    @Size(max = 100)
+    @Size(max = 300)
     @Column(name = "image")
     private String image;
     @Basic(optional = false)

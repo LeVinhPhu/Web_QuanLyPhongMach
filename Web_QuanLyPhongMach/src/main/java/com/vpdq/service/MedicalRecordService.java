@@ -4,14 +4,14 @@
  */
 package com.vpdq.service;
 
-import com.vpdq.pojo.Unit;
 import java.util.List;
 
 /**
  *
  * @author phamt
  */
-public interface UnitService {
-    List<Unit> getUnits();
-//    String getUnitById(Unit unit);
+public interface MedicalRecordService {
+    List<Object[]> revenueStatistics();
+//    List<Object[]> revenueStatisticsByYear(int year);
+    List<Object[]> revenueStatisticsByQuarter(int quarter, int year);
 }

@@ -4,8 +4,8 @@
  */
 package com.vpdq.repository.impl;
 
-import com.vpdq.pojo.Unit;
-import com.vpdq.repository.UnitRepository;
+import com.vpdq.pojo.Supplier;
+import com.vpdq.repository.SupplierRepository;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
@@ -25,26 +25,16 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class UnitRepositoryImpl implements UnitRepository {
-
+public class SupplierRepositoryImp implements SupplierRepository {
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
-
+    
     @Override
-    public List<Unit> getUnits() {
-//        Session s = this.sessionFactory.getObject().getCurrentSession();
-//        CriteriaBuilder b = s.getCriteriaBuilder();
-//            CriteriaQuery<Unit> q = b.createQuery(Unit.class);
-//            Root root = q.from(Unit.class);
-//            q.select(root);
-//        List<Predicate> predicates = new ArrayList<>();
-//        q.where(predicates.toArray(Predicate[]::new));
-//        
-//        Query query = s.createQuery(q);
-//        return query.getResultList();
-        Session s = this.sessionFactory.getObject().getCurrentSession();
-        Query q = s.createQuery("From Unit");
+    public List<Supplier> getSuppliers() {
+
+    Session s = this.sessionFactory.getObject().getCurrentSession();
+        Query q = s.createQuery("From Supplier");
         return q.getResultList();
     }
-
+    
 }
