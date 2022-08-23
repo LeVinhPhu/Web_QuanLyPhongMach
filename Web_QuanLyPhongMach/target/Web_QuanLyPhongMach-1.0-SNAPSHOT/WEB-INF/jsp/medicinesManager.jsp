@@ -32,16 +32,21 @@
                 <label for="name">Tên thuốc</label>
             </div>
             <div class="form-floating mb-3 mt-3">
-                <form:input type="number" path="unitPrice" class="form-control" id="unitPrice" placeholder="Nhap gia" name="name" />
-                <label for="name">Giá thuốc</label>
-            </div>
-            <div class="form-floating mb-3 mt-3">
                 <form:select path="unitId" class="form-select" id="unit" name="unit">
                     <c:forEach items="${units}" var="u">
                         <option value="${u.id}">${u.name}</option>
                     </c:forEach>
                 </form:select>
                 <label for="sel1" class="form-label">Đơn vị</label>
+            </div>
+            <div class="form-floating mb-3 mt-3">
+                <form:input type="number" path="unitPrice" class="form-control" id="unitPrice" placeholder="Nhap gia" name="name" />
+                <label for="name">Đơn giá</label>
+            </div>
+            
+            <div class="form-floating mb-3 mt-3">
+                <form:input type="number" path="quantity" class="form-control" id="unitPrice" placeholder="Nhap so luong" name="name" />
+                <label for="name">Số lượng</label>
             </div>
             <div class="form-floating mb-3 mt-3">
                 <form:select path="unitId" class="form-select" id="unit" name="unit">
@@ -52,8 +57,11 @@
                 </form:select>
                 <label for="sel1" class="form-label">Nhà cung cấp</label>
             </div>
-             
-            <div style="overflow: hidden">              
+            <div class="form-floating mb-2 mt-3">
+                <form:input type="text" path="note" class="form-control" id="name" placeholder="Ghi chu" name="note" />
+                <label for="note">Ghi chú</label>
+            </div>
+<!--            <div style="overflow: hidden">              
                 <label for="mDay">Ngày sản xuất</label>
                 <input type="date" id="mDay" name="mDay" style="float: right">
             </div>
@@ -63,7 +71,7 @@
             <div style="overflow: hidden"s>              
                 <label for="eDay">Hạn sử dụng</label>
                 <input type="date" id="mDay" name="eDay" style="float: right">
-            </div>
+            </div>-->
 
             
             <input type="submit" value="Thêm thuốc" class="btn btn-warning mb-3 mt-3" />

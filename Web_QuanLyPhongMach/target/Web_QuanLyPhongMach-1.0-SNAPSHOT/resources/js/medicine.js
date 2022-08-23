@@ -33,7 +33,7 @@ function getMedicines(endpoint) {
                 
                     h += `
                     <tr id="row${data[i][0]}">
-                        <td><img src="https://res.cloudinary.com/dieuque/image/upload/v1660877416/khang-khang-sinh-1574298226633568511405_dxwhyb.png" width="50" /></td>
+                        <td>${i+1}</td>
                         <td>${data[i][1]}</td>
                         <td>${data[i][2]}</td>
                         <td>${data[i][3]}</td>
