@@ -28,6 +28,7 @@ com\vpdq\pojo\Department.class
 com\vpdq\service\impl\MedicalRecordServiceImpl.class
 com\vpdq\service\impl\SupplierServiceImpl.class
 com\vpdq\service\UnitService.class
+com\vpdq\controllers\UserController.class
 com\vpdq\controllers\ApiController.class
 com\vpdq\configs\HibernateConfig.class
 com\vpdq\repository\EmployeeRepository.class

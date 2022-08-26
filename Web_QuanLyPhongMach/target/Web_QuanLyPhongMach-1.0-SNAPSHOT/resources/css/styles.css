@@ -26,6 +26,39 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     box-shadow: 1px 1px 1px 5px #fcecfd;
 }
 
-.setMargin {
+
+
+div.contents {
+    display: flex;
+    width: 100%;
+    
+}
+
+
+div.left {
+    width: 10%;
+    float: left;
+    background-color: blue;
+}
+
+div.right {
+    width: 80%;
+    float: left;
     margin: 100px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+ul.menu2 {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width:100%;
+    display: block;
+    padding: 2px 9px;
+    position: fixed;
+    left:2px;
+    top: 25%;
+    width: 18%;
 }

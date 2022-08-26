@@ -3,17 +3,94 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
 */
 /* 
-    Created on : Aug 22, 2022, 9:17:08 AM
+    Created on : Aug 24, 2022, 12:07:12 AM
     Author     : phamt
 */
 
-#titles2 {
-    width:50%;
-    border: 1px solid;
-    padding: 10px;
-    box-shadow: 10px 10px 10px blue inset;
+
+div.contents {
+    display: flex;
+    width: 100%;
+
 }
 
-* {
-    background-color: blue;
+
+/*trái*/
+div.left {
+    width: 20%;
 }
+
+ul.leftContent {
+    list-style-type: none;
+    margin: 0;
+    width:100%;
+    display: block;
+    padding: 2px 9px;
+    position: fixed;
+    left:2px;
+    top: 25%;
+    width: 18%;
+}
+
+ul.leftContent > li > a {
+    display: block;
+    padding: 10px 18px;
+    text-decoration: none;
+    color: black;
+
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 5px lightcyan;
+    margin-bottom: 15px;
+}
+
+
+ul.leftContent > li > a:hover {
+    background: lightcyan !important;
+}
+
+
+
+/*phải*/
+div.right {
+    width: 80%;
+}
+
+div.rightContent {
+    margin: 100px 0px 0px 0px;
+}
+
+.ct {
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.content0 {
+    box-shadow: 1px 1px 1px 5px #bfffc4;
+}
+.content1 {
+    box-shadow: 1px 1px 1px 5px lightcyan;
+}
+
+.content2 {
+    box-shadow: 1px 1px 1px 5px #fcecfd;
+}
+
+.content3 {
+    box-shadow: 1px 1px 1px 5px cornsilk;
+}
+
+.myBorder1 {
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 5px lightcyan;
+}
+
+.myBorder2 {
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 5px #fcecfd;
+}
+
+.myBorder3 {
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 5px cornsilk;
+}
+

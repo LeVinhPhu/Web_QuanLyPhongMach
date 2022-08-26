@@ -80,12 +80,13 @@ public class AdminController {
         return "customersManager";
     }
     
-    @GetMapping("/reportsManager")
-    public String reportsManager (Model model){
-//            @RequestParam(value = "quarter", defaultValue = "0") int quarter,
-//            @RequestParam(value = "year", defaultValue = "2022") int year){
+    @RequestMapping("/reportsManager")
+    public String reportsManager (Model model,
+            @RequestParam(value = "year", defaultValue = "0", required = false) int year,
+            @RequestParam(value = "year2", defaultValue = "0", required = false) int year2){
         model.addAttribute("revenueStats", this.medicalRecordService.revenueStatistics());
-//        model.addAttribute("revenueStatsByQuarter", this.medicalRecordService.revenueStatisticsByQuarter(quarter, year));
+        model.addAttribute("revenueStatsByQuarter", this.medicalRecordService.revenueStatisticsByQuarter(year));
+        model.addAttribute("revenueStatsByMonth", this.medicalRecordService.revenueStatisticsByMonth(year2));
         return "reportsManager";
     }
   

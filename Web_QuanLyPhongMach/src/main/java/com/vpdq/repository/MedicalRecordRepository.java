@@ -14,6 +14,6 @@ import java.util.Map;
 public interface MedicalRecordRepository {
 //    List<Object[]> revenueStatistics();
     List<Object[]> revenueStatistics();
-//    List<Object[]> revenueStatisticsByYear(int year);
-    List<Object[]> revenueStatisticsByQuarter(int quarter, int year);
+    List<Object[]> revenueStatisticsByMonth(int year);
+    List<Object[]> revenueStatisticsByQuarter(int year);
 }

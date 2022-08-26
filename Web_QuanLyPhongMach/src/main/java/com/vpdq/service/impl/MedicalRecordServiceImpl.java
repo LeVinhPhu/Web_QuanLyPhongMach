@@ -25,8 +25,13 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     }
 
     @Override
-    public List<Object[]> revenueStatisticsByQuarter(int quarter, int year) {
-        return this.medicalRecordRepository.revenueStatisticsByQuarter(quarter, year);
+    public List<Object[]> revenueStatisticsByQuarter(int year) {
+        return this.medicalRecordRepository.revenueStatisticsByQuarter(year);
+    }
+
+    @Override
+    public List<Object[]> revenueStatisticsByMonth(int year) {
+        return this.medicalRecordRepository.revenueStatisticsByMonth(year);
     }
     
 }

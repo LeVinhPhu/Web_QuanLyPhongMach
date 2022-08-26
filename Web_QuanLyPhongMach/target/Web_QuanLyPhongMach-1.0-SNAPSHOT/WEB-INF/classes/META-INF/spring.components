@@ -6,6 +6,7 @@ com.vpdq.controllers.ApiController=org.springframework.stereotype.Component
 com.vpdq.controllers.CustomerController=org.springframework.stereotype.Component
 com.vpdq.controllers.EmployeeController=org.springframework.stereotype.Component
 com.vpdq.controllers.HomeController=org.springframework.stereotype.Component
+com.vpdq.controllers.UserController=org.springframework.stereotype.Component
 com.vpdq.pojo.Admin=javax.persistence.Entity,javax.persistence.Table,javax.xml.bind.annotation.XmlRootElement,javax.persistence.NamedQueries
 com.vpdq.pojo.Admin_=javax.annotation.Generated,javax.persistence.metamodel.StaticMetamodel
 com.vpdq.pojo.Appointment=javax.persistence.Entity,javax.persistence.Table,javax.xml.bind.annotation.XmlRootElement,javax.persistence.NamedQueries
