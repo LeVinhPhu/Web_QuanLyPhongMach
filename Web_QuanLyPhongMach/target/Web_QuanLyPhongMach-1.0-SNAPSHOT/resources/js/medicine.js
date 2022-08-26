@@ -38,11 +38,11 @@ function getMedicines(endpoint) {
                         <td>${data[i][2]}</td>
                         <td>${data[i][3]}</td>
                         <td>${data[i][4]}</td>
-                        <td><button class="btn btn-primary">DETAILS</button></td>
-                        <td><button class="btn btn-warning">UPDATE</button></td>
+                        <td><button class="btn">DETAILS</button></td>
+                        <td><button class="btn">UPDATE</button></td>
                         <td>
                             <div class="spinner-border text-warning" style="display:none" id="load${data[i][0]}"></div>
-                            <button class="btn btn-success" onclick="deleteMedicine('${endpoint + "/" + data[i][0]}', ${data[i][0]}, this)">DELETE</button>
+                            <button class="btn" style="background-color: #FFCDCD" onclick="deleteMedicine('${endpoint + "/" + data[i][0]}', ${data[i][0]}, this)">DELETE</button>
                         </td>
                     </tr>
                     `;

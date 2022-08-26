@@ -57,25 +57,25 @@
                 </form:select>
                 <label for="sup" class="form-label">Nhà cung cấp</label>
             </div>
-            <div class="form-floating mb-2 mt-3">
+
+            <div class="mb-2 mt-3">
+                <label style="margin-left: 4.5%;" class="ml-2"for="file">Chọn ảnh</label>
                 <form:input type="file" path="file" id="file" class="form-control" />
-                <label for="file">Chọn ảnh</label>
             </div>
             <div class="form-floating mb-2 mt-3">
                 <form:input type="text" path="note" class="form-control" id="name" placeholder="Ghi chu" name="note" />
                 <label for="note">Ghi chú</label>
             </div>
-
-            <input type="submit" value="Thêm thuốc" class="btn btn-warning mb-3 mt-3" />
+                <input type="submit" value="Thêm thuốc" class="btn mb-3 mt-3" style="background-color: #d1e7dd" />
         </form:form>    
     </div>
 
-    <div class="col-md-1 col-xs-12"></div>
+<!--    <div class="col-md-1 col-xs-12"></div>-->
 
 
-    <div class="col-md-8 col-xs-12">
-        <table class="table">
-            <tr>
+    <div class="col-md-9 col-xs-12">
+        <table class="table table-hover ">
+            <tr class="table-success">
                 <th></th>
                 <th>Tên thuốc</th>
                 <th>Số lượng</th>

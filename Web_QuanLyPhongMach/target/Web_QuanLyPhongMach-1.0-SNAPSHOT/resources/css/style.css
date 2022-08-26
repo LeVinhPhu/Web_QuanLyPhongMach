@@ -37,15 +37,14 @@ ul.leftContent > li > a {
     padding: 10px 18px;
     text-decoration: none;
     color: black;
-
     border-radius: 10px;
-    box-shadow: 1px 1px 1px 5px lightcyan;
+    box-shadow: 1px 1px 1px 5px #d1e7dd;
     margin-bottom: 15px;
 }
 
 
 ul.leftContent > li > a:hover {
-    background: lightcyan !important;
+    background: #d1e7dd !important;
 }
 
 
@@ -65,7 +64,7 @@ div.rightContent {
 }
 
 .content0 {
-    box-shadow: 1px 1px 1px 5px #bfffc4;
+    box-shadow: 1px 1px 1px 5px #d1e7dd;
 }
 .content1 {
     box-shadow: 1px 1px 1px 5px lightcyan;
@@ -92,5 +91,10 @@ div.rightContent {
 .myBorder3 {
     border-radius: 10px;
     box-shadow: 1px 1px 1px 5px cornsilk;
+}
+
+tbody#myMedicine {
+    height:80em;
+    overflow:scroll;
 }
 
