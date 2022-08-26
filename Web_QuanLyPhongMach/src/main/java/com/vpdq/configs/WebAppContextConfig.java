@@ -4,6 +4,8 @@
  */
 package com.vpdq.configs;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.vpdq.formatters.MedicalRecordFormatter;
 import com.vpdq.formatters.SupplierFormatter;
 import com.vpdq.formatters.UnitFormatter;
@@ -16,6 +18,7 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -27,7 +30,6 @@ import org.springframework.web.servlet.view.JstlView;
  *
  * @author vinhp
  */
-
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
@@ -37,12 +39,12 @@ import org.springframework.web.servlet.view.JstlView;
     "com.vpdq.service"
 })
 public class WebAppContextConfig implements WebMvcConfigurer {
+
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer conf) {
         conf.enable();
     }
-    
-    
+
 //    //Tao View (chỉ sử dụng khi viết header, footer, content vào 1 file .jsp)
 //    @Bean
 //    public InternalResourceViewResolver viewResolver ()
@@ -55,21 +57,20 @@ public class WebAppContextConfig implements WebMvcConfigurer {
 //        
 //        return r;
 //    }
-    
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/**").addResourceLocations("/resources/images/");
         registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
     }
-    
+
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource m = new ResourceBundleMessageSource();
         m.setBasenames("messages");
         return m;
     }
-    
+
     @Override
     public void addFormatters(FormatterRegistry r) {
         r.addFormatter(new UnitFormatter());
@@ -77,16 +78,34 @@ public class WebAppContextConfig implements WebMvcConfigurer {
 //        r.addFormatter(new MedicalRecordFormatter());
     }
 
-
     @Override
     public Validator getValidator() {
         return validator();
     }
-    
+
     @Bean
     public Validator validator() {
         LocalValidatorFactoryBean v = new LocalValidatorFactoryBean();
         v.setValidationMessageSource(messageSource());
         return v;
+    }
+
+    @Bean
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver resolver
+                = new CommonsMultipartResolver();
+        resolver.setDefaultEncoding("UTF-8");
+        return resolver;
+    }
+
+    @Bean
+    public Cloudinary cloudinary() {
+        Cloudinary cloudinary
+                = new Cloudinary(ObjectUtils.asMap(
+                        "cloud_name", "vinhphuvtv2",
+                        "api_key", "335115886111226",
+                        "api_secret", "Y4A5vCe_8f-liruLKg5FRmjl9tw",
+                        "secure", true));
+        return cloudinary;
     }
 }

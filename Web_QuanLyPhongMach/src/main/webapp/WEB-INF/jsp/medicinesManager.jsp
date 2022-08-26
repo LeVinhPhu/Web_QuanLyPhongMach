@@ -24,7 +24,7 @@
         <%--<c:if>
 
         </c:if>--%>
-        <form:form method="post" action="${action}" modelAttribute="medicine">
+        <form:form method="post" action="${action}" modelAttribute="medicine" enctype="multipart/form-data">
             <form:errors path="*" element="div" cssClass="alert alert-danger" />
             <div class="form-floating mb-2 mt-3">
                 <form:input type="text" path="name" class="form-control" id="name" placeholder="Nhap ten" name="name" />
@@ -42,7 +42,7 @@
                 <form:input type="number" path="unitPrice" class="form-control" id="unitPrice" placeholder="Nhap gia" name="name" />
                 <label for="name">Đơn giá</label>
             </div>
-            
+
             <div class="form-floating mb-3 mt-3">
                 <form:input type="number" path="quantity" class="form-control" id="unitPrice" placeholder="Nhap so luong" name="name" />
                 <label for="name">Số lượng</label>
@@ -50,37 +50,29 @@
             <div class="form-floating mb-3 mt-3">
                 <form:select path="supplierId" class="form-select" id="sup" name="sup">
                     <option  disabled="disabled" selected="selected" value="null">Chọn nhà cung cấp</option>
-                    
+
                     <c:forEach items="${suppliers}" var="s">
                         <option value="${s.id}">${s.companyName}</option>
                     </c:forEach>
                 </form:select>
                 <label for="sup" class="form-label">Nhà cung cấp</label>
             </div>
+                <div>
+                    <label for="file">Chọn ảnh</label>
+                    <form:input type="file" path="file" id="file" class="form-control" />
+                </div>
             <div class="form-floating mb-2 mt-3">
                 <form:input type="text" path="note" class="form-control" id="name" placeholder="Ghi chu" name="note" />
                 <label for="note">Ghi chú</label>
             </div>
-<!--            <div style="overflow: hidden">              
-                <label for="mDay">Ngày sản xuất</label>
-                <input type="date" id="mDay" name="mDay" style="float: right">
-            </div>
-            
-            <br>
 
-            <div style="overflow: hidden"s>              
-                <label for="eDay">Hạn sử dụng</label>
-                <input type="date" id="mDay" name="eDay" style="float: right">
-            </div>-->
-
-            
             <input type="submit" value="Thêm thuốc" class="btn btn-warning mb-3 mt-3" />
         </form:form>    
     </div>
 
-        <div class="col-md-1 col-xs-12"></div>
-        
-       
+    <div class="col-md-1 col-xs-12"></div>
+
+
     <div class="col-md-8 col-xs-12">
         <table class="table">
             <tr>

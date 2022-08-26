@@ -4,6 +4,8 @@
  */
 package com.vpdq.controllers;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.vpdq.pojo.Medicine;
 import com.vpdq.service.EmployeeService;
 import com.vpdq.service.MedicalRecordService;
@@ -11,7 +13,10 @@ import com.vpdq.service.MedicineService;
 import com.vpdq.service.PositionService;
 import com.vpdq.service.SupplierService;
 import com.vpdq.service.UnitService;
+import java.io.IOException;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,6 +54,8 @@ public class AdminController {
     @Autowired
     private MedicalRecordService medicalRecordService;
     
+    @Autowired
+    private Cloudinary cloudinary;
     
     //dung chung
     @ModelAttribute
@@ -105,9 +112,17 @@ public class AdminController {
     @PostMapping("/medicinesManager")
     public String addMedicine(@ModelAttribute(value = "medicine") @Valid Medicine m, 
             BindingResult rs) {
+        try {
+            Map r = this.cloudinary.uploader().upload(m.getFile().getBytes(),
+                    ObjectUtils.asMap("resource_type", "auto"));
+            String img = (String) r.get("secure_url");
+            m.setImage(img);
+        } catch (IOException ex) {
+            System.err.println("ADD MEDICINE " + ex.getMessage());
+        }
+           
         if (rs.hasErrors())
             return "medicinesManager";
-        
         if (this.medicineService.addMedicine(m)==true)
             return "medicinesManager";
         

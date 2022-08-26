@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -141,6 +142,7 @@
 
                 <div class="col-md-6 col-xs-12">
                     <c:url value="/admins/reportsManager" var="action" />
+                    
                     <form action="${action}" method="POST">
                         <div class="mb-3 mt-3">
                             <input type="number" id="number" class="form-control" placeholder="Nhập năm" name="year2">
