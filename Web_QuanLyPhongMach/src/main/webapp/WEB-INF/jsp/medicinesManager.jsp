@@ -57,10 +57,10 @@
                 </form:select>
                 <label for="sup" class="form-label">Nhà cung cấp</label>
             </div>
-                <div>
-                    <label for="file">Chọn ảnh</label>
-                    <form:input type="file" path="file" id="file" class="form-control" />
-                </div>
+            <div class="form-floating mb-2 mt-3">
+                <form:input type="file" path="file" id="file" class="form-control" />
+                <label for="file">Chọn ảnh</label>
+            </div>
             <div class="form-floating mb-2 mt-3">
                 <form:input type="text" path="note" class="form-control" id="name" placeholder="Ghi chu" name="note" />
                 <label for="note">Ghi chú</label>

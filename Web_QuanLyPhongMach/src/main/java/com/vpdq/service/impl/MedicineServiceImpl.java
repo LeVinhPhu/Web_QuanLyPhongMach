@@ -34,7 +34,6 @@ public class MedicineServiceImpl implements MedicineService {
 
     @Override
     public boolean addMedicine(Medicine m) {
-//        m.setImage("");  XỬ LÝ UPLOAD ẢNH
         return this.medicineRepository.addMedicine(m);
     }
 
