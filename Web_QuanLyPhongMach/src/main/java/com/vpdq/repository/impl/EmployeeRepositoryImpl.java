@@ -60,7 +60,6 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         if (params != null) {
             List<Predicate> predicates = new ArrayList<>();
 
-            
             //Tìm theo tên
             String kw = params.get("kw");
             if (kw != null && !kw.isEmpty()) {
@@ -71,27 +70,15 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
                 if (!pfn.equals(pln)) {
                     predicates.add(pln);
                 }
-                
+
             }
 
             //Tìm theo ngày sinh
-            String fdate = params.get("fromDate");
-            if (fdate != null) {
-                Predicate p = b.greaterThanOrEqualTo(root.get("dateOfBirth").as(Date.class), Date.parse(fdate));
-                predicates.add(p);
-            }
-
-            String tdate = params.get("toDate");
-            if (tdate != null) {
-                Predicate p = b.greaterThanOrEqualTo(root.get("dateOfBirth").as(Date.class), Date.parse(tdate));
-                predicates.add(p);
-            }
-
             
             //Tìm theo posision
-            String cateId = params.get("cateId");
-            if (cateId != null) {
-                Predicate p = b.equal(root.get("categoryId"), Integer.parseInt(cateId));
+            String positionId = params.get("positionId");
+            if (positionId != null) {
+                Predicate p = b.equal(root.get("positionId"), Integer.parseInt(positionId));
                 predicates.add(p);
             }
 
@@ -102,6 +89,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
         Query query = session.createQuery(q);
 
+        //Phân trang
         if (page > 0) {
             int size = Integer.parseInt(env.getProperty("page.size").toString());
             int start = (page - 1) * size;
@@ -114,26 +102,42 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Override
     public int countEmployee() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        org.hibernate.query.Query q = session.createQuery("SELECT COUNT(*) FROM Employee");
+
+        return Integer.parseInt(q.getSingleResult().toString());
     }
 
     @Override
-    public boolean addEmployee(Employee p) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean addEmployee(Employee e) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        try {
+            session.save(e);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     @Override
-    public boolean deleteEmployee(int productId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean deleteEmployee(int employeeId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        try {
+            Employee e = session.get(Employee.class, employeeId);
+            session.delete(e);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public List<Object[]> countEmployeeByCate() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return null;
     }
 
-    @Override
-    public List<Object[]> revenueStats(int quarter, int year) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

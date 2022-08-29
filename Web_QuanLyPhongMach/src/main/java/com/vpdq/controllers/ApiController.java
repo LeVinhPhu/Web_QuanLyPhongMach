@@ -4,8 +4,10 @@
  */
 package com.vpdq.controllers;
 
+import com.vpdq.pojo.Employee;
 import com.vpdq.pojo.Medicine;
 import com.vpdq.pojo.Unit;
+import com.vpdq.service.EmployeeService;
 import com.vpdq.service.MedicalRecordService;
 import com.vpdq.service.MedicineService;
 import com.vpdq.service.UnitService;
@@ -31,11 +33,14 @@ public class ApiController {
 
     @Autowired
     private MedicineService medicineService;
-    
 
     @Autowired
     private UnitService unitService;
 
+    @Autowired
+    private EmployeeService employeeServic;
+
+//  API-Que
     @GetMapping("/medicines")
     public ResponseEntity<List<Object[]>> listMedicine() {
         //api/medicines lấy danh sách thuốc phục vụ cho admin/medicines
@@ -45,9 +50,6 @@ public class ApiController {
 //        return "medicines.jsp";
 //    }
 
-    
-    
-    
 //    @GetMapping("/units")
 //    public ResponseEntity<List<Unit>> list() {
 //        return new ResponseEntity<>(this.unitService.getUnits(null, 0), HttpStatus.OK);
@@ -60,6 +62,18 @@ public class ApiController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteMedicine(@PathVariable(value = "medicineId") int id) {
         this.medicineService.deleteMedicine(id);
+    }
+
+//   API-Phu
+    @GetMapping("/employeesManager")
+    public ResponseEntity<List<Employee>> list() {
+        return new ResponseEntity<>(this.employeeServic.getEmployee(null, 0), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/employeesManager/{employeeId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable(value = "employeeId") int employeeId) {
+        this.employeeServic.deleteEmployee(employeeId);
     }
 
 }
