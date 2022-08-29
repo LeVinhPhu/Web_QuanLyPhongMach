@@ -4,6 +4,7 @@
  */
 package com.vpdq.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -26,6 +27,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -57,58 +59,77 @@ public class Employee implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 24)
+    @Size(min = 1, max = 24, message = "{employee.firstName.nullfnErr}")
     @Column(name = "first_name")
     private String firstName;
+    
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 24)
-    @Column(name = "last_name")
+    @Size(min = 1, max = 24, message = "{employee.lastName.nulllnErr}")
+    @Column(name = "last_name")   
     private String lastName;
+    
     @Column(name = "date_of_birth")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
+    
     @Size(max = 10)
     @Column(name = "sex")
     private String sex;
+    
     @Size(max = 100)
     @Column(name = "address")
     private String address;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 45)
+    
+    //@Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @Size(max = 45, message = "{employee.email.nullemlErr}")
     @Column(name = "email")
     private String email;
+    
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
-    @Size(max = 20)
+    @Size(max = 20, message = "{employee.phone.nullphnErr}")
     @Column(name = "phone")
     private String phone;
+    
     @Size(max = 45)
     @Column(name = "specialize")
     private String specialize;
+    
     @Size(max = 300)
     @Column(name = "image")
     private String image;
+    
     @Size(max = 45)
     @Column(name = "username")
     private String username;
+    
     @Size(max = 45)
     @Column(name = "password")
     private String password;
+    
     @Size(max = 200)
     @Column(name = "note")
     private String note;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctorId")
+    @JsonIgnore //
     private Collection<MedicalRecord> medicalRecordCollection;
     @OneToMany(mappedBy = "nurseId")
+    @JsonIgnore //
     private Collection<MedicalRecord> medicalRecordCollection1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeId")
+    @JsonIgnore //
     private Collection<Degree> degreeCollection;
     @JoinColumn(name = "position_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore //
     private Position positionId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeId")
+    @JsonIgnore //
     private Collection<OnCall> onCallCollection;
 
     public Employee() {

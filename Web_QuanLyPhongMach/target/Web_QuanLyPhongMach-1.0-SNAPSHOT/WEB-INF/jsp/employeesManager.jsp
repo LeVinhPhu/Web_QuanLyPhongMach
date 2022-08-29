@@ -1,19 +1,14 @@
 <%-- 
-    Document   : employeemanager
-    Created on : Aug 21, 2022, 10:20:04 AM
+    Document   : employeesManager
+    Created on : Aug 23, 2022, 5:14:47 PM
     Author     : vinhp
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<div class="col-md-2 col-12 mb-2 btn btn-success">
-    <a 
-        href="<c:url value="/admins/adminIndex"/>" 
-        style="text-decoration: none; color: white">Quay lại</a>
-</div>
-
 
 <h1>Quản lý nhân viên</h1>
 <div class="col-md-2 col-12 mb-2 btn btn-success">
@@ -127,3 +122,4 @@
         getEmployees("${u}")
     }
 </script>
+
