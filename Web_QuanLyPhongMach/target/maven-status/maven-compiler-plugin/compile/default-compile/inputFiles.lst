@@ -1,11 +1,14 @@
+C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\configs\SpringSecurityInit.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\service\UnitService.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\service\MedicalRecordService.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\pojo\Appointment.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\service\PositionService.java
+C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\repository\CustomerRepository.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\service\SupplierService.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\repository\PositionRepository.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\repository\impl\PositionRepositoryImpl.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\pojo\Department.java
+C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\service\CustomerService.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\service\impl\SupplierServiceImpl.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\configs\HibernateConfig.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\formatters\UnitFormatter.java
@@ -16,6 +19,7 @@ C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\mai
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\formatters\SupplierFormatter.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\service\impl\UnitServiceImpl.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\repository\SupplierRepository.java
+C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\service\impl\CustomerServiceImpl.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\repository\impl\MedicineRepositoryImpl.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\configs\WebAppContextConfig.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\pojo\Unit.java
@@ -38,6 +42,7 @@ C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\mai
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\service\impl\MedicalRecordServiceImpl.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\pojo\Supplier.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\repository\MedicineRepository.java
+C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\configs\SpringSecurityConfig.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\formatters\MedicalRecordFormatter.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\controllers\UserController.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\pojo\Position.java
@@ -49,4 +54,5 @@ C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\mai
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\repository\UnitRepository.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\repository\impl\EmployeeRepositoryImpl.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\controllers\ApiController.java
+C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\repository\impl\CustomerRepositoryImpl.java
 C:\Users\phamt\OneDrive\Máy tính\Web_QuanLyPhongMach\Web_QuanLyPhongMach\src\main\java\com\vpdq\pojo\Service.java
