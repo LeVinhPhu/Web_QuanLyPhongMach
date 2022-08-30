@@ -88,11 +88,11 @@ public class AdminController {
     }
     
     @PostMapping("/employeesManager")
-    public String addEmployee(@ModelAttribute(value = "employee") @Valid Employee e,
+    public String addEmployee(@ModelAttribute(value = "employee") Employee e,
             BindingResult r) {
-        if (r.hasErrors()) {
-            return "employeesManager"; //return lổi
-        }
+//        if (r.hasErrors()) {
+//            return "employeesManager"; //return lổi
+//        }
         if (this.employeeService.addEmployee(e) == true)
             return "redirect:employeesManager"; //return về trang gì đó
         

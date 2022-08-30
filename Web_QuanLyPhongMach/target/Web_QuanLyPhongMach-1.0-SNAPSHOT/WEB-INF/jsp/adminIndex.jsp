@@ -8,16 +8,19 @@
 <%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<div class="row mt-3">
+    <div class="col-md-12 col-12">
+        <h5>Thông báo</h5>
+    </div>
+</div>
 
-<div class="row mt-2">
-
-    <div class = "col-md-12 col-xs-12">
+<div class="row mt-2 mb-2">
+    <div class="col-md-10 sol-12">
         <div id="demo" class="carousel slide" data-bs-ride="carousel">
 
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
                 <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-                <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
             </div>
 
             <div class="carousel-inner">
@@ -39,68 +42,21 @@
             </button>
         </div>
     </div>
-</div>
 
-<div class="row mt-5 fs-4">
-    <div class="col-md-12 col-12" style="align-items: center">
-
-        <div class="col-md-2 col-12 mb-2 btn btn-primary">
-            <a 
-                href="<c:url value="/admins/adminsManager"/>" 
-                style="text-decoration: none; color: white">Quản lý Admin</a>
-        </div>
-
-        <div class="col-md-2 col-12 mb-2 btn btn-primary">
-            <a 
-                href="<c:url value="/admins/employeesManager"/>" 
-                style="text-decoration: none; color: white">Quản lý nhân viên</a>
-        </div>
-
-        <div class="col-md-2 col-12 mb-2 btn btn-primary">
-            <a 
-                href="<c:url value="/admins/customersManager"/>" 
-                style="text-decoration: none; color: white">Quản lý khách hàng</a>
-        </div>
-
-        <div class="col-md-2 col-12 mb-2 btn btn-primary">
-            <a 
-                href="<c:url value="/admins/reportsManager"/>" 
-                style="text-decoration: none; color: white">Thống kê báo cáo</a>
-        </div>
-                
-        <div class="col-md-2 col-12 mb-2 btn btn-primary">
-            <a 
-                href="<c:url value="/admins/medicinesManager"/>" 
-                style="text-decoration: none; color: white">Quản lý Thuốc</a>
-        </div>
-
-        <div class="col-md-2 col-12 mb-2 btn btn-success">
-            <a 
-                href="<c:url value="/admins/onCallManager"/>" 
-                style="text-decoration: none; color: white">Xếp lịch trực</a>
+    <div class="col-md-2 col-12">
+        <div class="list-group">
+            <a class="list-group-item list-group-item-action active">
+                Tiện ích
+            </a>
+            <a href="/Web_QuanLyPhongMach/admins/adminIndex" class="list-group-item list-group-item-action">Trang Chủ</a>
+            <a href="/Web_QuanLyPhongMach/admins/adminsManager" class="list-group-item list-group-item-action">Quản lý Admin</a>
+            <a href="/Web_QuanLyPhongMach/admins/employeesManager" class="list-group-item list-group-item-action">Quản lý Nhân viên</a>
+            <a href="/Web_QuanLyPhongMach/admins/medicinesManager" class="list-group-item list-group-item-action">Quản lý Thuốc</a>
+            <a href="/Web_QuanLyPhongMach/admins/customersManager" class="list-group-item list-group-item-action">Quản lý Khách Hàng</a>
+            <a href="/Web_QuanLyPhongMach/admins/reportsManager" class="list-group-item list-group-item-action">Quản lý Thống kê</a>
+            <a href="/Web_QuanLyPhongMach/admins/onCallManager" class="list-group-item list-group-item-action">Quản lý Lịch trực</a>
         </div>
     </div>
 </div>
 
-<h1>Hello Admin - Welcome to works</h1>
-
-
-
-
-
-
-<!--
-<div class="row" style="padding: 5px">
-<c:forEach items="${employees}" var="empl">
-    <div class = "col-md-3 col-xs-12">
-        <div class="card">
-            <img class="card-img-top" src="${empl.image}" alt="Card image">
-            <div class="card-body">
-                <h4 class="card-title">${empl.firstName} ${empl.lastName}</h4>
-                <p class="card-text">Some example text.</p>
-                <a href="#" class="btn btn-primary">See Profile</a>
-            </div>
-        </div>
-    </div>
-</c:forEach> 
-</div>-->
+<h1>HELLO ADMIN - WELLCOM TO WORK</h1>

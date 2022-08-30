@@ -103,11 +103,13 @@ public class Employee implements Serializable {
     @Column(name = "image")
     private String image;
     
-    @Size(max = 45)
+    @NotNull
+    @Size(min=1, max = 45)
     @Column(name = "username")
     private String username;
     
-    @Size(max = 60)
+    @NotNull
+    @Size(min = 1, max = 60)
     @Column(name = "password")
     private String password;
     
