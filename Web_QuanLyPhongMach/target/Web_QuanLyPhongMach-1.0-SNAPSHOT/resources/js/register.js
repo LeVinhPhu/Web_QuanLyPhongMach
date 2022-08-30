@@ -2,8 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/Gruntfile.js to edit this template
  */
-
+//var z = [];
+//const myObjStr = JSON.stringify(z);
+//fetch('http://localhost:8080/Web_QuanLyPhongMach/api/phoneNumber')
+//        .then(Response => {
+//            return Response.json();
+//        }).then(data => {
+//    console.log('>>> check fetch data: ', data)
+//    for (let i = 0; i < data.length; i++)
+//        z[i] = data[i];
+//});
 //
+//console.log('>>> check fetch: ', z);
+//console.log('>>> check: ', z[5]);
+
+
 const firstName = document.getElementById('firstName');
 const lastName = document.getElementById('lastName');
 const email = document.getElementById('email');
@@ -79,11 +92,8 @@ function checkValidate() {
         }
     }
 
-    if (check('${p}', phoneValues)) {
-        setError(phone, 'Số điện thoại đã tồn tại');
-        isCheck = false;
-    }
 
+    checkPhoneNumber(phoneValues);
     // Kiểm tra phoneNumber
     if (phoneValues === '') {
         setError(phone, 'Số điện thoại không được để trống');
@@ -91,7 +101,11 @@ function checkValidate() {
     } else if (!isPhone(phoneValues)) {
         setError(phone, 'Số điện thoại không đúng định dạng');
         isCheck = false;
+    } else if (checkPhoneNumber(phoneValues)) {
+        setError(phone, 'Số điện thoại đã tồn tại');
+        isCheck = false;
     }
+
 
     return isCheck;
 }
@@ -110,27 +124,34 @@ function isPhone(number) {
     return /(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(number);
 }
 
-//function checkPhoneNumberExists(list, pNumber) {
-//    for (let i = 0; i < list.length; i++) {
-//        if (list[i] == pNumber)
-//            return false;
-//    }
-//    return true;
-//}
 
+function checkPhoneNumber(number) {
+    const e = false;
+        let count = 0;
+    fetch('/Web_QuanLyPhongMach/api/phoneNumber')
+            .then(Response => {
+                return Response.json();
+            }).then(data => {
 
-function check(endpoint, pNumber) {
-    let exists = false;
-    fetch(endpoint).then(function (res) {
-        return  res.json();
-    }).then(function (data) {
         for (let i = 0; i < data.length; i++)
-            if (data[i] == pNumber)
-                exists = true;
-    })
+            if (data[i] === number) {
+                e = true;
+//                return e;
+//                e = true;
+//                console.log('true', data[i]);
+//                count++;
+//                alert("trung so dien thoai");
+//                break;
+            }
 
-    return exists;
+        if (e === true)
+            console.log('true1', count);
+
+        else
+            console.log('false1', count);
+        return e;
+    });
+    return e;
 }
-
 
 

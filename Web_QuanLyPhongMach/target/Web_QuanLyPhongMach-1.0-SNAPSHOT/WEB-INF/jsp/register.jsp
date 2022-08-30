@@ -39,9 +39,10 @@
                 </form:select>
                 <label for="sex" class="form-label">Giới tính</label>
             </div>
-            <div class="input-row">
-                <label style="margin-left: 0.7rem;" for="birthday">Ngày sinh</label>
+            <div class="form-floating input-row">
+                
                 <form:input path="dateOfBirth" class="form-control" type="date" id="birthday" name="birthday" />
+                <label for="birthday">Ngày sinh</label>
             </div>    
             <div class="form-floating input-row">
                 <form:input type="text" path="address" class="form-control" id="address" placeholder="Nhap dia chi" name="name" />
