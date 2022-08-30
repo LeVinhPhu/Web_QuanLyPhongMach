@@ -4,13 +4,17 @@
  */
 package com.vpdq.controllers;
 
+
 import com.vpdq.pojo.Employee;
 import com.vpdq.pojo.Medicine;
 import com.vpdq.pojo.Unit;
 import com.vpdq.service.EmployeeService;
+
+import com.vpdq.pojo.Customer;
+import com.vpdq.pojo.Medicine;
+import com.vpdq.service.CustomerService;
 import com.vpdq.service.MedicalRecordService;
 import com.vpdq.service.MedicineService;
-import com.vpdq.service.UnitService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,12 +34,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class ApiController {
-
     @Autowired
     private MedicineService medicineService;
-
+    
     @Autowired
-    private UnitService unitService;
+    private CustomerService customerService;
 
     @Autowired
     private EmployeeService employeeServic;
@@ -46,23 +49,17 @@ public class ApiController {
         //api/medicines lấy danh sách thuốc phục vụ cho admin/medicines
         return new ResponseEntity<>(this.medicineService.getMedicines(null, 0), HttpStatus.OK);
     }
-    
-//    public String getM() {
-//        return "medicines.jsp";
-//    }
 
-//    @GetMapping("/units")
-//    public ResponseEntity<List<Unit>> list() {
-//        return new ResponseEntity<>(this.unitService.getUnits(null, 0), HttpStatus.OK);
-//    }
-//    @GetMapping(value = "medicines", params = "unitName")
-//    public String Unit(Unit u) {
-//        return this.unitService.getUnitById(u);
-//    }
     @DeleteMapping("/medicines/{medicineId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteMedicine(@PathVariable(value = "medicineId") int id) {
         this.medicineService.deleteMedicine(id);
+    }
+    
+    
+    @GetMapping("/phoneNumber")
+    public ResponseEntity<List<Customer>> listPhoneNumber() {
+        return new ResponseEntity<>(this.customerService.getAllPhoneNumber(), HttpStatus.OK);
     }
 
 //   API-Phu

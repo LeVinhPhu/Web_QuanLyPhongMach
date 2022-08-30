@@ -44,13 +44,18 @@ com\vpdq\repository\impl\MedicalRecordRepositoryImpl.class
 com\vpdq\controllers\CustomerController.class
 com\vpdq\controllers\AdminController.class
 com\vpdq\formatters\SupplierFormatter.class
+com\vpdq\configs\SpringSecurityConfig.class
 com\vpdq\pojo\Employee_.class
+com\vpdq\service\CustomerService.class
 com\vpdq\pojo\Customer_.class
+com\vpdq\repository\impl\CustomerRepositoryImpl.class
 com\vpdq\configs\WebAppContextConfig.class
 com\vpdq\pojo\Admin.class
 com\vpdq\pojo\Position.class
+com\vpdq\repository\CustomerRepository.class
 com\vpdq\controllers\HomeController.class
 com\vpdq\pojo\MedicalRecord_.class
+com\vpdq\service\impl\CustomerServiceImpl.class
 com\vpdq\service\MedicalRecordService.class
 com\vpdq\service\PositionService.class
 com\vpdq\service\impl\PositionServiceImpl.class
@@ -67,3 +72,4 @@ com\vpdq\repository\SupplierRepository.class
 com\vpdq\service\impl\UnitServiceImpl.class
 com\vpdq\formatters\PositionFormatter.class
 com\vpdq\pojo\Degree.class
+com\vpdq\configs\SpringSecurityInit.class

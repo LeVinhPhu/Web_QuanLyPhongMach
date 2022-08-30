@@ -20,10 +20,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -65,6 +67,7 @@ public class Customer implements Serializable {
     private String lastName;
     @Column(name = "date_of_birth")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
     @Size(max = 45)
     @Column(name = "sex")
@@ -76,13 +79,14 @@ public class Customer implements Serializable {
     @Size(max = 45)
     @Column(name = "email")
     private String email;
-    @Size(max = 45)
+    @Size(min = 1, max = 45)
     @Column(name = "phone_number")
     private String phoneNumber;
     @Size(max = 300)
     @Column(name = "image")
     private String image;
-    @Size(max = 45)
+    @NotNull
+    @Size(min = 1, max = 60)
     @Column(name = "password")
     private String password;
     @Size(max = 200)
@@ -92,7 +96,11 @@ public class Customer implements Serializable {
     private Collection<MedicalRecord> medicalRecordCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerId")
     private Collection<Appointment> appointmentCollection;
-
+    
+    @Transient
+    @NotNull
+    @Size(min = 1, max = 60)
+    private String confirmPassword;
     public Customer() {
     }
 
@@ -235,6 +243,20 @@ public class Customer implements Serializable {
     @Override
     public String toString() {
         return "com.vpdq.pojo.Customer[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the confirmPassword
+     */
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    /**
+     * @param confirmPassword the confirmPassword to set
+     */
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
     
 }
