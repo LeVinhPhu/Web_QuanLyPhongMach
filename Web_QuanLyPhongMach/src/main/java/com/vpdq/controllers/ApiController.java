@@ -46,6 +46,7 @@ public class ApiController {
         //api/medicines lấy danh sách thuốc phục vụ cho admin/medicines
         return new ResponseEntity<>(this.medicineService.getMedicines(null, 0), HttpStatus.OK);
     }
+    
 //    public String getM() {
 //        return "medicines.jsp";
 //    }
@@ -70,6 +71,8 @@ public class ApiController {
         return new ResponseEntity<>(this.employeeServic.getEmployee(null, 0), HttpStatus.OK);
     }
 
+
+    
     @DeleteMapping("/employeesManager/{employeeId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable(value = "employeeId") int employeeId) {

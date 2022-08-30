@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 
-
 function getEmployees(endpoint) {
     fetch(endpoint).then(function (res) {
         return res.json();
@@ -29,7 +28,7 @@ function getEmployees(endpoint) {
                     </td>
                     <td>
                         <div class="spinner-border text-secondary" style="display:none" id="load${data[i].id}"></div>
-                        <button class='btn btn-success' onclick="del('${endpoint + "/" + data[i].id}', ${data[i].id})">DETAILS</button>
+                        <button class="btn btn-success" data-bs-toggle="modal" onclick="detailEmployee()">DETAILS</button>
                     </td>
                 </tr>
         `
@@ -59,3 +58,123 @@ function deleteEmployee(endpoint, id, btn) {
         btn.style.display = "block";
     })
 }
+
+
+function detailEmployee() {
+    $('#myModal').modal('show');
+}
+
+
+//Trường xữ lý lổi của form Add
+
+const firstname = document.getElementById("firstName");
+const lastname = document.getElementById("lastName");
+const address = document.getElementById("address");
+const email = document.getElementById("email");
+const phone = document.getElementById("phone");
+const username = document.getElementById("username");
+const password = document.getElementById("password");
+
+const btSubmit = document.getElementById('bt-submit');
+const inputEls = document.querySelectorAll('.input-row');
+
+
+btSubmit.addEventListener('click', function () {
+    Array.from(inputEls).map((ele) =>
+        ele.classList.remove('error')
+    );
+    if (!checkValidate()) {
+        $(document).ready(function () {
+            $('form').submit(function (event) {
+                $.ajax({
+                    method: $(this).attr('method'),
+                    url: $(this).attr('action'),
+                    data: $(this).serialize()
+                });
+                event.preventDefault();
+            });
+        });
+    }
+
+    if (checkValidate())
+    {
+        alert('Gửi đăng ký thành công');
+        window.location = "/Web_QuanLyPhongMach/admins/employeesManager";
+    }
+});
+//Kiểm tra lổi
+function checkValidate() {
+
+    let fn = firstname.value;
+    let ln = lastname.value;
+    let adrs = address.value;
+    let eml = email.value;
+    let phn = phone.value;
+    let user = username.value;
+    let pass = password.value;
+
+    let isCheck = true;
+    if (fn == '') {
+        setError(firstname, 'Họ và tên đệm không được để trống');
+        isCheck = false;
+    }
+
+    if (ln == '') {
+        setError(lastname, 'Tên không được để trống');
+        isCheck = false;
+    }
+
+    if (adrs == '') {
+        setError(address, 'Địa chỉ không được để trống');
+        isCheck = false;
+    }
+
+    if (user == '') {
+        setError(username, 'Username không được để trống');
+        isCheck = false;
+    }
+
+    if (pass == '') {
+        setError(password, 'Password không được để trống');
+        isCheck = false;
+    }
+
+    if (eml == '') {
+        setError(email, 'Email không được để trống');
+        isCheck = false;
+    } else if (!isEmail(eml)) {
+        setError(email, 'Email không đúng định dạng');
+        isCheck = false;
+    }
+
+    if (phn == '') {
+        setError(phone, 'Số điện thoại không được để trống');
+        isCheck = false;
+    } else if (!isPhone(phn)) {
+        setError(phone, 'Số điện thoại không đúng định dạng');
+        isCheck = false;
+    }
+
+    return isCheck;
+}
+
+function setError(e, message) {
+    let parentEle = e.parentNode;
+    parentEle.classList.add('error');
+    parentEle.querySelector('small').innerText = message;
+}
+
+//kiểm tra email có hợp lệ
+function isEmail(eml) {
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+            eml
+            );
+}
+//kiểm tra số điẹn thoại có hợp lệ
+function isPhone(nb) {
+    return /(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(nb);
+}
+
+
+
+

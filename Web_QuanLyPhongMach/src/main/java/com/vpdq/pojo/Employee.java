@@ -107,7 +107,7 @@ public class Employee implements Serializable {
     @Column(name = "username")
     private String username;
     
-    @Size(max = 45)
+    @Size(max = 60)
     @Column(name = "password")
     private String password;
     

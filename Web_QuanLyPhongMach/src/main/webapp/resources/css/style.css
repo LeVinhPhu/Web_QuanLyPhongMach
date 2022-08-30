@@ -94,7 +94,22 @@ div.rightContent {
 }
 
 tbody#myMedicine {
-    height:80em;
+    height:10em;
     overflow:scroll;
 }
 
+.input-row {
+    position: relative;
+}
+
+.input-row small {
+    color: red;
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    visibility: hidden;
+    font-size: 12px;
+}
+.input-row.error small {
+    visibility: visible;
+}

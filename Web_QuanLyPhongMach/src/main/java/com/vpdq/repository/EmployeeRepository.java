@@ -23,4 +23,6 @@ public interface EmployeeRepository {
     boolean addEmployee(Employee e);
     boolean deleteEmployee(int employeeId);
     List<Object[]> countEmployeeByCate();
+    
+    Employee getEmployeeByID(int id);
 }

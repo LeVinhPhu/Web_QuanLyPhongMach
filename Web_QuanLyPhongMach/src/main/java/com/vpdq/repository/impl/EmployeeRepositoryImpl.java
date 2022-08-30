@@ -140,4 +140,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         return null;
     }
 
+    @Override
+    public Employee getEmployeeByID(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("From Employee e WHERE e.id =: idEmpl");
+        
+        q.setParameter("idEmpl", id);
+        return (Employee) q.getSingleResult();
+    }
+
 }

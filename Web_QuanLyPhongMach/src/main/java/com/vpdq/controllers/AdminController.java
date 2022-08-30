@@ -94,7 +94,7 @@ public class AdminController {
             return "employeesManager"; //return lổi
         }
         if (this.employeeService.addEmployee(e) == true)
-            return "redirect:/"; //return về trang gì đó
+            return "redirect:employeesManager"; //return về trang gì đó
         
         return "employeesManager";
     }

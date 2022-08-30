@@ -57,4 +57,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Object[]> countEmployeeByCate() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public Employee getEmployeeByID(int id) {
+        return this.employeeRepository.getEmployeeByID(id);
+    }
 }
