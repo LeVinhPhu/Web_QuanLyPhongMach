@@ -66,11 +66,11 @@
                 <form:input type="text" path="note" class="form-control" id="name" placeholder="Ghi chu" name="note" />
                 <label for="note">Ghi chú</label>
             </div>
-                <input type="submit" value="Thêm thuốc" class="btn mb-3 mt-3" style="background-color: #d1e7dd" />
+            <input type="submit" value="Thêm thuốc" class="btn mb-3 mt-3" style="background-color: #d1e7dd" />
         </form:form>    
     </div>
 
-<!--    <div class="col-md-1 col-xs-12"></div>-->
+    <!--    <div class="col-md-1 col-xs-12"></div>-->
 
 
     <div class="col-md-9 col-xs-12">

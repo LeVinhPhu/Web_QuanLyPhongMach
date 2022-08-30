@@ -17,7 +17,8 @@ import org.springframework.stereotype.Service;
  * @author vinhp
  */
 @Service
-public class EmployeeServiceImpl implements EmployeeService{
+public class EmployeeServiceImpl implements EmployeeService {
+
     // lien ket voi Repository
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -38,13 +39,18 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public boolean addEmployee(Employee p) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean addEmployee(Employee e) {
+        //cần xử lý việc lấy ảnh
+
+        e.setImage("image");
+        return this.employeeRepository.addEmployee(e);
     }
 
     @Override
-    public boolean deleteEmployee(int productId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean deleteEmployee(int employeeId) {
+        //Xữ lý việc ràng buộc
+        
+        return this.employeeRepository.deleteEmployee(employeeId);
     }
 
     @Override
@@ -53,7 +59,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public List<Object[]> revenueStats(int quarter, int year) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Employee getEmployeeByID(int id) {
+        return this.employeeRepository.getEmployeeByID(id);
     }
 }

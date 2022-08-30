@@ -20,8 +20,9 @@ public interface EmployeeRepository {
     //
     List<Employee> getEmployee(Map<String, String> params, int page);
     int countEmployee();
-    boolean addEmployee(Employee p);
-    boolean deleteEmployee(int productId);
+    boolean addEmployee(Employee e);
+    boolean deleteEmployee(int employeeId);
     List<Object[]> countEmployeeByCate();
-    List<Object[]> revenueStats(int quarter, int year);
+    
+    Employee getEmployeeByID(int id);
 }

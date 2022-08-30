@@ -4,6 +4,12 @@
  */
 package com.vpdq.controllers;
 
+
+import com.vpdq.pojo.Employee;
+import com.vpdq.pojo.Medicine;
+import com.vpdq.pojo.Unit;
+import com.vpdq.service.EmployeeService;
+
 import com.vpdq.pojo.Customer;
 import com.vpdq.pojo.Medicine;
 import com.vpdq.service.CustomerService;
@@ -30,16 +36,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiController {
     @Autowired
     private MedicineService medicineService;
-   
+    
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private EmployeeService employeeServic;
+
+//  API-Que
     @GetMapping("/medicines")
     public ResponseEntity<List<Object[]>> listMedicine() {
         //api/medicines lấy danh sách thuốc phục vụ cho admin/medicines
         return new ResponseEntity<>(this.medicineService.getMedicines(null, 0), HttpStatus.OK);
     }
-
 
     @DeleteMapping("/medicines/{medicineId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -51,6 +60,20 @@ public class ApiController {
     @GetMapping("/phoneNumber")
     public ResponseEntity<List<Customer>> listPhoneNumber() {
         return new ResponseEntity<>(this.customerService.getAllPhoneNumber(), HttpStatus.OK);
+    }
+
+//   API-Phu
+    @GetMapping("/employeesManager")
+    public ResponseEntity<List<Employee>> list() {
+        return new ResponseEntity<>(this.employeeServic.getEmployee(null, 0), HttpStatus.OK);
+    }
+
+
+    
+    @DeleteMapping("/employeesManager/{employeeId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable(value = "employeeId") int employeeId) {
+        this.employeeServic.deleteEmployee(employeeId);
     }
 
 }

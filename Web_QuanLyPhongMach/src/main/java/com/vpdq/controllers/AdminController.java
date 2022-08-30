@@ -6,6 +6,7 @@ package com.vpdq.controllers;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.vpdq.pojo.Employee;
 import com.vpdq.pojo.Medicine;
 import com.vpdq.service.EmployeeService;
 import com.vpdq.service.MedicalRecordService;
@@ -57,6 +58,9 @@ public class AdminController {
     @Autowired
     private Cloudinary cloudinary;
     
+    @Autowired
+    private EmployeeService employeeService;
+    
     //dung chung
     @ModelAttribute
     public void commonAttribute(Model model) {
@@ -79,6 +83,19 @@ public class AdminController {
     
     @GetMapping("/employeesManager")
     public String employeesManager(Model model) {
+        model.addAttribute("employee",new Employee());
+        return "employeesManager";
+    }
+    
+    @PostMapping("/employeesManager")
+    public String addEmployee(@ModelAttribute(value = "employee") @Valid Employee e,
+            BindingResult r) {
+        if (r.hasErrors()) {
+            return "employeesManager"; //return lổi
+        }
+        if (this.employeeService.addEmployee(e) == true)
+            return "redirect:employeesManager"; //return về trang gì đó
+        
         return "employeesManager";
     }
     

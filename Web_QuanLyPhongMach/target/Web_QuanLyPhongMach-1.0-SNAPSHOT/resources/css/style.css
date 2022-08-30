@@ -94,12 +94,9 @@ div.rightContent {
 }
 
 tbody#myMedicine {
-    height:80em;
+    height:10em;
     overflow:scroll;
 }
-
-
-
 
 .input-row {
     margin-bottom: 1.7rem;
@@ -120,6 +117,5 @@ tbody#myMedicine {
 .input-row.error small {
     visibility: visible;
 }
-
 
 

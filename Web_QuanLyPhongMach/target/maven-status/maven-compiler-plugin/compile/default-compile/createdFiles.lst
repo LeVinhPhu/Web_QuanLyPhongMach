@@ -70,5 +70,6 @@ com\vpdq\pojo\Service.class
 com\vpdq\pojo\Status_.class
 com\vpdq\repository\SupplierRepository.class
 com\vpdq\service\impl\UnitServiceImpl.class
+com\vpdq\formatters\PositionFormatter.class
 com\vpdq\pojo\Degree.class
 com\vpdq\configs\SpringSecurityInit.class
