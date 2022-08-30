@@ -5,6 +5,7 @@
 package com.vpdq.service;
 
 import com.vpdq.pojo.Customer;
+import java.util.List;
 //import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
@@ -15,4 +16,5 @@ import com.vpdq.pojo.Customer;
 public interface CustomerService {
     boolean addCustomer(Customer c);
 //    Customer getCusByPhoneNumber(String phoneNumber);
+    List<Customer> getAllPhoneNumber();
 }

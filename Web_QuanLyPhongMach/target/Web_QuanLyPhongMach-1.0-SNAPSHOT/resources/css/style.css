@@ -98,3 +98,28 @@ tbody#myMedicine {
     overflow:scroll;
 }
 
+
+
+
+.input-row {
+    margin-bottom: 1.7rem;
+    position: relative;
+}
+
+.input-row.error input {
+    border-color: red;
+}
+.input-row small {
+    color: red;
+    position: absolute;
+    bottom: -22px;
+    left: 0;
+    visibility: hidden;
+    font-size: 14px;
+}
+.input-row.error small {
+    visibility: visible;
+}
+
+
+

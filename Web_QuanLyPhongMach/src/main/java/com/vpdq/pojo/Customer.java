@@ -57,12 +57,12 @@ public class Customer implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45, message = "{customer.firstName.nullErr}")
+    @Size(min = 1, max = 45)
     @Column(name = "first_name")
     private String firstName;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45, message = "{customer.lastName.nullErr}")
+    @Size(min = 1, max = 45)
     @Column(name = "last_name")
     private String lastName;
     @Column(name = "date_of_birth")
@@ -79,14 +79,14 @@ public class Customer implements Serializable {
     @Size(max = 45)
     @Column(name = "email")
     private String email;
-    @Size(min = 1, max = 45, message = "{customer.phoneNumber.nullErr}")
+    @Size(min = 1, max = 45)
     @Column(name = "phone_number")
     private String phoneNumber;
     @Size(max = 300)
     @Column(name = "image")
     private String image;
     @NotNull
-    @Size(min = 1, max = 60, message = "{customer.password.nullErr}")
+    @Size(min = 1, max = 60)
     @Column(name = "password")
     private String password;
     @Size(max = 200)
@@ -99,7 +99,7 @@ public class Customer implements Serializable {
     
     @Transient
     @NotNull
-    @Size(min = 1, max = 60, message = "{customer.confirmPassword.nullErr}")
+    @Size(min = 1, max = 60)
     private String confirmPassword;
     public Customer() {
     }

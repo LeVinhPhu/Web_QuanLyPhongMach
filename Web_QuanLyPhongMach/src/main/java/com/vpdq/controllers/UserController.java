@@ -39,27 +39,40 @@ public class UserController {
         return "register";
     }
 
+//    @PostMapping("/register")
+//    public String register(Model model,
+//            @ModelAttribute(value = "customers") @Valid Customer customer, BindingResult rs) {
+//        String errMsg = "";
+//        if (rs.hasErrors() == false) {
+//            if (customer.getPassword().equals(customer.getConfirmPassword())) {
+//                if (this.customerService.addCustomer(customer) == true) {
+//                    return "redirect:/login";
+//                } else {
+//                    errMsg = "Đã có lỗi xảy ra!";
+//                }
+//            } else 
+//                errMsg = "Mật khẩu xác nhận không hợp lệ!";
+//        }
+//        else
+//            errMsg = "Lỗi";
+//
+//        model.addAttribute("errMsg", errMsg);
+//
+//        return "register";
+//    }
     @PostMapping("/register")
-    public String register(Model model, 
-            @ModelAttribute(value = "customers") @Valid Customer customer, 
-            BindingResult rs) {
-        if(rs.hasErrors())
-            return "register";
+    public String register(Model model,
+            @ModelAttribute(value = "customers") Customer customer) {
         String errMsg = "";
-        if (customer.getPassword().equals(customer.getConfirmPassword())) {
-            if (this.customerService.addCustomer(customer) == true) {
-                return "redirect:/login";
-            } else {
-                errMsg = "Đã có lỗi xảy ra!";
-            }
+
+        if (this.customerService.addCustomer(customer) == true) {
+            return "redirect:/login";
         } else {
-            errMsg = "Mật khẩu xác nhận không hợp lệ!";
+            errMsg = "Đã có lỗi xảy ra!";
         }
 
         model.addAttribute("errMsg", errMsg);
-
         return "register";
-
     }
 
 }

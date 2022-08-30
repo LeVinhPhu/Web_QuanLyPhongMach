@@ -5,6 +5,8 @@
 package com.vpdq.repository;
 
 import com.vpdq.pojo.Customer;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -13,4 +15,5 @@ import com.vpdq.pojo.Customer;
 public interface CustomerRepository {
     boolean addCustomer(Customer c);
 //    Customer getCusByPhoneNumber(String phoneNumber);
+    List<Customer> getAllPhoneNumber();
 }

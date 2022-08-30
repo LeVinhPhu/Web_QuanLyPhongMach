@@ -9,6 +9,7 @@ import com.vpdq.pojo.Position;
 import com.vpdq.repository.CustomerRepository;
 import com.vpdq.service.CustomerService;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -63,6 +64,11 @@ public class CustomerServiceImpl implements CustomerService {
 //        return new org.springframework.security.core.userdetails.User(
 //                c.getPhoneNumber(), c.getPassword(), authorities);
 //    }
+
+    @Override
+    public List<Customer> getAllPhoneNumber() {
+        return this.customerRepository.getAllPhoneNumber();
+    }
 
 
 }
