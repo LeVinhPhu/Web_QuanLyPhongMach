@@ -111,7 +111,6 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     @Override
     public boolean addEmployee(Employee e) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-
         try {
             session.save(e);
             return true;

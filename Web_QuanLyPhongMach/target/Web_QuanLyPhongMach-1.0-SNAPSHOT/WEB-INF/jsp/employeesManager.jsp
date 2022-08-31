@@ -89,7 +89,7 @@
             <div class="modal-body" id="AddEmployee">
                 <div class = "col-md-12 col-xs-12">
                     <c:url value="/admins/employeesManager" var="action"></c:url>
-                    <form:form method="post" action="${action}" modelAttribute="employee" enctype="multipart/form-data">
+                    <form:form id="myForm" method="post" action="${action}" modelAttribute="employee" enctype="multipart/form-data">
 
                         <div class="form-floating input-row">
                             <form:input type="text" path="firstName" class="form-control" id="firstName" placeholder="Nhap ho va ten dem" name="name" />

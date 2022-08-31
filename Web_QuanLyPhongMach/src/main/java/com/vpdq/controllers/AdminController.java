@@ -88,11 +88,11 @@ public class AdminController {
     }
     
     @PostMapping("/employeesManager")
-    public String addEmployee(@ModelAttribute(value = "employee") Employee e,
+    public String addEmployee(@ModelAttribute(value = "employee") @Valid Employee e,
             BindingResult r) {
-//        if (r.hasErrors()) {
-//            return "employeesManager"; //return lổi
-//        }
+        if (r.hasErrors()) {
+            return "employeesManager"; //return lổi
+        } 
         if (this.employeeService.addEmployee(e) == true)
             return "redirect:employeesManager"; //return về trang gì đó
         
@@ -112,6 +112,16 @@ public class AdminController {
         model.addAttribute("revenueStatsByQuarter", this.medicalRecordService.revenueStatisticsByQuarter(year));
         model.addAttribute("revenueStatsByMonth", this.medicalRecordService.revenueStatisticsByMonth(year2));
         return "reportsManager";
+    }
+    
+    @RequestMapping("/reports2Manager")
+    public String reports2Manager (Model model){
+        return "reports2Manager";
+    }
+    
+    @RequestMapping("/reports3Manager")
+    public String reports3Manager (Model model){
+        return "reports3Manager";
     }
   
   

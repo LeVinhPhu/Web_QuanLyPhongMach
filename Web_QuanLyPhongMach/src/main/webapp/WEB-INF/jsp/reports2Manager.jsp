@@ -1,9 +1,8 @@
 <%-- 
-    Document   : reports
-    Created on : Aug 21, 2022, 10:41:49 AM
+    Document   : reports2Manager
+    Created on : Aug 31, 2022, 6:26:11 PM
     Author     : vinhp
 --%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -220,5 +219,4 @@
         revenueStatsByMonth(labels3, data3);
     }
 </script>
-
 

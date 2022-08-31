@@ -22,14 +22,13 @@ div.left {
 
 ul.leftContent {
     list-style-type: none;
-    margin: 0;
-    width:100%;
+/*    width:100%;*/
     display: block;
     padding: 2px 9px;
-    position: fixed;
-    left:2px;
-    top: 25%;
-    width: 18%;
+    /*position: fixed;*/
+/*    left:2px;*/
+    /*top: 25%;*/
+    /*width: 18%;*/
 }
 
 ul.leftContent > li > a {
@@ -51,11 +50,11 @@ ul.leftContent > li > a:hover {
 
 /*phải*/
 div.right {
-    width: 80%;
+    /*width: 80%;*/
 }
 
 div.rightContent {
-    margin: 100px 0px 0px 0px;
+    margin: 0px 10px 0px 0px;
 }
 
 .ct {
@@ -94,9 +93,11 @@ div.rightContent {
 }
 
 tbody#myMedicine {
-    height:10em;
+    height:80em;
     overflow:scroll;
 }
+
+
 
 
 .input-row {
@@ -118,5 +119,6 @@ tbody#myMedicine {
 .input-row.error small {
     visibility: visible;
 }
+
 
 
