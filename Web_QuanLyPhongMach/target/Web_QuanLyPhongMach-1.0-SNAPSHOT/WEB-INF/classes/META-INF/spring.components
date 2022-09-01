@@ -46,6 +46,7 @@ com.vpdq.repository.impl.PositionRepositoryImpl=org.springframework.stereotype.C
 com.vpdq.repository.impl.SupplierRepositoryImp=org.springframework.stereotype.Component
 com.vpdq.repository.impl.UnitRepositoryImpl=org.springframework.stereotype.Component
 com.vpdq.service.impl.CustomerServiceImpl=org.springframework.stereotype.Component
+com.vpdq.service.impl.EmployeeLoginServiceImpl=org.springframework.stereotype.Component
 com.vpdq.service.impl.EmployeeServiceImpl=org.springframework.stereotype.Component
 com.vpdq.service.impl.MedicalRecordServiceImpl=org.springframework.stereotype.Component
 com.vpdq.service.impl.MedicineServiceImpl=org.springframework.stereotype.Component

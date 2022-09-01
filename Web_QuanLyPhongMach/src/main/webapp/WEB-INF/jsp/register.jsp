@@ -10,14 +10,18 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h2 style="text-align: center" class="mt-3">DANG KY TAI KHOAN</h2>
+
+
 <c:if test="${errMsg != null}">
     <div class="mt-2 alert alert-danger">
         ${errMsg}
     </div>
 </c:if>
-<div style="width: 50%; margin-left: 25%; background-color: #f3f3f3">
-    <div style="width: 90%; margin: 5%; padding-top: 5%">
+<div class="shadow rounded-3 mt-4 bg-light" style="width: 50%; margin-left: 25%;">
+    <div class="form-floating" style="padding-top: 3%">
+        <h3 style="text-align: center">Đăng ký tài khoản</h3>
+    </div>
+    <div style="width: 90%; margin: 5%; padding-top: 1%; padding-bottom: 1%">
         <c:url value="/register" var="action" />
         <form:form method="post" action="${action}" modelAttribute="customers" enctype="multipart/form-data">
             <%--<form:errors path="*" element="div" cssClass="alert alert-danger" />--%>
@@ -39,9 +43,9 @@
                 </form:select>
                 <label for="sex" class="form-label">Giới tính</label>
             </div>
-            <div class="input-row">
-                <label style="margin-left: 0.7rem;" for="birthday">Ngày sinh</label>
+            <div class="input-row form-floating">
                 <form:input path="dateOfBirth" class="form-control" type="date" id="birthday" name="birthday" />
+                <label for="birthday">Ngày sinh</label>
             </div>    
             <div class="form-floating input-row">
                 <form:input type="text" path="address" class="form-control" id="address" placeholder="Nhap dia chi" name="name" />
@@ -72,8 +76,13 @@
                 <label for="p2">Xác nhận mật khẩu <span style="color: red">*</span></label>
                 <small>Error</small>
             </div>
-            <div style="text-align: center">
-                <input id="btnRegister" type="submit" value="Đăng ký" class="btn mb-3 mt-3" style="background-color: blue; color: white" />
+                
+            <div class="mt-2" style="text-align: center">
+                <input id="btnRegister" type="submit" value="Đăng ký" class="btn btn-primary" />
+            </div>
+
+            <div class="form-floating mb-4" style="text-align: center">
+                <span style="font-size: 12px">Bạn chưa có tài khoản? <a href="/Web_QuanLyPhongMach/login" style="text-decoration: none">Đăng nhập</a></span>
             </div>
         </form:form>  
     </div>

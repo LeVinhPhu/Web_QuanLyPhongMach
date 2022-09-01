@@ -56,8 +56,11 @@
 
                 <div type="button" style="border: none" class="bg-dark btn btn-primary dropdown-toggle" 
                      data-bs-toggle="dropdown">
-
-                    <a class="" href="#" style="text-decoration:none; color:  #999999;">Lê Vỉnh Phú</a>
+                    <sec:authorize access="isAuthenticated()">
+                        <a class="" href="<c:url value="/login" />" style="text-decoration:none; color:  #999999;">
+                             <sec:authentication property="principal.username"/>
+                        </a>
+                    </sec:authorize>
                     <img
                         src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
                         class="rounded-circle"
@@ -68,16 +71,20 @@
                         />
                 </div>
 
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                    <sec:authorize access="!isAuthenticated()">
+                        <a class="dropdown-item" href="#">Đăng ký</a>
+                    </sec:authorize>
+                    </li>
                     <li><a class="dropdown-item" href="#">Thông tin cá nhân</a></li>
-                    <li><a class="dropdown-item" href="#">Tuỳ chọn</a></li>
-                    <li><a class="dropdown-item" href="<c:url value="/"/>">Thoát</a></li>
+                    <li>
+                    <sec:authorize access="isAuthenticated()">
+                        <a class="dropdown-item" href="<c:url value="/logout" />">Thoát</a>
+                    </sec:authorize>
+                    </li>
                 </ul>
             </div>
-
-            <!--<a class="text-reset me-2" href="#">
-                            <i class="fas fa-sign-out-alt"></i>
-                        </a>-->
         </div>
 
     </div>

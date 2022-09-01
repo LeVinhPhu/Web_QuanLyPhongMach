@@ -61,4 +61,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee getEmployeeByID(int id) {
         return this.employeeRepository.getEmployeeByID(id);
     }
+
+    @Override
+    public boolean updateEmployee(Employee e) {
+        return this.employeeRepository.updateEmployee(e);
+    }
 }

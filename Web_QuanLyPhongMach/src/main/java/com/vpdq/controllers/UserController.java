@@ -5,7 +5,10 @@
 package com.vpdq.controllers;
 
 import com.cloudinary.utils.ObjectUtils;
+import com.vpdq.pojo.Account;
+import com.vpdq.pojo.Admin;
 import com.vpdq.pojo.Customer;
+import com.vpdq.pojo.Employee;
 import com.vpdq.service.CustomerService;
 import java.io.IOException;
 import java.util.Map;
@@ -29,7 +32,8 @@ public class UserController {
     private CustomerService customerService;
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
+        model.addAttribute("Account", new Account());
         return "login";
     }
 

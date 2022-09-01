@@ -12,11 +12,6 @@
 
 <h2 style="text-align: center; margin-top: 10px">QUẢN LÝ NHÂN VIÊN</h2>
 
-<!--    <div class="col-md-5 col-12 mb-2 btn btn-success">
-        <a 
-            href="<c:url value="/admins/adminIndex"/>" 
-            style="text-decoration: none; color: white">Quay lại</a>
-    </div>-->
 <div class="row mt-2 bg-light">
     <div class="col-md-8 col-12 mt-2 mb-2">
         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal" id="btn-add">ADD EMPLOYEE</button>
@@ -79,6 +74,7 @@
     <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
         <div class="modal-content">
 
+            <h6></h6>
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">Thêm Nhân Viên</h4>
@@ -90,15 +86,14 @@
                 <div class = "col-md-12 col-xs-12">
                     <c:url value="/admins/employeesManager" var="action"></c:url>
                     <form:form id="myForm" method="post" action="${action}" modelAttribute="employee" enctype="multipart/form-data">
-
                         <div class="form-floating input-row">
-                            <form:input type="text" path="firstName" class="form-control" id="firstName" placeholder="Nhap ho va ten dem" name="name" />
-                            <label for="name">Họ và tên đệm</label>
+                            <form:input type="text" path="firstName" class="form-control" id="firstName" placeholder="Nhap ho va ten dem" name="name" value="" />
+                            <label for="firstName">Họ và tên đệm</label>
                             <small>Error</small>
                         </div>
                         <div class="form-floating input-row">
                             <form:input type="text" path="lastName" class="form-control" id="lastName" placeholder="Nhap ten" name="name" />
-                            <label for="name">Tên</label>
+                            <label for="lastName">Tên</label>
                             <small>Error</small>
                         </div>
                         <div class="input-row form-floating">
@@ -114,7 +109,7 @@
                                     <option value="${p.id}">${p.name}</option>
                                 </c:forEach>
                             </form:select>
-                            <label for="position" class="form-label">Chức vụ</label>
+                            <label for="positionId" class="form-label">Chức vụ</label>
                             <!--Sinh lổi-->
                             <small></small>
 
@@ -196,11 +191,6 @@
     </div>
 </div>
 
-
-
-
-
-
 <!-- The Modal Detail -->
 <div class="modal" id="detailModal">
     <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
@@ -214,7 +204,7 @@
 
             <!-- Modal body -->
             <div class="modal-body" id="detailEmployee">
-                
+
             </div>
             <!-- Modal footer -->
         </div>
@@ -228,7 +218,7 @@
 <script>
     <c:url value="/api/employeesManager" var="u" />
     window.onload = function () {
-        getEmployees("${u}")
+        getEmployees("${u}");
     }
 </script>
 

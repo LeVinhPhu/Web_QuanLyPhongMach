@@ -10,7 +10,6 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
  *
  * @author phamt
  */
-public class SpringSecurityInit {
-//    extends AbstractSecurityWebApplicationInitializer
+public class SpringSecurityInit extends AbstractSecurityWebApplicationInitializer {
 }
 

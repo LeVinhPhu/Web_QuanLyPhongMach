@@ -59,4 +59,4 @@
     </div>
 </div>
 
-<h1>HELLO ADMIN - WELLCOM TO WORK</h1>
+<h1>HELLO ADMIN - WELCOM TO WORK</h1>
