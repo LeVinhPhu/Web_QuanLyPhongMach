@@ -52,9 +52,10 @@ public class Medicine implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50, message = "{medicine.name.nullErr}")
+    @Size(min = 1, max = 50)
     @Column(name = "name")
     private String name;
+//    @NotNull(message = "{medicine.unitPrice.nullErr}")
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "unit_price")
     private BigDecimal unitPrice;

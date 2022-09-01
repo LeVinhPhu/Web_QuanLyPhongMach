@@ -114,7 +114,8 @@ public class AdminController {
         model.addAttribute("revenueStatsByMonth", this.medicalRecordService.revenueStatisticsByMonth(year2));
         return "reportsManager";
     }
-
+    
+//    THUỐC
     @GetMapping("/medicinesManager")
     public String listMedicine(Model model) {
         model.addAttribute("medicine", new Medicine());
@@ -126,42 +127,67 @@ public class AdminController {
 
     @PostMapping("/medicinesManager")
     public String addMedicine(@ModelAttribute(value = "medicine") @Valid Medicine m,
-            BindingResult rs) {
-        try {
-            Map r = this.cloudinary.uploader().upload(m.getFile().getBytes(),
-                    ObjectUtils.asMap("resource_type", "auto"));
-            String img = (String) r.get("secure_url");
-            m.setImage(img);
-        } catch (IOException ex) {
-            System.err.println("ADD MEDICINE " + ex.getMessage());
+            BindingResult rs) throws IOException {
+        //nếu có ảnh thì upload lên cloudinary
+        if (m.getFile().isEmpty()==false) {
+            try {
+                Map r = this.cloudinary.uploader().upload(m.getFile().getBytes(),
+                        ObjectUtils.asMap("resource_type", "auto"));
+                String img = (String) r.get("secure_url");
+                m.setImage(img);
+            } catch (IOException ex) {
+                System.err.println("ADD MEDICINE " + ex.getMessage());
+            }
         }
-
-        if (rs.hasErrors()) {
+        
+        if(m.getNote().isEmpty())
+            m.setNote(null);
+        
+        if (rs.hasErrors())
             return "medicinesManager";
-        }
-        if (this.medicineService.addMedicine(m) == true) {
-            return "medicinesManager";
-        }
-
+        
+        
+        if (this.medicineService.addMedicine(m) == true) 
+            return "redirect:medicinesManager";
+        
         return "medicinesManager";
     }
 
     @GetMapping("/medicinesManager/{mID}")
     public String getMedicine(Model model, Medicine m, @PathVariable(value = "mID") int id) {
         model.addAttribute("medicine", this.medicineService.getMedicineByID(id));
-        return "detailsMedicine";
+        return "updateMedicine";
     }
 
     @PostMapping("/medicinesManager/{mID}")
-    public String updateMedicine(@ModelAttribute(value = "medicine") Medicine m,
-            @PathVariable(value = "mID") int id) {
-
-        if (this.medicineService.updateMedicineByID(id, m) == true) {
-            return "medicinesManager";
+    public String updateMedicine(@PathVariable(value = "mID") int id,
+            @ModelAttribute(value = "medicine") @Valid Medicine m,
+            BindingResult rs) {
+        Medicine me = this.medicineService.getMedicineByID(id);
+        
+        if (m.getFile().isEmpty()==false) {
+            try {
+                Map r = this.cloudinary.uploader().upload(m.getFile().getBytes(),
+                        ObjectUtils.asMap("resource_type", "auto"));
+                String img = (String) r.get("secure_url");
+                m.setImage(img);
+            } catch (IOException ex) {
+                System.err.println("ADD MEDICINE " + ex.getMessage());
+            }
         }
-        return "detailsMedicine";
+        else
+            m.setImage(me.getImage());
+        
+        if (rs.hasErrors())
+            return "updateMedicine";
+        
+        if (this.medicineService.updateMedicineByID(id, m) == true) {
+            return "redirect:/admins/medicinesManager";
+        }
+        return "updateMedicine";
     }
-
+    
+//LỊCH TRỰC
     @GetMapping("/onCallManager")
     public String onCallManager() {
         return "onCallManager";

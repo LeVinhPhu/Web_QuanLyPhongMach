@@ -2,20 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/Gruntfile.js to edit this template
  */
-//var z = [];
-//const myObjStr = JSON.stringify(z);
-//fetch('http://localhost:8080/Web_QuanLyPhongMach/api/phoneNumber')
-//        .then(Response => {
-//            return Response.json();
-//        }).then(data => {
-//    console.log('>>> check fetch data: ', data)
-//    for (let i = 0; i < data.length; i++)
-//        z[i] = data[i];
-//});
-//
-//console.log('>>> check fetch: ', z);
-//console.log('>>> check: ', z[5]);
-
+/* global fetch */
 
 const firstName = document.getElementById('firstName');
 const lastName = document.getElementById('lastName');
@@ -59,7 +46,6 @@ function checkValidate() {
 
     let isCheck = true;
 
-
     // Kiểm tra họ và tên
     if (firstNameValues === '') {
         setError(firstName, 'Họ và tên đệm không được để trống');
@@ -70,19 +56,19 @@ function checkValidate() {
         isCheck = false;
     }
 
-    // Kiểm tra mật khẩu
-//    if (passwordValues === '') {
-//        setError(password, 'Mật khẩu không được để trống');
-//        isCheck = false;
-//    }
-//    if (confirmPasswordValues === '') {
-//        setError(confirmPassword, 'Xác nhận mật khẩu không được để trống');
-//        isCheck = false;
-//    }
-//    if (passwordValues !== confirmPasswordValues) {
-//        setError(confirmPassword, 'Mật khẩu không khớp');
-//        isCheck = false;
-//    }
+    //Kiểm tra mật khẩu
+    if (passwordValues === '') {
+        setError(password, 'Mật khẩu không được để trống');
+        isCheck = false;
+    }
+    if (confirmPasswordValues === '') {
+        setError(confirmPassword, 'Xác nhận mật khẩu không được để trống');
+        isCheck = false;
+    }
+    if (passwordValues !== confirmPasswordValues) {
+        setError(confirmPassword, 'Mật khẩu không khớp');
+        isCheck = false;
+    }
 
     // Kiểm tra email
     if (emailValues !== "") {
@@ -93,7 +79,6 @@ function checkValidate() {
     }
 
 
-    checkPhoneNumber(phoneValues);
     // Kiểm tra phoneNumber
     if (phoneValues === '') {
         setError(phone, 'Số điện thoại không được để trống');
@@ -127,7 +112,6 @@ function isPhone(number) {
 
 function checkPhoneNumber(number) {
     const e = false;
-        let count = 0;
     fetch('/Web_QuanLyPhongMach/api/phoneNumber')
             .then(Response => {
                 return Response.json();
@@ -136,20 +120,8 @@ function checkPhoneNumber(number) {
         for (let i = 0; i < data.length; i++)
             if (data[i] === number) {
                 e = true;
-//                return e;
-//                e = true;
-//                console.log('true', data[i]);
-//                count++;
-//                alert("trung so dien thoai");
-//                break;
+                break;
             }
-
-        if (e === true)
-            console.log('true1', count);
-
-        else
-            console.log('false1', count);
-        return e;
     });
     return e;
 }

@@ -206,28 +206,19 @@ public class MedicineRepositoryImpl implements MedicineRepository {
         return m;
     }
 
-//    @Override
-//    public void updateMedicineByID(int id, String name) {
-//        Session session = this.sessionFactory.getObject().getCurrentSession();
-//        Medicine m = getMedicineByID(id);
-////        m.setName(name);
-//        session.evict(m);
-////        Medicine m = new Medicine();
-////        m.setName("zzz");
-////        m.setQuantity(id);
-//        m.setName(name);
-//        session.save(m);
-//    }
     @Override
     public boolean updateMedicineByID(int id, Medicine medicine) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Medicine m = getMedicineByID(id);
+        
         m.setName(medicine.getName());
         m.setQuantity(medicine.getQuantity());
         m.setUnitPrice(medicine.getUnitPrice());
         m.setUnitId(medicine.getUnitId());
         m.setSupplierId(medicine.getSupplierId());
         m.setNote(medicine.getNote());
+        m.setImage(medicine.getImage());
+        
         try {
             session.saveOrUpdate(m);
           return true;
