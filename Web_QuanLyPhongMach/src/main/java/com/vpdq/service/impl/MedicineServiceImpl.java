@@ -41,5 +41,15 @@ public class MedicineServiceImpl implements MedicineService {
     public List<Medicine> getMedicines2(Map<String, String> params, int page) {
         return this.medicineRepository.getMedicines2(params, page);
     }
+
+    @Override
+    public Medicine getMedicineByID(int id) {
+        return this.medicineRepository.getMedicineByID(id);
+    }
+
+    @Override
+    public boolean updateMedicineByID(int id, Medicine medicine) {
+        return this.medicineRepository.updateMedicineByID(id, medicine);
+    }
     
 }

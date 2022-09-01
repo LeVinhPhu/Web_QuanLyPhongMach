@@ -69,7 +69,11 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/medicinesManager.jsp" />
     </definition>
-    
+    <definition name="detailsMedicine" extends="baseLayout">
+        <put-attribute name="title" value="Chi tiết thuốc" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/detailsMedicine.jsp" />
+    </definition>
     <definition name="onCallManager" extends="baseLayout">
         <put-attribute name="title" value="Quản Lý Lịch Trực" />
         <put-attribute name="content"

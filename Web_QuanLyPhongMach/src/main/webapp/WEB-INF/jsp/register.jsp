@@ -10,12 +10,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h2 style="text-align: center" class="mt-3">DANG KY TAI KHOAN</h2>
-<c:if test="${errMsg != null}">
-    <div class="mt-2 alert alert-danger">
-        ${errMsg}
-    </div>
-</c:if>
+<h2 style="text-align: center" class="mt-3">ĐĂNG KÝ</h2>
+
 <div style="width: 50%; margin-left: 25%; background-color: #f3f3f3">
     <div style="width: 90%; margin: 5%; padding-top: 5%">
         <c:url value="/register" var="action" />
@@ -40,7 +36,7 @@
                 <label for="sex" class="form-label">Giới tính</label>
             </div>
             <div class="form-floating input-row">
-                
+
                 <form:input path="dateOfBirth" class="form-control" type="date" id="birthday" name="birthday" />
                 <label for="birthday">Ngày sinh</label>
             </div>    
@@ -76,11 +72,13 @@
             <div style="text-align: center">
                 <input id="btnRegister" type="submit" value="Đăng ký" class="btn mb-3 mt-3" style="background-color: blue; color: white" />
             </div>
+            <c:if test="${errMsg != null}">
+                <div class="mt-2 alert alert-danger">
+                    ${errMsg}
+                </div>
+            </c:if>
         </form:form>  
     </div>
 </div>
 
-<script src="<c:url value="/js/register.js" />"></script>
-<script>
-    <c:url value="/api/phoneNumber" var="p" />;
-</script>
+<script src="<c:url value="/js/registers.js" />"></script>

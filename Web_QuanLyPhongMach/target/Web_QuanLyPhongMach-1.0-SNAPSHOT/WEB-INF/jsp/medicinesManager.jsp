@@ -49,8 +49,7 @@
             </div>
             <div class="form-floating mb-3 mt-3">
                 <form:select path="supplierId" class="form-select" id="sup" name="sup">
-                    <option  disabled="disabled" selected="selected" value="null">Chọn nhà cung cấp</option>
-
+                    <option disabled="disabled" selected="selected" value=""}>Chọn nhà cung cấp</option>
                     <c:forEach items="${suppliers}" var="s">
                         <option value="${s.id}">${s.companyName}</option>
                     </c:forEach>
@@ -97,7 +96,7 @@
 
 
 <!--sử dụng api lấy danh sách thuốc-->
-<script src="<c:url value="/js/medicine.js" />"></script>
+<script src="<c:url value="/js/medicine_1.js" />"></script>
 <script>
     <c:url value="/api/medicines" var="m" />
     window.onload = function () {

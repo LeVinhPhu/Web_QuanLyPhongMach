@@ -70,5 +70,10 @@ public class CustomerServiceImpl implements CustomerService {
         return this.customerRepository.getAllPhoneNumber();
     }
 
+    @Override
+    public boolean check(String phone) {
+        return this.customerRepository.check(phone);
+    }
+
 
 }

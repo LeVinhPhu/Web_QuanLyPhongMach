@@ -38,7 +38,7 @@ function getMedicines(endpoint) {
                         <td>${data[i][3]}</td>
                         <td>${data[i][4]}</td>
                         <td><button class="btn">DETAILS</button></td>
-                        <td><a href="/admins/medicinesManager/${data[i][0]}>Sửa</a></td>
+                        <td><a href="/Web_QuanLyPhongMach/admins/medicinesManager/${data[i][0]}">Sửa</a></td>
                         <td>
                             <div class="spinner-border text-warning" style="display:none" id="load${data[i][0]}"></div>
                             <button class="btn" style="background-color: #FFCDCD" onclick="deleteMedicine('${endpoint + "/" + data[i][0]}', ${data[i][0]}, this)">DELETE</button>

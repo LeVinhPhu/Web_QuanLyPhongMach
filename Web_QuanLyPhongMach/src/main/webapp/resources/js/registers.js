@@ -71,14 +71,14 @@ function checkValidate() {
     }
 
     // Kiểm tra mật khẩu
-    if (passwordValues === '') {
-        setError(password, 'Mật khẩu không được để trống');
-        isCheck = false;
-    }
-    if (confirmPasswordValues === '') {
-        setError(confirmPassword, 'Xác nhận mật khẩu không được để trống');
-        isCheck = false;
-    }
+//    if (passwordValues === '') {
+//        setError(password, 'Mật khẩu không được để trống');
+//        isCheck = false;
+//    }
+//    if (confirmPasswordValues === '') {
+//        setError(confirmPassword, 'Xác nhận mật khẩu không được để trống');
+//        isCheck = false;
+//    }
 //    if (passwordValues !== confirmPasswordValues) {
 //        setError(confirmPassword, 'Mật khẩu không khớp');
 //        isCheck = false;

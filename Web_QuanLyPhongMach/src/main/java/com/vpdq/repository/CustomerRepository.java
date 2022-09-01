@@ -16,4 +16,5 @@ public interface CustomerRepository {
     boolean addCustomer(Customer c);
 //    Customer getCusByPhoneNumber(String phoneNumber);
     List<Customer> getAllPhoneNumber();
+    boolean check(String phone);
 }

@@ -79,10 +79,10 @@ function checkValidate() {
         setError(confirmPassword, 'Xác nhận mật khẩu không được để trống');
         isCheck = false;
     }
-    if (passwordValues !== confirmPasswordValues) {
-        setError(confirmPassword, 'Mật khẩu không khớp');
-        isCheck = false;
-    }
+//    if (passwordValues !== confirmPasswordValues) {
+//        setError(confirmPassword, 'Mật khẩu không khớp');
+//        isCheck = false;
+//    }
 
     // Kiểm tra email
     if (emailValues !== "") {

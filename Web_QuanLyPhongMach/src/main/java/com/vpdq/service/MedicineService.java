@@ -18,4 +18,6 @@ public interface MedicineService {
     List<Medicine> getMedicines2(Map<String, String> params, int page);
     boolean deleteMedicine(int id);
     boolean addMedicine(Medicine m);
+    Medicine getMedicineByID(int id);
+    boolean updateMedicineByID(int id, Medicine medicine);
 }

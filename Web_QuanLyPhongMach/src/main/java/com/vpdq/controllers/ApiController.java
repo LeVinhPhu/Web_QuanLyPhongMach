@@ -75,5 +75,11 @@ public class ApiController {
     public void delete(@PathVariable(value = "employeeId") int employeeId) {
         this.employeeServic.deleteEmployee(employeeId);
     }
+    
+    
+    @GetMapping("/medicine/{mID}")
+    public Medicine getMedicine(@PathVariable(value = "mID") int id) {
+            return medicineService.getMedicineByID(id);
+    }
 
 }

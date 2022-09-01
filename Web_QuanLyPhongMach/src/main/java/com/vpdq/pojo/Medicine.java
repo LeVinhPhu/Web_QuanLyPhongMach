@@ -201,5 +201,9 @@ public class Medicine implements Serializable {
     public void setFile(MultipartFile file) {
         this.file = file;
     }
+
+    public void setName(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

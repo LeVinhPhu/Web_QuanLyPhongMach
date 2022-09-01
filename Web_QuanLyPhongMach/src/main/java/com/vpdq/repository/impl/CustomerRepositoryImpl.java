@@ -81,4 +81,19 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return query.getResultList();
     }
 
+    @Override
+    public boolean check(String phone) {
+        boolean kq=false;
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        
+        CriteriaQuery<Customer> q = b.createQuery(Customer.class);
+        Root root = q.from(Customer.class);
+        q.where(b.equal(root.get("phoneNumber"), phone));
+        q.select(root);
+        if(root.get("phoneNumber").equals(phone))
+            kq=true;
+        return kq;
+    }
+
 }

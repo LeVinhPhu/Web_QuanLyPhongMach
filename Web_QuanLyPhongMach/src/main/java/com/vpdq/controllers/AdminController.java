@@ -8,6 +8,7 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.vpdq.pojo.Employee;
 import com.vpdq.pojo.Medicine;
+import com.vpdq.pojo.Supplier;
 import com.vpdq.service.EmployeeService;
 import com.vpdq.service.MedicalRecordService;
 import com.vpdq.service.MedicineService;
@@ -26,6 +27,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,25 +44,25 @@ public class AdminController {
     //Kết nối vs service
     @Autowired
     private PositionService positionService;
-    
+
     @Autowired
     private MedicineService medicineService;
-    
+
     @Autowired
     private UnitService unitService;
 
     @Autowired
     private SupplierService supplierService;
-    
+
     @Autowired
     private MedicalRecordService medicalRecordService;
-    
+
     @Autowired
     private Cloudinary cloudinary;
-    
+
     @Autowired
     private EmployeeService employeeService;
-    
+
     //dung chung
     @ModelAttribute
     public void commonAttribute(Model model) {
@@ -70,7 +72,6 @@ public class AdminController {
 //        model.addAttribute("revenueStats", this.medicalRecordService.revenueStatistics());
     }
 
-    
     @GetMapping("/adminIndex")
     public String index() {
         return "adminIndex";
@@ -80,54 +81,51 @@ public class AdminController {
     public String adminsMager(Model model) {
         return "adminsManager";
     }
-    
+
     @GetMapping("/employeesManager")
     public String employeesManager(Model model) {
-        model.addAttribute("employee",new Employee());
+        model.addAttribute("employee", new Employee());
         return "employeesManager";
     }
-    
+
     @PostMapping("/employeesManager")
     public String addEmployee(@ModelAttribute(value = "employee") @Valid Employee e,
             BindingResult r) {
         if (r.hasErrors()) {
             return "employeesManager"; //return lổi
         }
-        if (this.employeeService.addEmployee(e) == true)
+        if (this.employeeService.addEmployee(e) == true) {
             return "redirect:employeesManager"; //return về trang gì đó
-        
+        }
         return "employeesManager";
     }
-    
+
     @GetMapping("/customersManager")
     public String customersManager(Model model) {
         return "customersManager";
     }
-    
+
     @RequestMapping("/reportsManager")
-    public String reportsManager (Model model,
+    public String reportsManager(Model model,
             @RequestParam(value = "year", defaultValue = "0", required = false) int year,
-            @RequestParam(value = "year2", defaultValue = "0", required = false) int year2){
+            @RequestParam(value = "year2", defaultValue = "0", required = false) int year2) {
         model.addAttribute("revenueStats", this.medicalRecordService.revenueStatistics());
         model.addAttribute("revenueStatsByQuarter", this.medicalRecordService.revenueStatisticsByQuarter(year));
         model.addAttribute("revenueStatsByMonth", this.medicalRecordService.revenueStatisticsByMonth(year2));
         return "reportsManager";
     }
-  
-  
-    
+
     @GetMapping("/medicinesManager")
-    public String listMedicine (Model model) {
+    public String listMedicine(Model model) {
         model.addAttribute("medicine", new Medicine());
-        
+
 //        int page = Integer.parseInt(params.getOrDefault("page", "1"));
 //        model.addAttribute("medicine2", this.medicineService.getMedicines2(params, page));
-        
         return "medicinesManager";
     }
-    
+
     @PostMapping("/medicinesManager")
-    public String addMedicine(@ModelAttribute(value = "medicine") @Valid Medicine m, 
+    public String addMedicine(@ModelAttribute(value = "medicine") @Valid Medicine m,
             BindingResult rs) {
         try {
             Map r = this.cloudinary.uploader().upload(m.getFile().getBytes(),
@@ -137,18 +135,35 @@ public class AdminController {
         } catch (IOException ex) {
             System.err.println("ADD MEDICINE " + ex.getMessage());
         }
-           
-        if (rs.hasErrors())
+
+        if (rs.hasErrors()) {
             return "medicinesManager";
-        if (this.medicineService.addMedicine(m)==true)
+        }
+        if (this.medicineService.addMedicine(m) == true) {
             return "medicinesManager";
-        
+        }
+
         return "medicinesManager";
-        
     }
-    
+
+    @GetMapping("/medicinesManager/{mID}")
+    public String getMedicine(Model model, Medicine m, @PathVariable(value = "mID") int id) {
+        model.addAttribute("medicine", this.medicineService.getMedicineByID(id));
+        return "detailsMedicine";
+    }
+
+    @PostMapping("/medicinesManager/{mID}")
+    public String updateMedicine(@ModelAttribute(value = "medicine") Medicine m,
+            @PathVariable(value = "mID") int id) {
+
+        if (this.medicineService.updateMedicineByID(id, m) == true) {
+            return "medicinesManager";
+        }
+        return "detailsMedicine";
+    }
+
     @GetMapping("/onCallManager")
-    public String onCallManager (){
+    public String onCallManager() {
         return "onCallManager";
     }
 
