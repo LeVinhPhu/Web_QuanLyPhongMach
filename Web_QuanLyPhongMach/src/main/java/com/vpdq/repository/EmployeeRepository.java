@@ -24,8 +24,6 @@ public interface EmployeeRepository {
     boolean updateEmployee(Employee e);
     boolean deleteEmployee(int employeeId);
     List<Object[]> countEmployeeByCate();
-    
     Employee getEmployeeByID(int id);
-    
     Employee getEmployeeByUsername(String username);
 }

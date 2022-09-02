@@ -53,20 +53,6 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return false;
     }
 
-//    @Override
-//    public Customer getCusByPhoneNumber(String phoneNumber) {
-//        Session session = this.sessionFactory.getObject().getCurrentSession();
-//        CriteriaBuilder b = session.getCriteriaBuilder();
-//        
-//        CriteriaQuery<Customer> q = b.createQuery(Customer.class);
-//        Root<Customer> root = q.from(Customer.class);
-//        q.select(root);
-//        
-//        q.where(b.equal(root.get("phoneNumber"), phoneNumber));
-//        
-//        Query query = session.createQuery(q);
-//        return (Customer) query.getSingleResult();
-//    }
     @Override
     public List<Customer> getAllPhoneNumber() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -100,6 +86,40 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
+
+    public boolean updateCustomer(Customer e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean deleteCustomer(int customerId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Object[]> countEmployeeByCate() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Customer getCustomerID(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override // username là phone number
+    public Customer getCustomerByUsername(String username) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Customer> q = b.createQuery(Customer.class);
+        Root root = q.from(Customer.class);
+        q.select(root);
+
+        q.where(b.equal(root.get("phone_number"), username));
+
+        Query query = session.createQuery(q);
+        return (Customer) query.getSingleResult();
+
     public List<Object[]> patientStatistics() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();

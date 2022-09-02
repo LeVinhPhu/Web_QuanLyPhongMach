@@ -4,7 +4,9 @@
  */
 package com.vpdq.controllers;
 
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -38,7 +40,8 @@ public class EmployeeController {
     //Y tá quản lý
     
     @GetMapping("/nursesIndex")
-    public String nursesIndex (){
+    public String nursesIndex (Model model, HttpSession session){
+        model.addAttribute("currentUser",session.getAttribute("currentUser"));
         return "nursesIndex";
     }
     

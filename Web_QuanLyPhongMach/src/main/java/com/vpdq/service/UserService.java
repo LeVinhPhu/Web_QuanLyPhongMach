@@ -11,6 +11,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  *
  * @author vinhp
  */
-public interface EmployeeLoginService extends UserDetailsService{
+public interface UserService extends UserDetailsService{
     Employee getEmployeeByUsername(String username);
 }

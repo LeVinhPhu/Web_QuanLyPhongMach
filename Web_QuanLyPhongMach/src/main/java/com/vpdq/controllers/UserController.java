@@ -5,11 +5,12 @@
 package com.vpdq.controllers;
 
 import com.cloudinary.utils.ObjectUtils;
-import com.vpdq.pojo.Account;
 import com.vpdq.pojo.Admin;
 import com.vpdq.pojo.Customer;
 import com.vpdq.pojo.Employee;
+import com.vpdq.rolestatic.UserRole;
 import com.vpdq.service.CustomerService;
+import static java.awt.SystemColor.window;
 import java.io.IOException;
 import java.util.Map;
 import javax.validation.Valid;
@@ -19,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -32,9 +34,10 @@ public class UserController {
     @Autowired
     private CustomerService customerService;
 
-    @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("Account", new Account());
+    @GetMapping("/login/{role}")
+    public String login(Model model, @PathVariable(value = "role") String role) {
+//        model.addAttribute(UserRole.role);
+        UserRole.role = role;
         return "login";
     }
 

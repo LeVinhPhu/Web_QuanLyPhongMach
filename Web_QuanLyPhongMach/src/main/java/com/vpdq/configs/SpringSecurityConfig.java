@@ -14,8 +14,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import com.vpdq.configs.handlers.LoginSuccessHandler;
+import com.vpdq.configs.handlers.LogoutHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 /**
  *
@@ -33,11 +36,27 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private AuthenticationSuccessHandler loginSuccessHandler;
+
+    @Autowired
+    private LogoutSuccessHandler logoutHandler;
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+
+    @Bean
+    public AuthenticationSuccessHandler loginSucceccHandler() {
+        return new LoginSuccessHandler();
+    }
+
+    @Bean
+    public LogoutSuccessHandler logoutHandler() {
+        return new LogoutHandler();
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
@@ -48,16 +67,24 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin().usernameParameter("username").passwordParameter("password")
                 .loginPage("/login");
 
-        http.formLogin().defaultSuccessUrl("/").failureUrl("/login?erorr");
+        http.formLogin().defaultSuccessUrl("/").failureUrl("/login?erorr"); // defaultSuccessUrl("/") cần thay thế hàm có giá trí phân quyền
+        http.formLogin().successHandler(this.loginSuccessHandler);
+//        http.logout().logoutSuccessUrl("/");
+        http.logout().logoutSuccessHandler(this.logoutHandler);
+        http.exceptionHandling()
+                .accessDeniedPage("/login?accessDenied");
 
-        http.logout().logoutSuccessUrl("/");
+        http.authorizeRequests().antMatchers("/").permitAll();
+        http.authorizeRequests().antMatchers("/admins/**").access("hasRole('admin') or hasRole('supperadmin')");
+        http.authorizeRequests().antMatchers("/employees/nursesIndex").access("hasRole('ROLE_EMPLOYEE')");
+        http.authorizeRequests().antMatchers("/employees/billsManager").access("hasRole('2')");
+        http.authorizeRequests().antMatchers("/employees/appointmentsManager").access("hasRole('2')");
+        http.authorizeRequests().antMatchers("/employees/doctorsIndex").access("hasRole('1')");
+        http.authorizeRequests().antMatchers("/employees/medicalRecord").access("hasRole('1')");
+        http.authorizeRequests().antMatchers("/employees/prescription").access("hasRole('1')");
+        http.authorizeRequests().antMatchers("/customers/customersIndex").permitAll();
+        http.authorizeRequests().antMatchers("/customers/appointments").permitAll();
 
-        http.authorizeRequests().antMatchers("/").permitAll()
-                .antMatchers("/**/comments").authenticated()
-                .antMatchers("/admin/**")
-                .access("hasRole('ROLE_ADMIN')");
         http.csrf().disable();
     }
-    
-
 }
