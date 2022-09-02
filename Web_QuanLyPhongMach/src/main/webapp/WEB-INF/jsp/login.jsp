@@ -13,9 +13,8 @@
 
     <div class="col-md-7 col-12 ">
         <div class="">
-            <h2 style="font-family: fantasy;">P&QCOMPANY</h2>
+            <h2 style="font-family: fantasy;">P&Q CLINCI</h2>
             <h6 style="font-family: courier">Welcome ..........</h6>
-            <hr>
         </div>
     </div>
 
@@ -28,14 +27,14 @@
         </div>
         <div class="mb-3">
             <c:url value="/login" var="action"></c:url>
-            <form:form method="post" action="${action}" modelAttribute="Account">
+            <form method="post" action="${action}">
                 <div class="input-row form-floating">
 
-                    <form:input type="text" class="form-control" path="username" id="phoneNumber" placeholder="phoneNumber" />
+                    <input type="text" class="form-control" path="username" id="username" name="username" placeholder="phoneNumber" />
                     <label for="address">Tài khoản</label>
                 </div>
                 <div class="input-row form-floating">
-                    <form:input type="password" class="form-control" path="password" id="password" placeholder="password" />
+                    <input type="password" class="form-control" path="password" id="password" name="password" placeholder="password" />
                     <label for="address">Mật khẩu</label>
                 </div>
                 <hr>
@@ -47,7 +46,7 @@
                 <div class="form-floating" style="text-align: center">
                     <span style="font-size: 12px">Bạn chưa có tài khoản? <a href="/Web_QuanLyPhongMach/register" style="text-decoration: none">Đăng ký</a></span>
                 </div>
-            </form:form>
+            </form>
         </div>
     </div>
 </div>

@@ -56,32 +56,50 @@
 
                 <div type="button" style="border: none" class="bg-dark btn btn-primary dropdown-toggle" 
                      data-bs-toggle="dropdown">
-                    <sec:authorize access="isAuthenticated()">
-                        <a class="" href="<c:url value="/login" />" style="text-decoration:none; color:  #999999;">
-                             <sec:authentication property="principal.username"/>
-                        </a>
-                    </sec:authorize>
-                    <img
-                        src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                        class="rounded-circle"
-                        height="30"
-                        width="30"
-                        alt="Black and White Portrait of a Man"
-                        loading="lazy"
-                        />
+
+                    <c:if test="${currentUser != null}">
+                        <a style="text-decoration:none; color:  #999999;">${currentUser.firstName} ${currentUser.lastName} </a>
+                        <img
+                            src="${currentUser.image}"
+                            class="rounded-circle"
+                            height="30"
+                            width="30"
+                            alt="Black and White Portrait of a Man"
+                            loading="lazy"
+                            />
+                    </c:if>
+                    <c:if test="${currentUser == null}">
+                        <a style="text-decoration:none; color:  #999999;" href="<c:url value="/login" />">Username</a>
+
+                        <img
+                            src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662139496/Web_QLPM/Avatar/user_2_sbwijr.png"
+                            class="rounded-circle"
+                            height="30"
+                            width="30"
+                            alt="Black and White Portrait of a Man"
+                            loading="lazy"
+                            />
+                    </c:if>
                 </div>
 
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                    <sec:authorize access="!isAuthenticated()">
-                        <a class="dropdown-item" href="#">Đăng ký</a>
-                    </sec:authorize>
+                        <c:if test="${currentUser == null}">
+                            <a class="dropdown-item" href="<c:url value="/login" />">Đăng ký</a>
+                        </c:if>
                     </li>
-                    <li><a class="dropdown-item" href="#">Thông tin cá nhân</a></li>
                     <li>
-                    <sec:authorize access="isAuthenticated()">
-                        <a class="dropdown-item" href="<c:url value="/logout" />">Thoát</a>
-                    </sec:authorize>
+                        <c:if test="${currentUser != null}">
+                            <a class="dropdown-item" href="#">Thông tin cá nhân</a>
+                        </c:if>
+                    </li>
+                    <li>
+                        <c:if test="${currentUser != null}">
+                            <a class="dropdown-item" href="<c:url value="/logout" />">Đăng xuất</a>
+                        </c:if>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">Trợ giúp</a>
                     </li>
                 </ul>
             </div>
