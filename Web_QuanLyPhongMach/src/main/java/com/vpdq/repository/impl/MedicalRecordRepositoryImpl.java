@@ -48,6 +48,7 @@ public class MedicalRecordRepositoryImpl implements MedicalRecordRepository {
                 b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice"))));
 
         q.groupBy(b.function("YEAR", Integer.class, mRoot.get("billingDate")));
+        q.orderBy(b.asc(b.function("YEAR", Integer.class, mRoot.get("billingDate"))));
         Query query = session.createQuery(q);
 
         return query.getResultList();

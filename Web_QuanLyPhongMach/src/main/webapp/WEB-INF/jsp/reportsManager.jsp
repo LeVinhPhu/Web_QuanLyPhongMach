@@ -41,14 +41,14 @@
                 </div>
             </div>
             <!--doanh thu theo năm-->
-            <p id="rightContent1"> </p>
+            <p id="rightContent1" style="padding-bottom: 80px"> </p>
             <div class="mt-2">
                 <div class="pt-2 pb-1">
                     <h5 class="text-center">DOANH THU THEO NĂM</h5>
                 </div>
 
                 <div class="row mt-2">  
-                    <div class="col-md-4 col-xs-12" style="background-color: lightcyan">
+                    <div class="col-md-5 col-xs-12">
                         <table class="table">
                             <tr>
                                 <th>Năm</th>
@@ -64,21 +64,21 @@
                             </td></tr>
                         </table>
                     </div>
-                    <div class="col-md-8 col-xs-12">
+                    <div class="col-md-7 col-xs-12">
                         <canvas id="myChart"></canvas>
                     </div>
                 </div>
             </div>
 
             <!--doanh thu theo quý-->
-            <p id="rightContent2"></p>
+            <p id="rightContent2" style="padding-bottom: 80px"></p>
             <div class="mt-2">
                 <div class="pt-2 pb-1">
                     <h5 class="text-center">DOANH THU THEO QUÝ</h5>
                 </div>
                 <div class="row mt-2">
 
-                    <div class="col-md-6 col-xs-12" style="background-color: #fcecfd">
+                    <div class="col-md-5 col-xs-12"">
                         <table class="table">
                             <tr>
                                 <th>Quý</th>
@@ -93,28 +93,30 @@
                             </c:forEach>
                         </table>
                     </div>
-                    <div class="col-md-6 col-xs-12">
+                    <div class="col-md-7 col-xs-12">
                         <c:url value="/admins/reportsManager" var="action" />
-                        <form action="${action}">
-                            <div class="mb-2 mt-2">
-                                <input type="number" class="form-control" placeholder="Nhập năm" name="year">
-                            </div>
-                            <button type="submit" class="btn btn-primary" style="margin-bottom: 5px" >Thống kê</button>
-                        </form>
-
-                        <canvas id="myChart2"></canvas>
+                            <form action="${action}">
+                                <div class="mb-2 mt-2">
+                                    <input type="number" class="form-control" placeholder="Nhập năm" name="year">
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="margin-bottom: 5px; position: absolute; margin-right: 0" >Thống kê</button>
+                            </form>
+                        <div style="width: 60%; margin-left: 30%"  >
+                            <canvas id="myChart2"></canvas>
+                        </div>
                     </div>
+
                 </div>
             </div>
 
             <!--doanh thu theo tháng-->
-            <p id="rightContent3"></p>
+            <p id="rightContent3" style="padding-bottom: 80px"></p>
             <div class="mt-2">
                 <div class="pt-2 pb-1">
                     <h5 class="text-center">DOANH THU THEO THÁNG</h5>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-6 col-xs-12" style="background-color: cornsilk">
+                    <div class="col-md-5 col-xs-12">
                         <table class="table">
                             <tr>
                                 <th>Tháng</th>
@@ -141,7 +143,7 @@
                         </table>
                     </div>
 
-                    <div class="col-md-6 col-xs-12">
+                    <div class="col-md-7 col-xs-12">
                         <c:url value="/admins/reportsManager" var="action" />
 
                         <form action="${action}" method="POST">

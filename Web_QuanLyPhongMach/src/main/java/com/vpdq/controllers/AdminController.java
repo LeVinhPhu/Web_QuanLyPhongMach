@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,7 +39,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/admins")
 @ControllerAdvice //dung trong khai bao thuoc tinh dung chung 
 public class AdminController {
-
+    @Bean
+    public Cloudinary cloudinary() {
+        Cloudinary cloudinary
+                = new Cloudinary(ObjectUtils.asMap(
+                        "cloud_name", "vinhphuvtv2",
+                        "api_key", "335115886111226",
+                        "api_secret", "Y4A5vCe_8f-liruLKg5FRmjl9tw",
+                        "secure", true));
+        return cloudinary;
+    }
+    
     //Kết nối vs service
     @Autowired
     private PositionService positionService;
@@ -54,14 +65,13 @@ public class AdminController {
 
     @Autowired
     private MedicalRecordService medicalRecordService;
-
-
+    
     @Autowired
     private Cloudinary cloudinary;
 
     @Autowired
     private EmployeeService employeeService;
-
+    
     //dung chung
     @ModelAttribute
     public void commonAttribute(Model model) {

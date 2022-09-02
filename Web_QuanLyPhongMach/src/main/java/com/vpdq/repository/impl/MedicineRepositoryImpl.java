@@ -57,39 +57,17 @@ public class MedicineRepositoryImpl implements MedicineRepository {
         if (params != null) {
             List<Predicate> predicates = new ArrayList<>();
 
-//            String kw = params.get("kw");
-//            if (kw != null && !kw.isEmpty()) {
-//                Predicate p = b.like(mRoot.get("name").as(String.class), String.format("%%%s%%", kw));
-//                predicates.add(p);
-//            }
-//
-//            String fp = params.get("fromPrice");
-//            if (fp != null) {
-//                Predicate p = b.greaterThanOrEqualTo(mRoot.get("unitPrice").as(Long.class), Long.parseLong(fp));
-//                predicates.add(p);
-//            }
-//
-//            String tp = params.get("toPrice");
-//            if (tp != null) {
-//                Predicate p = b.lessThanOrEqualTo(mRoot.get("unitPrice").as(Long.class), Long.parseLong(tp));
-//                predicates.add(p);
-//            }
-//            String mediId = params.get("mediId");
-//            if (mediId != null) {
-//                Predicate p = b.equal(mRoot.get("categoryId"), Integer.parseInt(mediId));
-//                predicates.add(p);
-//            }
             q.where(predicates.toArray(Predicate[]::new));
         }
         
         Query<Object[]> query = session.createQuery(q);
-        
-        if (page > 0) {
-            int size = Integer.parseInt(env.getProperty("page.size").toString());
-            int start = (page - 1) * size;
-            query.setFirstResult(start);
-            query.setMaxResults(size);
-        }
+//        
+//        if (page > 0) {
+//            int size = Integer.parseInt(env.getProperty("page.size").toString());
+//            int start = (page - 1) * size;
+//            query.setFirstResult(start);
+//            query.setMaxResults(size);
+//        }
         
         return query.getResultList();
     }

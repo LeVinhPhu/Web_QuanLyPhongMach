@@ -88,7 +88,7 @@
     </div>
 </div>
 
-<script src="<c:url value="/js/register.js" />"></script>
+<script src="<c:url value="/js/registers.js" />"></script>
 <script>
     <c:url value="/api/phoneNumber" var="p" />;
 </script>
