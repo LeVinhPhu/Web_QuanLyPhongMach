@@ -64,6 +64,17 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
                        value="/WEB-INF/jsp/reportsManager.jsp" />
     </definition>
     
+    <definition name="reports2Manager" extends="baseLayout">
+        <put-attribute name="title" value="Báo Cáo Thống Kê" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/reports2Manager.jsp" />
+    </definition>
+    
+    <definition name="reports3Manager" extends="baseLayout">
+        <put-attribute name="title" value="Báo Cáo Thống Kê" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/reports3Manager.jsp" />
+    </definition>
     <definition name="medicinesManager" extends="baseLayout">
         <put-attribute name="title" value="Quản Lý Thuốc" />
         <put-attribute name="content"

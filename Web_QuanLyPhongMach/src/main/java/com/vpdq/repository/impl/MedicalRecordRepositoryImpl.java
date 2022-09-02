@@ -69,7 +69,8 @@ public class MedicalRecordRepositoryImpl implements MedicalRecordRepository {
                 b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
                 b.equal(b.function("YEAR", Integer.class, mRoot.get("billingDate")), year));
 
-        q.multiselect(b.function("QUARTER", Integer.class, mRoot.get("billingDate")), b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice"))));
+        q.multiselect(b.function("QUARTER", Integer.class, mRoot.get("billingDate")), 
+                b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice"))));
 
         q.groupBy(b.function("QUARTER", Integer.class, mRoot.get("billingDate")));
         q.orderBy(b.asc(b.function("QUARTER", Integer.class, mRoot.get("billingDate"))));
@@ -94,7 +95,8 @@ public class MedicalRecordRepositoryImpl implements MedicalRecordRepository {
                 b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
                 b.equal(b.function("YEAR", Integer.class, mRoot.get("billingDate")), year));
 
-        q.multiselect(b.function("MONTH", Integer.class, mRoot.get("billingDate")), b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice"))), b.function("YEAR", Integer.class, mRoot.get("billingDate")));
+        q.multiselect(b.function("MONTH", Integer.class, mRoot.get("billingDate")), 
+                b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice"))));
 
         q.groupBy(b.function("MONTH", Integer.class, mRoot.get("billingDate")));
         q.orderBy(b.asc(b.function("MONTH", Integer.class, mRoot.get("billingDate"))));

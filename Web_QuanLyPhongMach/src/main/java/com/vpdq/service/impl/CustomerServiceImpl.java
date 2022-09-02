@@ -75,5 +75,25 @@ public class CustomerServiceImpl implements CustomerService {
         return this.customerRepository.check(phone);
     }
 
+    @Override
+    public List<Object[]> patientStatistics() {
+        return this.customerRepository.patientStatistics();
+    }
+
+    @Override
+    public List<Object[]> patientStatisticsByYear() {
+        return this.customerRepository.patientStatisticsByYear();
+    }
+
+    @Override
+    public List<Object[]> patientStatisticsByQuater(int year) {
+        return this.customerRepository.patientStatisticsByQuater(year);
+    }
+
+    @Override
+    public List<Object[]> patientStatisticsByMonth(int year) {
+        return this.customerRepository.patientStatisticsByMonth(year);
+    }
+
 
 }

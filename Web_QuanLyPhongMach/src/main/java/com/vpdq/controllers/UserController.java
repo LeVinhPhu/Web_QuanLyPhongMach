@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -50,7 +51,7 @@ public class UserController {
     public String registers(Model model,
             @ModelAttribute(value = "customers") Customer customer) {
         String errMsg = "";
-
+        
         if (customer.getPassword().equals(customer.getConfirmPassword())) {
             if (this.customerService.addCustomer(customer) == true) {
                 return "redirect:/login";

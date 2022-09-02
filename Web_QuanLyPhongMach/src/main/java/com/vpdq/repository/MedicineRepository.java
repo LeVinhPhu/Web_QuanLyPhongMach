@@ -14,12 +14,13 @@ import java.util.Map;
  */
 public interface MedicineRepository {
     List<Object[]> getMedicines(Map<String, String> params, int page);
-    List<Medicine> getMedicines2(Map<String, String> params, int page);
-    
+    List<Medicine> getMedicines2(Map<String, String> params, int page); 
     boolean deleteMedicine(int id);
     boolean addMedicine(Medicine m);
     Medicine getMedicineByID(int id);
-    
     boolean updateMedicineByID(int id, Medicine medicine);
+    List<Object[]> frequencyOfMedicineUsageStatisticsByYear(int year);
+    List<Object[]> frequencyOfMedicineUsageStatisticsByQuarter(int year, int quarter);
+    List<Object[]> frequencyOfMedicineUsageStatisticsByMonth(int year, int month);
     
 }

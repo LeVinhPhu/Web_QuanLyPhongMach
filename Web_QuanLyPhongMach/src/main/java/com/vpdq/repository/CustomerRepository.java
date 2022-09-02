@@ -31,4 +31,10 @@ public interface CustomerRepository {
 
     Customer getCustomerByUsername(String username);
 
+
+    List<Object[]> patientStatistics();
+    List<Object[]> patientStatisticsByYear();
+    List<Object[]> patientStatisticsByQuater(int year);
+    List<Object[]> patientStatisticsByMonth(int year);
+
 }

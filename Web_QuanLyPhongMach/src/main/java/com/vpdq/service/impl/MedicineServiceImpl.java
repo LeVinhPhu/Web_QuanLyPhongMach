@@ -51,5 +51,20 @@ public class MedicineServiceImpl implements MedicineService {
     public boolean updateMedicineByID(int id, Medicine medicine) {
         return this.medicineRepository.updateMedicineByID(id, medicine);
     }
+
+    @Override
+    public List<Object[]> frequencyOfMedicineUsageStatisticsByYear(int year) {
+        return this.medicineRepository.frequencyOfMedicineUsageStatisticsByYear(year);
+    }
+
+    @Override
+    public List<Object[]> frequencyOfMedicineUsageStatisticsByQuarter(int year, int quarter) {
+        return this.medicineRepository.frequencyOfMedicineUsageStatisticsByQuarter(year, quarter);
+    }
+
+    @Override
+    public List<Object[]> frequencyOfMedicineUsageStatisticsByMonth(int year, int month) {
+        return this.medicineRepository.frequencyOfMedicineUsageStatisticsByMonth(year, month);
+    }
     
 }

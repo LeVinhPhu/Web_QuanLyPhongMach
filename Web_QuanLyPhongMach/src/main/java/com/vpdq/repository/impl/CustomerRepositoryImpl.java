@@ -5,7 +5,9 @@
 package com.vpdq.repository.impl;
 
 import com.vpdq.pojo.Customer;
+import com.vpdq.pojo.MedicalRecord;
 import com.vpdq.pojo.Medicine;
+import com.vpdq.pojo.Prescription;
 import com.vpdq.pojo.Unit;
 import com.vpdq.repository.CustomerRepository;
 import java.util.ArrayList;
@@ -84,6 +86,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
+
     public boolean updateCustomer(Customer e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -116,6 +119,71 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
         Query query = session.createQuery(q);
         return (Customer) query.getSingleResult();
+
+    public List<Object[]> patientStatistics() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root root = q.from(MedicalRecord.class);
+        q.multiselect(b.count(root.get("id")));
+
+        Query query = session.createQuery(q);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Object[]> patientStatisticsByYear() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root root = q.from(MedicalRecord.class);
+
+        q.multiselect(b.function("YEAR", Integer.class, root.get("billingDate")), b.count(root.get("id")));
+
+        q.groupBy(b.function("YEAR", Integer.class, root.get("billingDate")));
+        q.orderBy(b.asc(b.function("YEAR", Integer.class, root.get("billingDate"))));
+        Query query = session.createQuery(q);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Object[]> patientStatisticsByQuater(int year) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root root = q.from(MedicalRecord.class);
+        q.where(b.equal(b.function("YEAR", Integer.class, root.get("billingDate")), year));
+        q.multiselect(b.function("QUARTER", Integer.class, root.get("billingDate")), 
+                b.count(root.get("id")));
+
+        q.groupBy(b.function("QUARTER", Integer.class, root.get("billingDate")));
+        q.orderBy(b.asc(b.function("QUARTER", Integer.class, root.get("billingDate"))));
+        Query query = session.createQuery(q);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Object[]> patientStatisticsByMonth(int year) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root root = q.from(MedicalRecord.class);
+        q.where(b.equal(b.function("YEAR", Integer.class, root.get("billingDate")), year));
+        q.multiselect(b.function("MONTH", Integer.class, root.get("billingDate")), 
+                b.count(root.get("id")));
+
+        q.groupBy(b.function("MONTH", Integer.class, root.get("billingDate")));
+        q.orderBy(b.asc(b.function("MONTH", Integer.class, root.get("billingDate"))));
+        Query query = session.createQuery(q);
+
+        return query.getResultList();
     }
 
 }
