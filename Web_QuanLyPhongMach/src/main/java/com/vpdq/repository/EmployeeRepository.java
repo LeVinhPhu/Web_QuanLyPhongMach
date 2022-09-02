@@ -21,8 +21,11 @@ public interface EmployeeRepository {
     List<Employee> getEmployee(Map<String, String> params, int page);
     int countEmployee();
     boolean addEmployee(Employee e);
+    boolean updateEmployee(Employee e);
     boolean deleteEmployee(int employeeId);
     List<Object[]> countEmployeeByCate();
     
     Employee getEmployeeByID(int id);
+    
+    Employee getEmployeeByUsername(String username);
 }

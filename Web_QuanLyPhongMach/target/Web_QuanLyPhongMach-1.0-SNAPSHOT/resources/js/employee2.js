@@ -3,6 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 
+
+/* 
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
+ */
+
 function getEmployees(endpoint) {
     fetch(endpoint).then(function (res) {
         return res.json();
@@ -104,7 +110,7 @@ function detailEmployee(endpoint, id) {
 }
 
 
-//Trường xữ lý lổi của form Add
+//form Add
 
 const firstname = document.getElementById("firstName");
 const lastname = document.getElementById("lastName");
@@ -141,6 +147,7 @@ btSubmit.addEventListener('click', function () {
                 });
             });
         });
+        temp = 0;
         alert('Gửi đăng ký thành công  !');
         window.location = "/Web_QuanLyPhongMach/admins/employeesManager";
     }
@@ -153,9 +160,15 @@ btSubmit.addEventListener('click', function () {
     }
 });
 
+//form Update
+function loadFormUpdate(endpoint,id){
+    
+}
 
 
-//Kiểm tra lổi
+
+
+//Kiểm tra lổi Update - add
 function checkValidate() {
     let fn = firstname.value;
     let ln = lastname.value;

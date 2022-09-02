@@ -111,7 +111,6 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     @Override
     public boolean addEmployee(Employee e) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-
         try {
             session.save(e);
             return true;
@@ -147,6 +146,33 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         
         q.setParameter("idEmpl", id);
         return (Employee) q.getSingleResult();
+    }
+
+    @Override
+    public boolean updateEmployee(Employee e) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.update(e);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public Employee getEmployeeByUsername(String username) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Employee> q = b.createQuery(Employee.class);
+        Root root = q.from(Employee.class);
+        q.select(root);
+
+        q.where(b.equal(root.get("username"), username));
+        
+        Query query = session.createQuery(q);
+        return (Employee) query.getSingleResult();
     }
 
 }

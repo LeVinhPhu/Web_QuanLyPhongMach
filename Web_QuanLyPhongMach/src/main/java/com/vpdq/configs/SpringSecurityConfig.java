@@ -26,35 +26,37 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(basePackages = {
     "com.vpdq.controllers",
     "com.vpdq.repository",
-    "com.vpdq.service",
-})
+    "com.vpdq.service",})
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-//    @Autowired
-//    private UserDetailsService customerService;
-//    
-    
-//    @Bean
-//    public BCryptPasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-    
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(customerService).passwordEncoder(passwordEncoder());
-//    }
-    
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.formLogin().usernameParameter("username").passwordParameter("password");
-////        http.formLogin().successHandler(loginHandler);
-//
-//        http.logout().logoutSuccessUrl("/login");
 
-//        http.authorizeRequests().antMatchers("/").permitAll()
-//                .antMatchers("/**/comments").authenticated()
-//                .antMatchers("/admin/**")
-//                .access("hasRole('ROLE_ADMIN')");
+    @Autowired
+    private UserDetailsService userDetailsService;
 
-//        http.csrf().disable();
-//    }
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.formLogin().usernameParameter("username").passwordParameter("password")
+                .loginPage("/login");
+
+        http.formLogin().defaultSuccessUrl("/").failureUrl("/login?erorr");
+
+        http.logout().logoutSuccessUrl("/");
+
+        http.authorizeRequests().antMatchers("/").permitAll()
+                .antMatchers("/**/comments").authenticated()
+                .antMatchers("/admin/**")
+                .access("hasRole('ROLE_ADMIN')");
+        http.csrf().disable();
+    }
+    
+
 }

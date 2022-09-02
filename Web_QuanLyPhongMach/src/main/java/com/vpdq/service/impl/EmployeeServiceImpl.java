@@ -35,14 +35,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public int countEmployee() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return 0;
     }
 
     @Override
     public boolean addEmployee(Employee e) {
         //cần xử lý việc lấy ảnh
-
-        e.setImage("image");
+        e.setImage("https://res.cloudinary.com/vinhphuvtv2/image/upload/v1661085367/Web_QLPM/Avatar/360_F_259394679_GGA8JJAEkukYJL9XXFH2JoC3nMguBPNH_q8wpm9.jpg");
         return this.employeeRepository.addEmployee(e);
     }
 
@@ -55,11 +54,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Object[]> countEmployeeByCate() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return null;
     }
 
     @Override
     public Employee getEmployeeByID(int id) {
         return this.employeeRepository.getEmployeeByID(id);
+    }
+
+    @Override
+    public boolean updateEmployee(Employee e) {
+        return this.employeeRepository.updateEmployee(e);
     }
 }

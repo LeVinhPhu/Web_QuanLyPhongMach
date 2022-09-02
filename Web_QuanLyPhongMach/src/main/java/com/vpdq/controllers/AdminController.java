@@ -17,8 +17,6 @@ import com.vpdq.service.SupplierService;
 import com.vpdq.service.UnitService;
 import java.io.IOException;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,6 +54,7 @@ public class AdminController {
 
     @Autowired
     private MedicalRecordService medicalRecordService;
+
 
     @Autowired
     private Cloudinary cloudinary;
@@ -100,6 +99,22 @@ public class AdminController {
         return "employeesManager";
     }
 
+    
+    
+    @PostMapping("/employeesManager/{employeeId}")
+    public String updateEmployee(
+            @ModelAttribute(value = "employeeUpdate") @Valid Employee e,
+            BindingResult r) {
+        if (r.hasErrors()) {
+            return "employeesManager"; //return lổi
+        }
+        if (this.employeeService.updateEmployee(e) == true) {
+            return "redirect:employeesManager"; //return về trang gì đó
+        }
+        return "employeesManager";
+    }
+    
+
     @GetMapping("/customersManager")
     public String customersManager(Model model) {
         return "customersManager";
@@ -114,6 +129,18 @@ public class AdminController {
         model.addAttribute("revenueStatsByMonth", this.medicalRecordService.revenueStatisticsByMonth(year2));
         return "reportsManager";
     }
+
+    
+    @RequestMapping("/reports2Manager")
+    public String reports2Manager (Model model){
+        return "reports2Manager";
+    }
+    
+    @RequestMapping("/reports3Manager")
+    public String reports3Manager (Model model){
+        return "reports3Manager";
+    }
+  
     
 //    THUỐC
     @GetMapping("/medicinesManager")
@@ -186,6 +213,7 @@ public class AdminController {
         }
         return "updateMedicine";
     }
+
     
 //LỊCH TRỰC
     @GetMapping("/onCallManager")
