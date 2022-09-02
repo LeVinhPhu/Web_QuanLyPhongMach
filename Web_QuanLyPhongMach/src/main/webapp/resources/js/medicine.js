@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
-//XOÁ THUỐC
+// XOÁ THUỐC
 function deleteMedicine(endpoint, id, btn) {
     let r = document.getElementById(`row${id}`);
     let load = document.getElementById(`load${id}`);
@@ -22,6 +22,7 @@ function deleteMedicine(endpoint, id, btn) {
     });
 }
 
+
 //LẤY THUỐC
 function getMedicines(endpoint) {
     fetch(endpoint).then(function (res) {
@@ -31,7 +32,6 @@ function getMedicines(endpoint) {
         if (d !== null) {
             let h = "";
             for (let i = 0; i < data.length; i++)
-                
                 h += `
                     <tr id="row${data[i][0]}">
                         <td>${i + 1}</td>

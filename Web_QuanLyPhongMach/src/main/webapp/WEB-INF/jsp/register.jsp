@@ -46,6 +46,7 @@
             <div class="input-row form-floating">
                 <form:input path="dateOfBirth" class="form-control" type="date" id="birthday" name="birthday" />
                 <label for="birthday">Ngày sinh</label>
+                <small>Error</small>
             </div>    
             <div class="form-floating input-row">
                 <form:input type="text" path="address" class="form-control" id="address" placeholder="Nhap dia chi" name="name" />
@@ -76,11 +77,11 @@
                 <label for="p2">Xác nhận mật khẩu <span style="color: red">*</span></label>
                 <small>Error</small>
             </div>
-                
+
             <div class="mt-2" style="text-align: center">
                 <input id="btnRegister" type="submit" value="Đăng ký" class="btn btn-primary" />
             </div>
-
+              
             <div class="form-floating mb-4" style="text-align: center">
                 <span style="font-size: 12px">Bạn chưa có tài khoản? <a href="/Web_QuanLyPhongMach/login" style="text-decoration: none">Đăng nhập</a></span>
             </div>
@@ -88,6 +89,7 @@
     </div>
 </div>
 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="<c:url value="/js/registers.js" />"></script>
 <script>
     <c:url value="/api/phoneNumber" var="p" />;

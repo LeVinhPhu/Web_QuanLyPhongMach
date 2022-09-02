@@ -35,132 +35,136 @@
     <div class="col-md-8 col-12">
         <!--bên phải-->
         <div class="">
-            <p id="rightContent0"></p>
-            <div class="">
-                <div>
-                    <h5>TỔNG DOANH THU</h5>
-                </div>
-            </div>
-            <!--doanh thu theo năm-->
-            <p id="rightContent1"> </p>
+
+            <!--Tần suất sử dụng thuốc theo năm-->
+            <p id="rightContent1" style="padding-bottom: 80px"> </p>
             <div class="mt-2">
                 <div class="pt-2 pb-1">
-                    <h5 class="text-center">DOANH THU THEO NĂM</h5>
+                    <h5 class="text-center">TẦN SUẤT SỬ DỤNG THUỐC NĂM <c:out value="${year1}" /></h5>
                 </div>
 
                 <div class="row mt-2">  
-                    <div class="col-md-4 col-xs-12" style="background-color: lightcyan">
+                    <div class="col-md-5 col-xs-12">
                         <table class="table">
                             <tr>
-                                <th>Năm</th>
-                                <th>Doanh thu</th>
+                                <th>Tên thuốc</th>
+                                <th>Tần suất</th>
                             </tr>
 
-                            <c:forEach items="${revenueStats}" var="r">
+                            <c:forEach items="${frequencyMedicineUsageStatsByYear}" var="f">
                                 <tr>
-                                    <td>${r[0]}</td>
-                                    <td><fmt:formatNumber type="number" value="${r[1]}" maxFractionDigits="3" /> VNĐ</td>
-                                </tr>
-                            </c:forEach>
-                            </td></tr>
-                        </table>
-                    </div>
-                    <div class="col-md-8 col-xs-12">
-                        <canvas id="myChart"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <!--doanh thu theo quý-->
-            <p id="rightContent2"></p>
-            <div class="mt-2">
-                <div class="pt-2 pb-1">
-                    <h5 class="text-center">DOANH THU THEO QUÝ</h5>
-                </div>
-                <div class="row mt-2">
-
-                    <div class="col-md-6 col-xs-12" style="background-color: #fcecfd">
-                        <table class="table">
-                            <tr>
-                                <th>Quý</th>
-                                <th>Doanh thu</th>
-                            </tr>
-
-                            <c:forEach items="${revenueStatsByQuarter}" var="r">
-                                <tr>
-                                    <td>${r[0]}</td>
-                                    <td><fmt:formatNumber type="number" value="${r[1]}" maxFractionDigits="3" /> VNĐ</td>
+                                    <td>${f[0]}</td>
+                                    <td>${f[1]}</td>
                                 </tr>
                             </c:forEach>
                         </table>
                     </div>
-                    <div class="col-md-6 col-xs-12">
-                        <c:url value="/admins/reportsManager" var="action" />
-                        <form action="${action}">
+                    <div class="col-md-7 col-xs-12">
+                        <form action="${action}" method="POST">
                             <div class="mb-2 mt-2">
-                                <input type="number" class="form-control" placeholder="Nhập năm" name="year">
+                                <input type="number" class="form-control" placeholder="Nhập năm" name="year1">
                             </div>
-                            <button type="submit" class="btn btn-primary" style="margin-bottom: 5px" >Thống kê</button>
+                            <button type="submit "class="btn btn-primary" style="margin-bottom: 5px">Thống kê</button>
                         </form>
-
-                        <canvas id="myChart2"></canvas>
+                        <canvas id="myChartFrequencyMedicineUsageStatsByYear"></canvas>
                     </div>
                 </div>
             </div>
 
-            <!--doanh thu theo tháng-->
-            <p id="rightContent3"></p>
+            <!--Tần suất sử dụng thuốc theo quý-->
+            <p id="rightContent2" style="padding-bottom: 80px"> </p>
             <div class="mt-2">
                 <div class="pt-2 pb-1">
-                    <h5 class="text-center">DOANH THU THEO THÁNG</h5>
+                    <h5 class="text-center">TẦN SUẤT SỬ DỤNG THUỐC QUÝ <c:out value="${quarter2}" /> - NĂM <c:out value="${year2}" /></h5>
                 </div>
-                <div class="row mt-2">
-                    <div class="col-md-6 col-xs-12" style="background-color: cornsilk">
+
+                <div class="row mt-2">  
+                    <div class="col-md-5 col-xs-12">
                         <table class="table">
                             <tr>
-                                <th>Tháng</th>
-                                <th>Doanh thu</th>
+                                <th>Tên thuốc</th>
+                                <th>Tần suất</th>
                             </tr>
-
-                            <c:if test="${not empty revenueStatsByMonth[0][2]}">
-                                <p class="h6" style="margin-top: 10px; font-weight: bold; text-align:center">
-                                    <c:out value="NĂM ${revenueStatsByMonth[0][2]}" />
-                                </p>
-                                <c:forEach items="${revenueStatsByMonth}" var="r">
+                            <c:if test="${not empty frequencyMedicineUsageStatsByQuarter[0][0]}"> 
+                                <c:forEach items="${frequencyMedicineUsageStatsByQuarter}" var="p">
                                     <tr>
-                                        <td>${r[0]}</td>
-                                        <td><fmt:formatNumber type="number" value="${r[1]}" maxFractionDigits="3" /> VNĐ</td>
+                                        <td>${p[0]}</td>
+                                        <td>${p[1]}</td><!--
+                                        --></tr>
+                                    </c:forEach>
+                                </c:if>
+
+                            <c:if test="${frequencyMedicineUsageStatsByQuarter[0][0] == null}">
+                                <td></td>
+                                <td>Chưa có dữ liệu</td>
+                            </c:if>
+                        </table>
+                    </div>
+                    <div class="col-md-7 col-xs-12">
+
+                        <form action="${action}" method="POST">
+                            <div class="mb-2 mt-2">
+                                <select name="quarter2" class="form-select" aria-label="Default select example">
+                                    <option value="1">Quý 1</option>
+                                    <option value="2">Quý 2</option>
+                                    <option value="3">Quý 3</option>
+                                    <option value="4">Quý 4</option>
+                                </select>
+                            </div>
+                            <div class="mb-2 mt-2">
+                                <input type="number" class="form-control" placeholder="Nhập năm" name="year2">
+                            </div>
+                            <button type="submit "class="btn btn-primary" style="margin-bottom: 5px">Thống kê</button>
+                        </form>
+                        <canvas id="myChartFrequencyMedicineUsageStatsByQuarter"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!--Tần suất sử dụng thuốc theo tháng-->
+            <p id="rightContent3" style="padding-bottom: 80px"> </p>
+            <div class="mt-2">
+                <div class="pt-2 pb-1">
+                    <h5 class="text-center">TẦN SUẤT SỬ DỤNG THUỐC THÁNG <c:out value="${month3}" /> - NĂM <c:out value="${year3}" /></h5>
+                </div>
+
+                <div class="row mt-2">  
+                    <div class="col-md-5 col-xs-12">
+                        <table class="table">
+                            <tr>
+                                <th>Tên thuốc</th>
+                                <th>Tần suất</th>
+                            </tr>
+                            <c:if test="${not empty frequencyMedicineUsageStatsByMonth[0][0]}"> 
+                                <c:forEach items="${frequencyMedicineUsageStatsByMonth}" var="m">
+                                    <tr>
+                                        <td>${m[0]}</td>
+                                        <td>${m[1]}</td>
                                     </tr>
                                 </c:forEach>
                             </c:if>
 
-                            <c:if test="${revenueStatsByMonth[0][2] == null}">
+                            <c:if test="${frequencyMedicineUsageStatsByMonth[0][0] == null}">
                                 <td></td>
-                                <td>Chưa có doanh thu</td>
+                                <td>Chưa có dữ liệu</td>
                             </c:if>
-
                         </table>
                     </div>
-
-                    <div class="col-md-6 col-xs-12">
-                        <c:url value="/admins/reportsManager" var="action" />
-
+                    <div class="col-md-7 col-xs-12">
                         <form action="${action}" method="POST">
                             <div class="mb-2 mt-2">
-                                <input type="number" id="number" class="form-control" placeholder="Nhập năm" name="year2">
+                                <input type="number" class="form-control" placeholder="Nhập tháng" name="month3">
+                            </div>
+                            <div class="mb-2 mt-2">
+                                <input type="number" class="form-control" placeholder="Nhập năm" name="year3">
                             </div>
                             <button type="submit "class="btn btn-primary" style="margin-bottom: 5px">Thống kê</button>
-
                         </form>
-                        <canvas id="myChart3"></canvas>
+                        <canvas id="myChartFrequencyMedicineUsageStatsByMonth"></canvas>
                     </div>
                 </div>
-            </div>               
-
+            </div>
         </div>    
-
-
-
     </div>
 
     <div class="col-md-2 col-12">
@@ -202,23 +206,22 @@
         let data3 = [];
         let labels3 = [];
 
-    <c:forEach items="${revenueStats}" var="c">
+    <c:forEach items="${frequencyMedicineUsageStatsByYear}" var="c">
         data.push(${c[1]});
         labels.push('${c[0]}');
     </c:forEach>
 
-    <c:forEach items="${revenueStatsByQuarter}" var="r">
+    <c:forEach items="${frequencyMedicineUsageStatsByQuarter}" var="r">
         data2.push(${r[1]});
         labels2.push('${r[0]}');
     </c:forEach>
-    <c:forEach items="${revenueStatsByMonth}" var="r">
+    <c:forEach items="${frequencyMedicineUsageStatsByMonth}" var="r">
         data3.push(${r[1]});
         labels3.push('${r[0]}');
     </c:forEach>
-
-        revenueStats(labels, data);
-        revenueStatsByQuarter(labels2, data2);
-        revenueStatsByMonth(labels3, data3);
+        frequencyMedicineUsageStatsByYear(labels, data);
+        frequencyMedicineUsageStatsByQuarter(labels2, data2);
+        frequencyMedicineUsageStatsByMonth(labels3, data3);
     }
 </script>
 

@@ -17,4 +17,8 @@ public interface CustomerRepository {
 //    Customer getCusByPhoneNumber(String phoneNumber);
     List<Customer> getAllPhoneNumber();
     boolean check(String phone);
+    List<Object[]> patientStatistics();
+    List<Object[]> patientStatisticsByYear();
+    List<Object[]> patientStatisticsByQuater(int year);
+    List<Object[]> patientStatisticsByMonth(int year);
 }

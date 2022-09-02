@@ -4,7 +4,9 @@
  */
 package com.vpdq.repository.impl;
 
+import com.vpdq.pojo.MedicalRecord;
 import com.vpdq.pojo.Medicine;
+import com.vpdq.pojo.Prescription;
 import com.vpdq.pojo.Unit;
 import com.vpdq.repository.MedicineRepository;
 import java.util.List;
@@ -204,6 +206,87 @@ public class MedicineRepositoryImpl implements MedicineRepository {
             ex.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public List<Object[]> frequencyOfMedicineUsageStatisticsByYear(int year) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root mRoot = q.from(MedicalRecord.class);
+        Root pRoot = q.from(Prescription.class);
+        Root medicineRoot = q.from(Medicine.class);
+
+        q.where(b.equal(pRoot.get("medicalRecordId"), mRoot.get("id")),
+                b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
+                b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
+                b.equal(b.function("YEAR", Integer.class, mRoot.get("billingDate")), year));
+
+        q.multiselect(medicineRoot.get("name"), 
+                b.count(pRoot.get("medicineId")));
+
+        q.groupBy(pRoot.get("medicineId"));
+        q.orderBy(b.asc(medicineRoot.get("name")));
+        
+        Query query = session.createQuery(q);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Object[]> frequencyOfMedicineUsageStatisticsByQuarter(int year, int quarter) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root mRoot = q.from(MedicalRecord.class);
+        Root pRoot = q.from(Prescription.class);
+        Root medicineRoot = q.from(Medicine.class);
+
+        q.where(b.equal(pRoot.get("medicalRecordId"), mRoot.get("id")),
+                b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
+                b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
+                b.equal(b.function("YEAR", Integer.class, mRoot.get("billingDate")), year),
+                b.equal(b.function("QUARTER", Integer.class, mRoot.get("billingDate")), quarter));
+
+        q.multiselect(medicineRoot.get("name"), 
+                b.count(pRoot.get("medicineId")));
+
+        q.groupBy(pRoot.get("medicineId"));
+        q.orderBy(b.asc(medicineRoot.get("name")));
+        
+        Query query = session.createQuery(q);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Object[]> frequencyOfMedicineUsageStatisticsByMonth(int year, int month) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root mRoot = q.from(MedicalRecord.class);
+        Root pRoot = q.from(Prescription.class);
+        Root medicineRoot = q.from(Medicine.class);
+
+        q.where(b.equal(pRoot.get("medicalRecordId"), mRoot.get("id")),
+                b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
+                b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
+                b.equal(b.function("YEAR", Integer.class, mRoot.get("billingDate")), year),
+                b.equal(b.function("MONTH", Integer.class, mRoot.get("billingDate")), month));
+
+        q.multiselect(medicineRoot.get("name"), 
+                b.count(pRoot.get("medicineId")));
+               
+
+        q.groupBy(pRoot.get("medicineId"));
+        q.orderBy(b.asc(medicineRoot.get("name")));
+        
+        Query query = session.createQuery(q);
+
+        return query.getResultList();
     }
     
 }

@@ -74,7 +74,7 @@
             <p id="rightContent2" style="padding-bottom: 80px"></p>
             <div class="mt-2">
                 <div class="pt-2 pb-1">
-                    <h5 class="text-center">DOANH THU THEO QUÝ</h5>
+                    <h5 class="text-center">DOANH THU THEO QUÝ (NĂM <c:out value="${year}" />)</h5>
                 </div>
                 <div class="row mt-2">
 
@@ -84,23 +84,29 @@
                                 <th>Quý</th>
                                 <th>Doanh thu</th>
                             </tr>
+                            <c:if test="${not empty revenueStatsByQuarter[0][0]}"> 
+                                <c:forEach items="${revenueStatsByQuarter}" var="r">
+                                    <tr>
+                                        <td>${r[0]}</td>
+                                        <td><fmt:formatNumber type="number" value="${r[1]}" maxFractionDigits="3" /> VNĐ</td>
+                                    </tr>
+                                </c:forEach>
+                            </c:if>
 
-                            <c:forEach items="${revenueStatsByQuarter}" var="r">
-                                <tr>
-                                    <td>${r[0]}</td>
-                                    <td><fmt:formatNumber type="number" value="${r[1]}" maxFractionDigits="3" /> VNĐ</td>
-                                </tr>
-                            </c:forEach>
+                            <c:if test="${revenueStatsByQuarter[0][0] == null}">
+                                <td></td>
+                                <td>Chưa có doanh thu</td>
+                            </c:if>
                         </table>
                     </div>
                     <div class="col-md-7 col-xs-12">
                         <c:url value="/admins/reportsManager" var="action" />
-                            <form action="${action}">
-                                <div class="mb-2 mt-2">
-                                    <input type="number" class="form-control" placeholder="Nhập năm" name="year">
-                                </div>
-                                <button type="submit" class="btn btn-primary" style="margin-bottom: 5px; position: absolute; margin-right: 0" >Thống kê</button>
-                            </form>
+                        <form action="${action}">
+                            <div class="mb-2 mt-2">
+                                <input type="number" class="form-control" placeholder="Nhập năm" name="year">
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="margin-bottom: 5px; position: absolute; margin-right: 0" >Thống kê</button>
+                        </form>
                         <div style="width: 60%; margin-left: 30%"  >
                             <canvas id="myChart2"></canvas>
                         </div>
@@ -113,7 +119,7 @@
             <p id="rightContent3" style="padding-bottom: 80px"></p>
             <div class="mt-2">
                 <div class="pt-2 pb-1">
-                    <h5 class="text-center">DOANH THU THEO THÁNG</h5>
+                    <h5 class="text-center">DOANH THU THEO THÁNG (NĂM <c:out value="${year2}" />)</h5>
                 </div>
                 <div class="row mt-2">
                     <div class="col-md-5 col-xs-12">
@@ -123,10 +129,7 @@
                                 <th>Doanh thu</th>
                             </tr>
 
-                            <c:if test="${not empty revenueStatsByMonth[0][2]}">
-                                <p class="h6" style="margin-top: 10px; font-weight: bold; text-align:center">
-                                    <c:out value="NĂM ${revenueStatsByMonth[0][2]}" />
-                                </p>
+                            <c:if test="${not empty revenueStatsByMonth[0][0]}"> 
                                 <c:forEach items="${revenueStatsByMonth}" var="r">
                                     <tr>
                                         <td>${r[0]}</td>
@@ -135,7 +138,7 @@
                                 </c:forEach>
                             </c:if>
 
-                            <c:if test="${revenueStatsByMonth[0][2] == null}">
+                            <c:if test="${revenueStatsByMonth[0][0] == null}">
                                 <td></td>
                                 <td>Chưa có doanh thu</td>
                             </c:if>

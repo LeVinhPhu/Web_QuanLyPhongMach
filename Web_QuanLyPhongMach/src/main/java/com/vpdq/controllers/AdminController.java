@@ -9,6 +9,7 @@ import com.cloudinary.utils.ObjectUtils;
 import com.vpdq.pojo.Employee;
 import com.vpdq.pojo.Medicine;
 import com.vpdq.pojo.Supplier;
+import com.vpdq.service.CustomerService;
 import com.vpdq.service.EmployeeService;
 import com.vpdq.service.MedicalRecordService;
 import com.vpdq.service.MedicineService;
@@ -71,6 +72,9 @@ public class AdminController {
 
     @Autowired
     private EmployeeService employeeService;
+       
+    @Autowired
+    private CustomerService customerService;
     
     //dung chung
     @ModelAttribute
@@ -132,22 +136,49 @@ public class AdminController {
 
     @RequestMapping("/reportsManager")
     public String reportsManager(Model model,
-            @RequestParam(value = "year", defaultValue = "0", required = false) int year,
-            @RequestParam(value = "year2", defaultValue = "0", required = false) int year2) {
+            @RequestParam(value = "year", defaultValue = "2022", required = false) int year,
+            @RequestParam(value = "year2", defaultValue = "2022", required = false) int year2) {
         model.addAttribute("revenueStats", this.medicalRecordService.revenueStatistics());
         model.addAttribute("revenueStatsByQuarter", this.medicalRecordService.revenueStatisticsByQuarter(year));
         model.addAttribute("revenueStatsByMonth", this.medicalRecordService.revenueStatisticsByMonth(year2));
+        model.addAttribute("year", year);
+        model.addAttribute("year2", year2);
         return "reportsManager";
     }
 
     
     @RequestMapping("/reports2Manager")
-    public String reports2Manager (Model model){
+    public String reports2Manager (Model model,
+            @RequestParam(value = "year1", defaultValue = "2022", required = false) int year1,
+            @RequestParam(value = "year2", defaultValue = "2022", required = false) int year2){
+        model.addAttribute("patientStats", this.customerService.patientStatistics());
+        model.addAttribute("patientStatsByYear", this.customerService.patientStatisticsByYear());
+        model.addAttribute("patientStatsByQuarter", this.customerService.patientStatisticsByQuater(year1));
+        model.addAttribute("patientStatsByMonth", this.customerService.patientStatisticsByMonth(year2));
+        model.addAttribute("year1", year1);
+        model.addAttribute("year2", year2);
         return "reports2Manager";
     }
     
     @RequestMapping("/reports3Manager")
-    public String reports3Manager (Model model){
+    public String reports3Manager (Model model,
+            @RequestParam(value = "year1", defaultValue = "2022", required = false) int year1,
+            @RequestParam(value = "year2", defaultValue = "2022", required = false) int year2,
+            @RequestParam(value = "year3", defaultValue = "2022", required = false) int year3,
+            @RequestParam(value = "quarter2", defaultValue = "1", required = false) int quarter2,
+            @RequestParam(value = "month3", defaultValue = "1", required = false) int month3) {
+        model.addAttribute("frequencyMedicineUsageStatsByYear", this.medicineService.frequencyOfMedicineUsageStatisticsByYear(year1));
+        model.addAttribute("year1", year1);
+        
+        model.addAttribute("frequencyMedicineUsageStatsByQuarter", this.medicineService.frequencyOfMedicineUsageStatisticsByQuarter(year2, quarter2));
+        model.addAttribute("year2", year2);
+        model.addAttribute("quarter2", quarter2);
+        
+        model.addAttribute("frequencyMedicineUsageStatsByMonth", this.medicineService.frequencyOfMedicineUsageStatisticsByMonth(year3, month3));
+        model.addAttribute("year3", year3);
+        model.addAttribute("month3", month3);
+        
+        
         return "reports3Manager";
     }
   

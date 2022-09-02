@@ -92,17 +92,17 @@
                     </form:form>    
                 </div>
             </div>
-                    
+
         </div>
     </div>
 </div>   
 
 
 <!--DANH SÁCH THUỐC-->
-<div class="row">
-    <div>
+<div class="row mt-3 mb-3">
+    <div class="col-md-10 col-12 shadow" style="overflow: auto; height: 400px; border-radius: 10px">
         <table class="table table-hover ">
-            <tr class="table-success">
+            <tr>
                 <th></th>
                 <th>Tên thuốc</th>
                 <th>Số lượng</th>
@@ -116,6 +116,21 @@
             </tbody>
         </table>
     </div>
+
+    <div class="col-md-2 col-12">
+        <div class="list-group">
+            <a class="list-group-item list-group-item-action active">
+                Tiện ích
+            </a>
+            <a href="/Web_QuanLyPhongMach/admins/adminIndex" class="list-group-item list-group-item-action">Trang Chủ</a>
+            <a href="/Web_QuanLyPhongMach/admins/adminsManager" class="list-group-item list-group-item-action">Quản lý Admin</a>
+            <a href="/Web_QuanLyPhongMach/admins/employeesManager" class="list-group-item list-group-item-action">Quản lý Nhân viên</a>
+            <a href="/Web_QuanLyPhongMach/admins/medicinesManager" class="list-group-item list-group-item-action">Quản lý Thuốc</a>
+            <a href="/Web_QuanLyPhongMach/admins/customersManager" class="list-group-item list-group-item-action">Quản lý Khách Hàng</a>
+            <a href="/Web_QuanLyPhongMach/admins/reportsManager" class="list-group-item list-group-item-action">Quản lý Thống kê</a>
+            <a href="/Web_QuanLyPhongMach/admins/onCallManager" class="list-group-item list-group-item-action">Quản lý Lịch trực</a>
+        </div>
+    </div>
 </div>
 
 
@@ -125,6 +140,5 @@
     <c:url value="/api/medicines" var="m" />
     window.onload = function () {
         getMedicines('${m}');
-    };
-
+    };   
 </script>

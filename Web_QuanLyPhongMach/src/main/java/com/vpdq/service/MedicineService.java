@@ -20,4 +20,7 @@ public interface MedicineService {
     boolean addMedicine(Medicine m);
     Medicine getMedicineByID(int id);
     boolean updateMedicineByID(int id, Medicine medicine);
+    List<Object[]> frequencyOfMedicineUsageStatisticsByYear(int year);
+    List<Object[]> frequencyOfMedicineUsageStatisticsByQuarter(int year, int quarter);
+    List<Object[]> frequencyOfMedicineUsageStatisticsByMonth(int year, int month);
 }
