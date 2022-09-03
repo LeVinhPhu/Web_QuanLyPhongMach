@@ -4,7 +4,6 @@
  */
 package com.vpdq.controllers;
 
-
 import com.vpdq.pojo.Employee;
 import com.vpdq.pojo.Medicine;
 import com.vpdq.pojo.Unit;
@@ -12,9 +11,11 @@ import com.vpdq.service.EmployeeService;
 
 import com.vpdq.pojo.Customer;
 import com.vpdq.pojo.Medicine;
+import com.vpdq.pojo.Prescription;
 import com.vpdq.service.CustomerService;
 import com.vpdq.service.MedicalRecordService;
 import com.vpdq.service.MedicineService;
+import com.vpdq.service.PrescriptionService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,14 +35,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class ApiController {
+
     @Autowired
     private MedicineService medicineService;
-    
+
     @Autowired
     private CustomerService customerService;
 
     @Autowired
     private EmployeeService employeeServic;
+    
+    @Autowired
+    private PrescriptionService prescriptionService;
 
 //  API-Que
     @GetMapping("/medicines")
@@ -55,11 +60,15 @@ public class ApiController {
     public void deleteMedicine(@PathVariable(value = "medicineId") int id) {
         this.medicineService.deleteMedicine(id);
     }
-    
-    
+
     @GetMapping("/phoneNumber")
     public ResponseEntity<List<Customer>> listPhoneNumber() {
         return new ResponseEntity<>(this.customerService.getAllPhoneNumber(), HttpStatus.OK);
+    }
+    
+    @GetMapping("/prescription")
+    public ResponseEntity<List<Object[]>> listPrescription() {
+        return new ResponseEntity<>(this.prescriptionService.getPrescription(), HttpStatus.OK);
     }
 
 //   API-Phu
@@ -68,18 +77,15 @@ public class ApiController {
         return new ResponseEntity<>(this.employeeServic.getEmployee(null, 0), HttpStatus.OK);
     }
 
-
-    
     @DeleteMapping("/employeesManager/{employeeId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable(value = "employeeId") int employeeId) {
         this.employeeServic.deleteEmployee(employeeId);
     }
-    
-    
+
     @GetMapping("/medicine/{mID}")
     public Medicine getMedicine(@PathVariable(value = "mID") int id) {
-            return medicineService.getMedicineByID(id);
+        return medicineService.getMedicineByID(id);
     }
 
 }

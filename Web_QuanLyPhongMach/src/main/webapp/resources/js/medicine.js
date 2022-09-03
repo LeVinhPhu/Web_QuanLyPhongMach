@@ -4,22 +4,39 @@
  */
 // XOÁ THUỐC
 function deleteMedicine(endpoint, id, btn) {
-    let r = document.getElementById(`row${id}`);
-    let load = document.getElementById(`load${id}`);
-    load.style.display = "block";
-    btn.style.display = "none";
-    fetch(endpoint, {
-        method: 'delete'
-    }).then(function (res) {
-        if (res.status !== 204)
-            alert("Something wrong!!!");
-        load.style.display = "none";
-        r.style.display = "none";
-    }).catch(function (err) {
-        console.error(err);
-        btn.style.display = "block";
-        load.style.display = "none";
+    fetch('/Web_QuanLyPhongMach/api/prescription').then(function (res) {
+        return  res.json();
+    }).then(function (data) {
+        a = true;
+        for (let i = 0; i < data.length; i++)
+            if (data[i][0] == id)
+            {
+                alert("Ràng buộc khoá ngoại, không thể xoá thuốc " + data[i][1] + " !");
+                a = false;
+                break;
+            }
+        if (a) {
+            if (confirm("Bạn có chắc chắn xoá?") === true) {
+                let r = document.getElementById(`row${id}`);
+                let load = document.getElementById(`load${id}`);
+                load.style.display = "block";
+                btn.style.display = "none";
+                fetch(endpoint, {
+                    method: 'delete'
+                }).then(function (res) {
+                    if (res.status !== 204)
+                        load.style.display = "none";
+                    r.style.display = "none";
+                }).catch(function (err) {
+                    console.error(err);
+                    btn.style.display = "block";
+                    load.style.display = "none";
+                });
+            }
+        }
     });
+
+
 }
 
 
@@ -39,11 +56,15 @@ function getMedicines(endpoint) {
                         <td>${data[i][2]}</td>
                         <td>${data[i][3]}</td>
                         <td>${data[i][4]}</td>
-                        <td><button class="btn">DETAILS</button></td>
-                        <td><a href="/Web_QuanLyPhongMach/admins/medicinesManager/${data[i][0]}">Sửa</a></td>
+                        <td>
+                            <i class="fas fa-info-circle" data-bs-toggle="modal" onclick="detailMedicines('${endpoint}', ${data[i][0]})"></i>
+                        </td>
+                        <td>
+                            <a style="color:black" href="/Web_QuanLyPhongMach/admins/medicinesManager/${data[i][0]}"><i class="fas fa-pencil-alt"></i></a>
+                        </td>
                         <td>
                             <div class="spinner-border text-warning" style="display:none" id="load${data[i][0]}"></div>
-                            <button class="btn" style="background-color: #FFCDCD" onclick="deleteMedicine('${endpoint + "/" + data[i][0]}', ${data[i][0]}, this)">DELETE</button>
+                            <i onclick="deleteMedicine('${endpoint + "/" + data[i][0]}', ${data[i][0]}, this)" class="fas fa-trash-alt"></i>
                         </td>
                     </tr>
                     `;
@@ -92,7 +113,7 @@ btnAdd.addEventListener('click', function () {
                 });
             });
         });
-        alert('Thêm thành công');   
+        alert('Thêm thành công');
         location.reload(true);
         getMedicines('/Web_QuanLyPhongMach/api/medicines');
     }
@@ -144,4 +165,48 @@ function setError(err, message) {
     parentEle.querySelector('small').innerText = message;
 }
 
+
+//CHI TIẾT THUỐC
+function detailMedicines(endpoint, id) {
+    fetch(endpoint).then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        console.info(data);
+        let h = "";
+        for (let i = 0; i < data.length; i++)
+            if (data[i][0] == id)
+            {
+                h += `
+                <div style="text-align: center" class="boder rounded bg-light"> 
+                    <img
+                        src="${data[i][0]}"
+                        class="rounded-circle"
+                        height="70"
+                        width="70"
+                        alt="Black and White Portrait of a Man"
+                        loading="lazy"
+                        />
+                    <h6></h6>
+                </div>
+
+                <div>
+                    <h6>Ngày sinh:</h6>
+                    <h6>Giới tính: </h6>
+                    <h6>Chức vụ: Bác sĩ</h6> 
+                    <h6>Chuyên ngành: </h6>
+                    <h6>Địa chỉ:</h6>
+                    <h6>Email:</h6>
+                    <h6>Phone: </h6>
+                    <h6>Username: </h6>
+                    <h6>Password: </h6>
+                </div>
+            `
+            }
+        let d = document.getElementById("detailMedicines");
+        d.innerHTML = h;
+    }).catch(function (err) {
+        console.error(err);
+    });
+    $('#detailModal').modal('show');
+}
 

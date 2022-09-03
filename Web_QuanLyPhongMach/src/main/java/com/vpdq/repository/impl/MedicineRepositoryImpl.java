@@ -4,6 +4,7 @@
  */
 package com.vpdq.repository.impl;
 
+import com.vpdq.pojo.Customer;
 import com.vpdq.pojo.MedicalRecord;
 import com.vpdq.pojo.Medicine;
 import com.vpdq.pojo.Prescription;
@@ -51,7 +52,13 @@ public class MedicineRepositoryImpl implements MedicineRepository {
         Root<Unit> uRoot = q.from(Unit.class);
         q.where(b.equal(mRoot.get("unitId"), uRoot.get("id")));
         
-        q.multiselect(mRoot.get("id"), mRoot.get("name"), mRoot.get("quantity"), mRoot.get("unitPrice"), uRoot.get("name"));
+        q.multiselect(mRoot.get("id"), 
+                mRoot.get("name"), 
+                mRoot.get("quantity"), 
+                mRoot.get("unitPrice"), 
+                uRoot.get("name"), 
+                mRoot.get("image"),
+                mRoot.get("note"));
 
         //sap xep thuoc theo ten
         q.orderBy(b.asc(mRoot.get("name")));
@@ -288,6 +295,8 @@ public class MedicineRepositoryImpl implements MedicineRepository {
 
         return query.getResultList();
     }
+
+
     
 }
 

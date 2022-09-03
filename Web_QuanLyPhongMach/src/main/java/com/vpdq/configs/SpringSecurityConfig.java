@@ -74,16 +74,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling()
                 .accessDeniedPage("/login?accessDenied");
 
-//        http.authorizeRequests().antMatchers("/").permitAll();
-//        http.authorizeRequests().antMatchers("/admins/**").access("hasRole('admin') or hasRole('supperadmin')");
-//        http.authorizeRequests().antMatchers("/employees/nursesIndex").access("hasRole('ROLE_EMPLOYEE')");
-//        http.authorizeRequests().antMatchers("/employees/billsManager").access("hasRole('2')");
-//        http.authorizeRequests().antMatchers("/employees/appointmentsManager").access("hasRole('2')");
-//        http.authorizeRequests().antMatchers("/employees/doctorsIndex").access("hasRole('1')");
-//        http.authorizeRequests().antMatchers("/employees/medicalRecord").access("hasRole('1')");
-//        http.authorizeRequests().antMatchers("/employees/prescription").access("hasRole('1')");
-//        http.authorizeRequests().antMatchers("/customers/customersIndex").permitAll();
-//        http.authorizeRequests().antMatchers("/customers/appointments").permitAll();
+        http.authorizeRequests().antMatchers("/").permitAll();
+        http.authorizeRequests().antMatchers("/admins/**").access("hasRole('admin') or hasRole('supperadmin')");
+        http.authorizeRequests().antMatchers("/employees/nursesIndex").access("hasRole('ROLE_EMPLOYEE')");
+        http.authorizeRequests().antMatchers("/employees/billsManager").access("hasRole('2')");
+        http.authorizeRequests().antMatchers("/employees/appointmentsManager").access("hasRole('2')");
+        http.authorizeRequests().antMatchers("/employees/doctorsIndex").access("hasRole('1')");
+        http.authorizeRequests().antMatchers("/employees/medicalRecord").access("hasRole('1')");
+        http.authorizeRequests().antMatchers("/employees/prescription").access("hasRole('1')");
+        http.authorizeRequests().antMatchers("/customers/customersIndex").permitAll();
+        http.authorizeRequests().antMatchers("/customers/appointments").permitAll();
 
         http.csrf().disable();
     }

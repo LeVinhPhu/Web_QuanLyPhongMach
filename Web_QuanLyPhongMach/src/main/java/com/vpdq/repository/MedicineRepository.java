@@ -22,5 +22,4 @@ public interface MedicineRepository {
     List<Object[]> frequencyOfMedicineUsageStatisticsByYear(int year);
     List<Object[]> frequencyOfMedicineUsageStatisticsByQuarter(int year, int quarter);
     List<Object[]> frequencyOfMedicineUsageStatisticsByMonth(int year, int month);
-    
 }

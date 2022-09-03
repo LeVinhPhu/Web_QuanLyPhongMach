@@ -11,12 +11,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
-<!--NÚT THÊM-->
-<div class="container mt-3">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-        Thêm thuốc
-    </button>
-</div>
+
 
 
 <!-- THÊM THUỐC -->
@@ -97,13 +92,28 @@
     </div>
 </div>   
 
+<div class="row mt-4 mb-4">
+    <div class="col-md-10 col-12">
+        <div style="text-align: center;" ><h3>QUẢN LÝ THUỐC</h3></div></div>
+    <div class="col-md-2 col-12"></div>
+</div>
+
+
+
 
 <!--DANH SÁCH THUỐC-->
 <div class="row mt-3 mb-3">
-    <div class="col-md-10 col-12 shadow" style="overflow: auto; height: 400px; border-radius: 10px">
+
+    <div class="col-md-1 col-12"></div>
+
+    <div class="col-md-8 col-12 shadow" style="overflow: auto; height: 500px; border-radius: 10px">
+        <div data-bs-toggle="modal" data-bs-target="#myModal" style="margin: 8px; width: 20%"><i class="fas fa-plus"></i>  Thêm thuốc</div>
+        
         <table class="table table-hover ">
             <tr>
-                <th></th>
+                <th>
+                    <i onclick="load()" class="fas fa-redo-alt"></i>
+                </th>
                 <th>Tên thuốc</th>
                 <th>Số lượng</th>
                 <th>Đơn giá</th>
@@ -116,6 +126,8 @@
             </tbody>
         </table>
     </div>
+
+    <div class="col-md-1 col-12"></div>
 
     <div class="col-md-2 col-12">
         <div class="list-group">
@@ -134,11 +146,44 @@
 </div>
 
 
+<!--CHI TIẾT THUỐC-->
+<!-- The Modal Detail -->
+<div class="modal" id="detailModal">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title">Chi tiết thuốc</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" id="detailMedicines">
+
+            </div>
+            <!-- Modal footer -->
+        </div>
+    </div>
+</div>
+
+
+
+
+
 <!--sử dụng api lấy danh sách thuốc-->
 <script src="<c:url value="/js/medicine.js" />"></script>
 <script>
     <c:url value="/api/medicines" var="m" />
-    window.onload = function () {
+                        window.onload = function () {
+                            getMedicines('${m}');
+                        };
+</script>
+
+
+<script>
+    function load() {
+    <c:url value="/api/medicines" var="m" />
         getMedicines('${m}');
-    };   
+    }
 </script>
