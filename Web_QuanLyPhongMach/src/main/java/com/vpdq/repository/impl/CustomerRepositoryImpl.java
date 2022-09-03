@@ -115,7 +115,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         Root root = q.from(Customer.class);
         q.select(root);
 
-        q.where(b.equal(root.get("phone_number"), username));
+        q.where(b.equal(root.get("phoneNumber"), username));
 
         Query query = session.createQuery(q);
         return (Customer) query.getSingleResult();

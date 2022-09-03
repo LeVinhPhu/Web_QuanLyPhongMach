@@ -3,14 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.vpdq.controllers;
-
+import com.vpdq.pojo.Admin;
 import com.vpdq.pojo.Employee;
 import com.vpdq.pojo.Medicine;
 import com.vpdq.pojo.Unit;
 import com.vpdq.service.EmployeeService;
-
 import com.vpdq.pojo.Customer;
 import com.vpdq.pojo.Medicine;
+import com.vpdq.service.AdminService;
 import com.vpdq.pojo.Prescription;
 import com.vpdq.service.CustomerService;
 import com.vpdq.service.MedicalRecordService;
@@ -48,6 +48,9 @@ public class ApiController {
     @Autowired
     private PrescriptionService prescriptionService;
 
+    @Autowired
+    private AdminService adminService;
+
 //  API-Que
     @GetMapping("/medicines")
     public ResponseEntity<List<Object[]>> listMedicine() {
@@ -79,8 +82,19 @@ public class ApiController {
 
     @DeleteMapping("/employeesManager/{employeeId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable(value = "employeeId") int employeeId) {
+    public void deleteEmployee(@PathVariable(value = "employeeId") int employeeId) {
         this.employeeServic.deleteEmployee(employeeId);
+    }
+
+    @GetMapping("/adminsManager")
+    public ResponseEntity<List<Admin>> listAdm() {
+        return new ResponseEntity<>(this.adminService.getAdmin(null, 0), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/adminsManager/{adminId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAdmin(@PathVariable(value = "adminId") int adminId) {
+        this.adminService.deleteAdmin(adminId);
     }
 
     @GetMapping("/medicine/{mID}")

@@ -9,6 +9,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+
 <div class="row m-5">
 
     <div class="col-md-7 col-12 ">
@@ -29,9 +30,11 @@
             <c:url value="/login" var="action"></c:url>
             <form method="post" action="${action}">
                 <div class="input-row form-floating">
-
                     <input type="text" class="form-control" path="username" id="username" name="username" placeholder="phoneNumber" />
                     <label for="address">Tài khoản</label>
+                    <c:if test="${param.erorr != null}">
+                        <span style="color:red" class="fs-8">Tài khoản hoặc mật khẩu không chính xác</span>
+                    </c:if>
                 </div>
                 <div class="input-row form-floating">
                     <input type="password" class="form-control" path="password" id="password" name="password" placeholder="password" />

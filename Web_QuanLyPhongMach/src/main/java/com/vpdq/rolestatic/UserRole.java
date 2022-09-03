@@ -10,5 +10,20 @@ package com.vpdq.rolestatic;
  */
 
 public class UserRole {
-    public static String role;
+    private static String role;
+
+    /**
+     * @return the role
+     */
+    public static String getRole() {
+        return role;
+    }
+
+    /**
+     * @param aRole the role to set
+     */
+    public static void setRole(String aRole) {
+        role = aRole;
+    }
+    
 }

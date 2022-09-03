@@ -5,7 +5,6 @@
 package com.vpdq.repository.impl;
 
 import com.vpdq.pojo.Admin;
-import com.vpdq.pojo.Employee;
 import com.vpdq.repository.AdminRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +38,94 @@ public class AdminRepositoryImpl implements AdminRepository {
 
     @Autowired
     private Environment env;
+    
+    
+
+    @Override
+    public int countAdmin() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean addAdmin(Admin adm) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.save(adm);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateAdmin(int id, Admin adm) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Admin admnew = getAdminByID(id);
+        
+        admnew.setFirstName(adm.getFirstName());
+        admnew.setLastName(adm.getLastName());
+        admnew.setDateOfBirth(adm.getDateOfBirth());
+        admnew.setSex(adm.getSex());
+        admnew.setAddress(adm.getAddress());
+        admnew.setEmail(adm.getEmail());
+        admnew.setPhone(adm.getPhone());
+        admnew.setUsername(adm.getUsername());
+        admnew.setPassword(adm.getPassword());
+        try {
+            session.saveOrUpdate(admnew);
+          return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteAdmin(int adminId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        try {
+            Admin adm = session.get(Admin.class, adminId);
+            session.delete(adm);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }}
+
+    @Override
+    public List<Object[]> countAdminByCate() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Admin getAdminByID(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        
+        CriteriaQuery<Admin> query = builder.createQuery(Admin.class);
+        Root<Admin> root = query.from(Admin.class);
+        query.select(root);
+        query.where(builder.equal(root.get("id"), id));
+        Admin adm = session.createQuery(query).uniqueResult();
+        
+        return adm;}
+
+    @Override
+    public Admin getAdminByUsername(String username) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Admin> q = b.createQuery(Admin.class);
+        Root root = q.from(Admin.class);
+        q.select(root);
+
+        q.where(b.equal(root.get("username"), username));
+
+        Query query = session.createQuery(q);
+        return (Admin) query.getSingleResult();
+    }
 
     @Override
     public List<Admin> getAdmin(Map<String, String> params, int page) {
@@ -65,6 +152,9 @@ public class AdminRepositoryImpl implements AdminRepository {
 
             }
 
+            //Tìm theo ngày sinh
+            //Tìm theo posision
+
             q.where(predicates.toArray(Predicate[]::new));
         }
 
@@ -81,51 +171,6 @@ public class AdminRepositoryImpl implements AdminRepository {
         }
 
         return query.getResultList();
-    }
-
-    @Override
-    public int countAdmin() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public boolean addAdmin(Admin adm) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public boolean updateAdmin(Admin adm) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public boolean deleteAdmin(int adminId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<Object[]> countAdminByCate() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Admin getAdminByID(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Admin getAdminByUsername(String username) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-
-        CriteriaBuilder b = session.getCriteriaBuilder();
-        CriteriaQuery<Admin> q = b.createQuery(Admin.class);
-        Root root = q.from(Admin.class);
-        q.select(root);
-
-        q.where(b.equal(root.get("username"), username));
-
-        Query query = session.createQuery(q);
-        return (Admin) query.getSingleResult();
     }
 
 }

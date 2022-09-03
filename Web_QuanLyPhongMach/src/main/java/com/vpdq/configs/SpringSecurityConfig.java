@@ -18,6 +18,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.vpdq.configs.handlers.LoginSuccessHandler;
 import com.vpdq.configs.handlers.LogoutHandler;
+import com.vpdq.rolestatic.UserRole;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 /**
@@ -66,24 +67,22 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin().usernameParameter("username").passwordParameter("password")
                 .loginPage("/login");
-
-        http.formLogin().defaultSuccessUrl("/").failureUrl("/login?erorr"); // defaultSuccessUrl("/") cần thay thế hàm có giá trí phân quyền
+        http.formLogin().failureUrl("/login?erorr"); // defaultSuccessUrl("/") cần thay thế hàm có giá trí phân quyền
         http.formLogin().successHandler(this.loginSuccessHandler);
 //        http.logout().logoutSuccessUrl("/");
         http.logout().logoutSuccessHandler(this.logoutHandler);
         http.exceptionHandling()
-                .accessDeniedPage("/login?accessDenied");
+                .accessDeniedPage("/?accessDenied");
 
-        http.authorizeRequests().antMatchers("/").permitAll();
-        http.authorizeRequests().antMatchers("/admins/**").access("hasRole('admin') or hasRole('supperadmin')");
-        http.authorizeRequests().antMatchers("/employees/nursesIndex").access("hasRole('ROLE_EMPLOYEE')");
-        http.authorizeRequests().antMatchers("/employees/billsManager").access("hasRole('2')");
-        http.authorizeRequests().antMatchers("/employees/appointmentsManager").access("hasRole('2')");
-        http.authorizeRequests().antMatchers("/employees/doctorsIndex").access("hasRole('1')");
-        http.authorizeRequests().antMatchers("/employees/medicalRecord").access("hasRole('1')");
-        http.authorizeRequests().antMatchers("/employees/prescription").access("hasRole('1')");
-        http.authorizeRequests().antMatchers("/customers/customersIndex").permitAll();
-        http.authorizeRequests().antMatchers("/customers/appointments").permitAll();
+//        http.authorizeRequests().antMatchers("/").permitAll();
+//        http.authorizeRequests().antMatchers("/admins/**").access("hasRole('ROLE_ADMIN')");
+//        http.authorizeRequests().antMatchers("/employees/nursesIndex").access("hasRole('ROLE_NURSE')");
+//        http.authorizeRequests().antMatchers("/employees/billsManager").access("hasRole('ROLE_NURSE')");
+//        http.authorizeRequests().antMatchers("/employees/appointmentsManager").access("hasRole('ROLE_NURSE')");
+//        http.authorizeRequests().antMatchers("/employees/doctorsIndex").access("hasRole('ROLE_DOCTOR')");
+//        http.authorizeRequests().antMatchers("/employees/medicalRecord").access("hasRole('ROLE_DOCTOR')");
+//        http.authorizeRequests().antMatchers("/employees/prescription").access("hasRole('ROLE_DOCTOR')");
+//        http.authorizeRequests().antMatchers("/customers/**").access("hasRole('ROLE_CUSTOMER')");
 
         http.csrf().disable();
     }

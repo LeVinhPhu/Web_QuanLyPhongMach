@@ -63,7 +63,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public boolean updateEmployee(Employee e) {
-        return this.employeeRepository.updateEmployee(e);
+    public boolean updateEmployee(int id,Employee e) {
+        return this.employeeRepository.updateEmployee(id, e);
     }
 }

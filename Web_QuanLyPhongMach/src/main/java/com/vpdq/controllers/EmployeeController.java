@@ -41,7 +41,7 @@ public class EmployeeController {
     
     @GetMapping("/nursesIndex")
     public String nursesIndex (Model model, HttpSession session){
-        model.addAttribute("currentUser",session.getAttribute("currentUser"));
+//        model.addAttribute("currentUser",session.getAttribute("currentUser"));
         return "nursesIndex";
     }
     

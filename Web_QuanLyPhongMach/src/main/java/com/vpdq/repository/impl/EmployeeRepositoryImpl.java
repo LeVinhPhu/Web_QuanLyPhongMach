@@ -7,7 +7,6 @@ package com.vpdq.repository.impl;
 import com.vpdq.pojo.Employee;
 import com.vpdq.repository.EmployeeRepository;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.Query;
@@ -74,7 +73,6 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             }
 
             //Tìm theo ngày sinh
-            
             //Tìm theo posision
             String positionId = params.get("positionId");
             if (positionId != null) {
@@ -143,21 +141,34 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     public Employee getEmployeeByID(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("From Employee e WHERE e.id =: idEmpl");
-        
+
         q.setParameter("idEmpl", id);
         return (Employee) q.getSingleResult();
     }
 
     @Override
-    public boolean updateEmployee(Employee e) {
+    public boolean updateEmployee(int id, Employee e) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
+        Employee enew = getEmployeeByID(id);
+
+        enew.setPositionId(e.getPositionId());
+        enew.setFirstName(e.getFirstName());
+        enew.setLastName(e.getLastName());
+        enew.setDateOfBirth(e.getDateOfBirth());
+        enew.setSex(e.getSex());
+        enew.setAddress(e.getAddress());
+        enew.setEmail(e.getEmail());
+        enew.setPhone(e.getPhone());
+        enew.setSpecialize(e.getSpecialize());
+        enew.setUsername(e.getUsername());
+        enew.setPassword(e.getPassword());
         try {
-            session.update(e);
+            session.saveOrUpdate(enew);
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();
-            return false;
         }
+        return false;
     }
 
     @Override
@@ -170,7 +181,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         q.select(root);
 
         q.where(b.equal(root.get("username"), username));
-        
+
         Query query = session.createQuery(q);
         return (Employee) query.getSingleResult();
     }
