@@ -19,6 +19,7 @@ import com.vpdq.service.PositionService;
 import com.vpdq.service.SupplierService;
 import com.vpdq.service.UnitService;
 import java.io.IOException;
+import java.time.ZonedDateTime;
 import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -174,11 +175,28 @@ public class AdminController {
     public String reportsManager(Model model,
             @RequestParam(value = "year", defaultValue = "2022", required = false) int year,
             @RequestParam(value = "year2", defaultValue = "2022", required = false) int year2) {
+        model.addAttribute("total", this.medicalRecordService.totalRevenueStatistics());
         model.addAttribute("revenueStats", this.medicalRecordService.revenueStatistics());
         model.addAttribute("revenueStatsByQuarter", this.medicalRecordService.revenueStatisticsByQuarter(year));
         model.addAttribute("revenueStatsByMonth", this.medicalRecordService.revenueStatisticsByMonth(year2));
         model.addAttribute("year", year);
         model.addAttribute("year2", year2);
+        
+        String err1 = "";
+        String err2 = "";
+       
+        //lấy năm hiện tại
+        ZonedDateTime zonedDateTime = ZonedDateTime.now();
+        int yearNow = zonedDateTime.getYear();
+       
+        if(year<1970 || year>yearNow)
+            err1 = "Năm không hợp lệ! Vui lòng thử lại.";
+        model.addAttribute("err1", err1);
+        
+        if(year2<1970 || year2>yearNow)
+            err2 = "Năm không hợp lệ! Vui lòng thử lại.";
+        model.addAttribute("err2", err2);
+        
         return "reportsManager";
     }
 
@@ -193,6 +211,23 @@ public class AdminController {
         model.addAttribute("patientStatsByMonth", this.customerService.patientStatisticsByMonth(year2));
         model.addAttribute("year1", year1);
         model.addAttribute("year2", year2);
+        
+        
+        String err1 = "";
+        String err2 = "";
+       
+        //lấy năm hiện tại
+        ZonedDateTime zonedDateTime = ZonedDateTime.now();
+        int yearNow = zonedDateTime.getYear();
+       
+        if(year1<1970 || year1>yearNow)
+            err1 = "Năm không hợp lệ! Vui lòng thử lại.";
+        model.addAttribute("err1", err1);
+        
+        if(year2<1970 || year2>yearNow)
+            err2 = "Năm không hợp lệ! Vui lòng thử lại.";
+        model.addAttribute("err2", err2);
+        
         return "reports2Manager";
     }
     
@@ -214,7 +249,30 @@ public class AdminController {
         model.addAttribute("year3", year3);
         model.addAttribute("month3", month3);
         
+        String err1 = "";
+        String err2 = "";
+        String err3 = "";
+  
+       
+        //lấy năm hiện tại
+        ZonedDateTime zonedDateTime = ZonedDateTime.now();
+        int yearNow = zonedDateTime.getYear();
+       
+        if(year1<1970 || year1>yearNow)
+            err1 = "Năm không hợp lệ! Vui lòng thử lại.";
+        model.addAttribute("err1", err1);
         
+        if(year2<1970 || year2>yearNow)
+            err2 = "Năm không hợp lệ! Vui lòng thử lại.";
+        model.addAttribute("err2", err2);
+        
+        if(year3<1970 || year3>yearNow)
+            err3 = "Năm không hợp lệ! Vui lòng thử lại.";
+        else
+            if(month3<1 || month3>12)
+                err3 = "Tháng không hợp lệ! Vui lòng thử lại.";
+        model.addAttribute("err3", err3);
+
         return "reports3Manager";
     }
   

@@ -21,6 +21,7 @@ btnSubmit.addEventListener('click', function () {
     Array.from(input).map((ele) =>
         ele.classList.remove('error')
     );
+
     //nếu còn lỗi --> không load lại trang
     if (!checkValidate()) {
         $(document).ready(function () {
@@ -33,8 +34,20 @@ btnSubmit.addEventListener('click', function () {
                 event.preventDefault();
             });
         });
-    } else
-        window.location = "/Web_QuanLyPhongMach/login";
+    } else {
+        fetch('/Web_QuanLyPhongMach/api/phoneNumber').then(function (res) {
+            return  res.json();
+        }).then(function (data) {
+            let check = true;
+            for (let i = 0; i < data.length; i++)
+                if (data[i] == phone.value) {
+                    check = false;
+                    setError(phone, 'Số điện thoại đã tồn tại');
+                }
+            if (check)
+                window.location = "/Web_QuanLyPhongMach/login";
+        });
+    }
 });
 
 
@@ -118,41 +131,5 @@ function isEmail(email) {
 function isPhone(number) {
     return /(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(number);
 }
-
-
-function checkPhoneNumber(number) {
-    const e = false;
-    axios.get('/Web_QuanLyPhongMach/api/phoneNumber')
-            .then(function (response) {
-                console.log(response.data);
-                var d = response.data;
-                for (let i = 0; i < d.length; i++)
-                    if (d[i] === number) {
-                        e = true;
-                        break;
-                        console.log(e);
-                    }
-            }).catch(function (error) {
-        console.log(error);
-    });
-    console.log(e);
-    return e;
-}
-
-
-//async function axiosTest() {
-//    try {
-//        const {data: response} = await axios.get('/Web_QuanLyPhongMach/api/phoneNumber')
-//        console.log(response);
-//        return response;
-//    } catch (error) {
-//        console.log(error);
-//    }
-//}
-//
-//
-//let a = axiosTest();
-//console.log(a);
-
 
 

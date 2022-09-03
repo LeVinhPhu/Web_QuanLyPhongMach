@@ -9,156 +9,198 @@
 <%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-
-
-<!--tổng doanh thu-->
-<p id="rightContent0"></p>
-<div class="bg-light">
-    <div class="pt-2 pb-1">
-        <h4 class="text-center">QUẢN LÝ THỐNG KÊ</h4>
-    </div>
-</div>
-
 <div class="row mb-2 mt-2">
-    <div class="col-md-2">
-        <div class="list-group mt-2" style="position: fixed">
-
-            <a class="list-group-item list-group-item-action active">
-                Các loại Thống kê
-            </a>
-            <a href="#rightContent1" class="list-group-item list-group-item-action">Theo Năm</a>
-            <a href="#rightContent2" class="list-group-item list-group-item-action">Theo Quý</a>
-            <a href="#rightContent3" class="list-group-item list-group-item-action">Theo Tháng</a>
-        </div>
-    </div>
-    <div class="col-md-8 col-12">
-        <!--bên phải-->
-        <div class="">
-
-            <!--Tổng bệnh nhân-->
-            <p id="rightContent0"></p>
-
-            <div>
-                <div style="text-align: center">
-                    <h5>TỔNG SỐ LƯỢNG BỆNH NHÂN: <c:out value="${patientStats[0]}"></c:out></h5>
-                    </div>
-                </div>
-                <!--Số lượng bệnh nhân theo năm-->
-                <p id="rightContent1" style="padding-bottom: 80px"> </p>
-                <div class="mt-2">
-                    <div class="pt-2 pb-1">
-                        <h5 class="text-center">SỐ LƯỢNG BỆNH NHÂN THEO CÁC NĂM</h5>
-                    </div>
-
-                    <div class="row mt-2">  
-                        <div class="col-md-5 col-xs-12">
-                            <table class="table">
-                                <tr>
-                                    <th>Năm</th>
-                                    <th>Số lượng bệnh nhân</th>
-                                </tr>
-
-                            <c:forEach items="${patientStatsByYear}" var="r">
-                                <tr>
-                                    <td>${r[0]}</td>
-                                    <td>${r[1]}</td>
-                                </tr>
-                            </c:forEach>
-                        </table>
-                    </div>
-                    <div class="col-md-7 col-xs-12">
-                        <canvas id="myChartPatientStatsByYear"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <!--Số lượng bệnh nhân theo quý-->
-            <p id="rightContent2" style="padding-bottom: 80px"> </p>
-            <div class="mt-2">
+    <div class="col-md-9 col-12">
+        <div style="text-align: center"class="">
+            <div class="bg-light">
                 <div class="pt-2 pb-1">
-                    <h5 class="text-center">SỐ LƯỢNG BỆNH NHÂN THEO QUÝ (NĂM <c:out value="${year1}" />)</h5>
+                    <h4 class="text-center">QUẢN LÝ THỐNG KÊ - SỐ LƯỢNG BỆNH NHÂN</h4>
+                </div>
+            </div>
+
+                <!--Tổng bệnh nhân-->
+            <div class="mt-3 mb-2 pt-2 pb-1">
+                <button style="width: 35%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#">TỔNG SỐ LƯỢNG BỆNH NHÂN: <c:out value="${patientStats[0]}"></c:out></button>
+                </div>        
+                <!--số lượng bệnh nhân theo năm-->
+                <div class="mt-3 mb-2 pt-2 pb-1">
+                    <button style="width: 35%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">SỐ LƯỢNG BỆNH NHÂN THEO NĂM</button>
                 </div>
 
-                <div class="row mt-2">  
-                    <div class="col-md-5 col-xs-12">
-                        <table class="table">
-                            <tr>
-                                <th>Quý</th>
-                                <th>Số lượng bệnh nhân</th>
-                            </tr>
-                            <c:if test="${not empty patientStatsByQuarter[0][0]}"> 
-                                <c:forEach items="${patientStatsByQuarter}" var="p">
-                                    <tr>
-                                        <td>${p[0]}</td>
-                                        <td>${p[1]}</td>
-                                    </tr>
-                                </c:forEach>
-                            </c:if>
-
-                            <c:if test="${patientStatsByQuarter[0][0] == null}">
-                                <td></td>
-                                <td>Chưa có bệnh nhân</td>
-                            </c:if>
-                        </table>
+                <!--số lượng bệnh nhân theo quý-->
+                <div class="mt-3 mb-2 pt-2 pb-1">
+                    <button style="width: 35%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal2">SỐ LƯỢNG BỆNH NHÂN THEO QUÝ</button>
+                <c:if test="${err1 != null}">
+                    <div class="mt-2">
+                        <span style="color: red">
+                            ${err1}
+                        </span>
                     </div>
-                    <div class="col-md-7 col-xs-12">
-                        <c:url value="/admins/reports2Manager" var="action" />
-                        <form action="${action}" method="POST">
-                            <div class="mb-2 mt-2">
-                                <input type="number" id="number" class="form-control" placeholder="Nhập năm" name="year1">
+                </c:if>
+            </div>
+
+            <!--số lượng bệnh nhân theo tháng-->
+            <div class="pt-2 pb-1">
+                <button style="width: 35%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal3">SỐ LƯỢNG BỆNH NHÂN THEO THÁNG</button>
+                <c:if test="${err2 != null}">
+                    <div class="mt-2">
+                        <span style="color: red">
+                            ${err2}
+                        </span>
+                    </div>
+                </c:if>
+            </div>
+
+
+            <!-- The Modal --> <!--Số lượng bệnh nhân theo năm-->
+            <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">SỐ LƯỢNG BỆNH NHÂN THEO NĂM</h4> 
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="row mt-2">  
+                                <div class="">
+                                    <table class="table">
+                                        <tr>
+                                            <th>Năm</th>
+                                            <th>Số lượng bệnh nhân</th>
+                                        </tr>
+
+                                        <c:forEach items="${patientStatsByYear}" var="r">
+                                            <tr>
+                                                <td>${r[0]}</td>
+                                                <td>${r[1]}</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </table>
+                                </div>
+                                <div class="">
+                                    <canvas id="myChartPatientStatsByYear"></canvas>
+                                </div>
                             </div>
-                            <button type="submit "class="btn btn-primary" style="margin-bottom: 5px">Thống kê</button>
-                        </form>
-                        <canvas id="myChartPatientStatsByQuarter"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!--Số lượng bệnh nhân theo tháng-->
-            <p id="rightContent3" style="padding-bottom: 80px"> </p>
-            <div class="mt-2">
-                <div class="pt-2 pb-1">
-                    <h5 class="text-center">SỐ LƯỢNG BỆNH NHÂN THEO THÁNG (NĂM <c:out value="${year2}" />)</h5>
-                </div>
+            <!-- The Modal --> <!--Số lượng bệnh nhân theo quý-->
+            <div class="modal" id="myModal2">
+                <div class="modal-dialog">
+                    <div class="modal-content">
 
-                <div class="row mt-2">  
-                    <div class="col-md-5 col-xs-12">
-                        <table class="table">
-                            <tr>
-                                <th>Tháng</th>
-                                <th>Số lượng bệnh nhân</th>
-                            </tr>
-                            <c:if test="${not empty patientStatsByMonth[0][0]}"> 
-                                <c:forEach items="${patientStatsByMonth}" var="p">
-                                    <tr>
-                                        <td>${p[0]}</td>
-                                        <td>${p[1]}</td>
-                                    </tr>
-                                </c:forEach>
-                            </c:if>
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">SỐ LƯỢNG BỆNH NHÂN THEO QUÝ (NĂM <c:out value="${year1}" />)</h4> 
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
 
-                            <c:if test="${patientStatsByMonth[0][0] == null}">
-                                <td></td>
-                                <td>Chưa có bệnh nhân</td>
-                            </c:if>
-                        </table>
-                    </div>
-                    <div class="col-md-7 col-xs-12">
-                        <form action="${action}" method="POST">
-                            <div class="mb-2 mt-2">
-                                <input type="number" id="number" class="form-control" placeholder="Nhập năm" name="year2">
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="row mt-2">  
+                                <div class="">
+                                    <table class="table">
+                                        <tr>
+                                            <th>Quý</th>
+                                            <th>Số lượng bệnh nhân</th>
+                                        </tr>
+                                        <c:if test="${not empty patientStatsByQuarter[0][0]}"> 
+                                            <c:forEach items="${patientStatsByQuarter}" var="p">
+                                                <tr>
+                                                    <td>${p[0]}</td>
+                                                    <td>${p[1]}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </c:if>
+
+                                        <c:if test="${patientStatsByQuarter[0][0] == null}">
+                                            <td></td>
+                                            <td>Chưa có bệnh nhân</td>
+                                        </c:if>
+                                    </table>
+                                </div>
+                                <div class="">
+                                    <c:url value="/admins/reports2Manager" var="action" />
+                                    <form action="${action}" method="POST">
+                                        <div class="mb-2 mt-2">
+                                            <input type="number" id="number" class="form-control" placeholder="Nhập năm" name="year1">
+                                        </div>
+                                        <div style="float: right">
+                                            <button type="submit "class="btn btn-primary" style="margin-bottom: 5px; ">Thống kê</button>
+                                        </div>
+
+                                    </form>
+                                    <canvas id="myChartPatientStatsByQuarter"></canvas>
+                                </div>
                             </div>
-                            <button type="submit "class="btn btn-primary" style="margin-bottom: 5px">Thống kê</button>
-                        </form>
-                        <canvas id="myChartPatientStatsByMonth"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
 
+
+            <!-- The Modal --> <!--Số lượng bệnh nhân theo tháng-->
+            <div class="modal" id="myModal3">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">SỐ LƯỢNG BỆNH NHÂN THEO THÁNG (NĂM <c:out value="${year2}" />)</h4> 
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="row mt-2">  
+                                <div class="">
+                                    <table class="table">
+                                        <tr>
+                                            <th>Tháng</th>
+                                            <th>Số lượng bệnh nhân</th>
+                                        </tr>
+                                        <c:if test="${not empty patientStatsByMonth[0][0]}"> 
+                                            <c:forEach items="${patientStatsByMonth}" var="p">
+                                                <tr>
+                                                    <td>${p[0]}</td>
+                                                    <td>${p[1]}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </c:if>
+
+                                        <c:if test="${patientStatsByMonth[0][0] == null}">
+                                            <td></td>
+                                            <td>Chưa có bệnh nhân</td>
+                                        </c:if>
+                                    </table>
+                                </div>
+                                <div class="">
+                                    <form action="${action}" method="POST">
+                                        <div class="mb-2 mt-2">
+                                            <input type="number" id="number" class="form-control" placeholder="Nhập năm" name="year2">
+                                        </div>
+                                        <div style="float: right">
+                                            <button type="submit "class="btn btn-primary" style="margin-bottom: 5px">Thống kê</button>
+                                        </div>
+
+                                    </form>
+                                    <canvas id="myChartPatientStatsByMonth"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                            
         </div>    
     </div>
 
-    <div class="col-md-2 col-12">
+    <div class="col-md-3 col-12">
         <div class="list-group">
             <a class="list-group-item list-group-item-action active">
                 Tiện ích

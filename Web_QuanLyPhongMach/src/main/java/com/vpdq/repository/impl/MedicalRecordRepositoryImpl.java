@@ -106,4 +106,23 @@ public class MedicalRecordRepositoryImpl implements MedicalRecordRepository {
         return query.getResultList();
     }
 
+    @Override
+    public List<Object[]> totalRevenueStatistics() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root mRoot = q.from(MedicalRecord.class);
+        Root pRoot = q.from(Prescription.class);
+        Root medicineRoot = q.from(Medicine.class);
+
+        q.where(b.equal(pRoot.get("medicalRecordId"), mRoot.get("id")),
+                b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
+                b.equal(pRoot.get("medicineId"), medicineRoot.get("id")));
+
+        q.multiselect(b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice"))));
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+
 }

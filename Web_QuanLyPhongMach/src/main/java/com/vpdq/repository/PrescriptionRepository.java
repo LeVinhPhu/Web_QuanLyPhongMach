@@ -4,6 +4,7 @@
  */
 package com.vpdq.repository;
 
+import com.vpdq.pojo.Prescription;
 import java.util.List;
 import java.util.Map;
 
@@ -11,10 +12,6 @@ import java.util.Map;
  *
  * @author phamt
  */
-public interface MedicalRecordRepository {
-//    List<Object[]> revenueStatistics();
-    List<Object[]> totalRevenueStatistics();
-    List<Object[]> revenueStatistics();
-    List<Object[]> revenueStatisticsByMonth(int year);
-    List<Object[]> revenueStatisticsByQuarter(int year);
+public interface PrescriptionRepository {
+    List<Object[]> getPrescription();
 }

@@ -3,19 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.vpdq.controllers;
-
 import com.vpdq.pojo.Admin;
 import com.vpdq.pojo.Employee;
 import com.vpdq.pojo.Medicine;
 import com.vpdq.pojo.Unit;
 import com.vpdq.service.EmployeeService;
-
 import com.vpdq.pojo.Customer;
 import com.vpdq.pojo.Medicine;
 import com.vpdq.service.AdminService;
+import com.vpdq.pojo.Prescription;
 import com.vpdq.service.CustomerService;
 import com.vpdq.service.MedicalRecordService;
 import com.vpdq.service.MedicineService;
+import com.vpdq.service.PrescriptionService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,6 +44,9 @@ public class ApiController {
 
     @Autowired
     private EmployeeService employeeServic;
+    
+    @Autowired
+    private PrescriptionService prescriptionService;
 
     @Autowired
     private AdminService adminService;
@@ -64,6 +67,11 @@ public class ApiController {
     @GetMapping("/phoneNumber")
     public ResponseEntity<List<Customer>> listPhoneNumber() {
         return new ResponseEntity<>(this.customerService.getAllPhoneNumber(), HttpStatus.OK);
+    }
+    
+    @GetMapping("/prescription")
+    public ResponseEntity<List<Object[]>> listPrescription() {
+        return new ResponseEntity<>(this.prescriptionService.getPrescription(), HttpStatus.OK);
     }
 
 //   API-Phu
