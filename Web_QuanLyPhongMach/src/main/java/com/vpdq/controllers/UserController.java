@@ -34,10 +34,8 @@ public class UserController {
     @Autowired
     private CustomerService customerService;
 
-    @GetMapping("/login/{role}")
-    public String login(Model model, @PathVariable(value = "role") String role) {
-//        model.addAttribute(UserRole.role);
-        UserRole.role = role;
+    @GetMapping("/login")
+    public String login(Model model) {
         return "login";
     }
 

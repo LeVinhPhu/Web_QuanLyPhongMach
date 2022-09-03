@@ -86,7 +86,7 @@ public class Customer implements Serializable {
     @Column(name = "image")
     private String image;
     @NotNull
-    @Size(min = 1, max = 60)
+    @Size(min = 1, max = 100)
     @Column(name = "password")
     private String password;
     @Size(max = 200)

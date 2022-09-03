@@ -4,6 +4,8 @@
  */
 package com.vpdq.service;
 
+import com.vpdq.pojo.Admin;
+import com.vpdq.pojo.Customer;
 import com.vpdq.pojo.Employee;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -13,4 +15,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  */
 public interface UserService extends UserDetailsService{
     Employee getEmployeeByUsername(String username);
+    Admin getAdminByUsername(String username);
+    Customer getCustomerUsername(String username);
 }

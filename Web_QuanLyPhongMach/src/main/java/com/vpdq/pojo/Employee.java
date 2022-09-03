@@ -109,7 +109,7 @@ public class Employee implements Serializable {
     private String username;
     
     @NotNull
-    @Size(min = 1, max = 60)
+    @Size(min = 1, max = 100)
     @Column(name = "password")
     private String password;
     
