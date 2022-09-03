@@ -11,6 +11,9 @@
 <div class="mt-3">
     <h2 style="font-family: fantasy;">WELCOME TO P&Q CLINIC </h2>
     <h6 style="font-family: courier">Only a life lived for others is a life worthwhile</h6>
+    <c:if test="${param.accessDenied != null}"> 
+        <h6 style="font-family: courier; color: red; font-weight: bold">Bạn cần đăng nhập để tiếp tục !</h6>
+    </c:if>
     <hr>
 </div>
 <div class="row  mb-5 mt-5" style="padding: 5px;">

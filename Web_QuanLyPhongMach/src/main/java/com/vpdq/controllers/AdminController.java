@@ -6,9 +6,11 @@ package com.vpdq.controllers;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.vpdq.pojo.Admin;
 import com.vpdq.pojo.Employee;
 import com.vpdq.pojo.Medicine;
 import com.vpdq.pojo.Supplier;
+import com.vpdq.service.AdminService;
 import com.vpdq.service.CustomerService;
 import com.vpdq.service.EmployeeService;
 import com.vpdq.service.MedicalRecordService;
@@ -76,6 +78,9 @@ public class AdminController {
     @Autowired
     private CustomerService customerService;
     
+    @Autowired
+    private AdminService adminService;
+    
     //dung chung
     @ModelAttribute
     public void commonAttribute(Model model) {
@@ -85,6 +90,7 @@ public class AdminController {
 //        model.addAttribute("revenueStats", this.medicalRecordService.revenueStatistics());
     }
 
+    //ADMIN
     @GetMapping("/adminIndex")
     public String index() {
         return "adminIndex";
@@ -92,15 +98,45 @@ public class AdminController {
 
     @GetMapping("/adminsManager")
     public String adminsMager(Model model) {
+        model.addAttribute("admin", new Admin());
+        return "adminsManager";
+    }
+    
+    // Thêm Admin
+    @PostMapping("/adminsManager")
+    public String addAdmin(@ModelAttribute(value = "admin") @Valid Admin adm,
+            BindingResult r) {
+        if (r.hasErrors()) {
+            return "adminsManager"; //return lổi
+        }
+        if (this.adminService.addAdmin(adm) == true) {
+            return "redirect:adminsManager"; //return về trang gì đó
+        }
+        return "adminsManager";
+    }
+    
+    //Sửa Admin
+    @PostMapping("/adminsManager/{adminId}")
+    public String updateAdmin(@PathVariable(value = "adminId") int id,
+            @ModelAttribute(value = "adminUpdate") @Valid Admin adm,
+            BindingResult r) {
+        if (r.hasErrors()) {
+            return "adminsManager"; //return lổi
+        }
+        if (this.adminService.updateAdmin(id, adm) == true) {
+            return "redirect:adminsManager"; //return về trang gì đó
+        }
         return "adminsManager";
     }
 
+    //Employee
     @GetMapping("/employeesManager")
     public String employeesManager(Model model) {
         model.addAttribute("employee", new Employee());
         return "employeesManager";
     }
 
+    //Thêm Nhân Viên
     @PostMapping("/employeesManager")
     public String addEmployee(@ModelAttribute(value = "employee") @Valid Employee e,
             BindingResult r) {
@@ -114,15 +150,15 @@ public class AdminController {
     }
 
     
-    
+    //Sửa Nhân Viên
     @PostMapping("/employeesManager/{employeeId}")
-    public String updateEmployee(
+    public String updateEmployee(@PathVariable(value = "employeeId") int id,
             @ModelAttribute(value = "employeeUpdate") @Valid Employee e,
             BindingResult r) {
         if (r.hasErrors()) {
             return "employeesManager"; //return lổi
         }
-        if (this.employeeService.updateEmployee(e) == true) {
+        if (this.employeeService.updateEmployee(id, e) == true) {
             return "redirect:employeesManager"; //return về trang gì đó
         }
         return "employeesManager";

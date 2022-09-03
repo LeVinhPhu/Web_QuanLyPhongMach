@@ -4,6 +4,7 @@
  */
 package com.vpdq.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -106,11 +107,14 @@ public class Admin implements Serializable {
     @Column(name = "note")
     private String note;
     @OneToMany(mappedBy = "adminId")
+    @JsonIgnore//
     private Collection<Admin> adminCollection;
     @JoinColumn(name = "admin_id", referencedColumnName = "id")
     @ManyToOne
+    @JsonIgnore //
     private Admin adminId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "adminId")
+    @JsonIgnore //
     private Collection<OnCall> onCallCollection;
 
     public Admin() {
