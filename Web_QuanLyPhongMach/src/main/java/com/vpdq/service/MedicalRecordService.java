@@ -11,6 +11,7 @@ import java.util.List;
  * @author phamt
  */
 public interface MedicalRecordService {
+    List<Object[]> totalRevenueStatistics();
     List<Object[]> revenueStatistics();
     List<Object[]> revenueStatisticsByMonth(int year);
     List<Object[]> revenueStatisticsByQuarter(int year);

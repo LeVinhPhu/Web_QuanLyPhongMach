@@ -13,6 +13,7 @@ import java.util.Map;
  */
 public interface MedicalRecordRepository {
 //    List<Object[]> revenueStatistics();
+    List<Object[]> totalRevenueStatistics();
     List<Object[]> revenueStatistics();
     List<Object[]> revenueStatisticsByMonth(int year);
     List<Object[]> revenueStatisticsByQuarter(int year);

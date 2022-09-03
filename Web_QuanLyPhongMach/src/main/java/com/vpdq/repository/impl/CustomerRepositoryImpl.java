@@ -119,6 +119,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
         Query query = session.createQuery(q);
         return (Customer) query.getSingleResult();
+    }
 
     public List<Object[]> patientStatistics() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -158,7 +159,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
         Root root = q.from(MedicalRecord.class);
         q.where(b.equal(b.function("YEAR", Integer.class, root.get("billingDate")), year));
-        q.multiselect(b.function("QUARTER", Integer.class, root.get("billingDate")), 
+        q.multiselect(b.function("QUARTER", Integer.class, root.get("billingDate")),
                 b.count(root.get("id")));
 
         q.groupBy(b.function("QUARTER", Integer.class, root.get("billingDate")));
@@ -176,7 +177,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
         Root root = q.from(MedicalRecord.class);
         q.where(b.equal(b.function("YEAR", Integer.class, root.get("billingDate")), year));
-        q.multiselect(b.function("MONTH", Integer.class, root.get("billingDate")), 
+        q.multiselect(b.function("MONTH", Integer.class, root.get("billingDate")),
                 b.count(root.get("id")));
 
         q.groupBy(b.function("MONTH", Integer.class, root.get("billingDate")));
