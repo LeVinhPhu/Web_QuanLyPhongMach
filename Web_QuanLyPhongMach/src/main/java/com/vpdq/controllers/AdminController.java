@@ -22,6 +22,7 @@ import com.vpdq.utils.Search;
 import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -100,12 +101,10 @@ public class AdminController {
     public String index() {
         return "adminIndex";
     }
-
-    @GetMapping("/adminsProfile")
-    public String adminsProfile() {
-        return "adminsProfile";
-    }
-    
+    /**
+     *
+     * @return
+     */
     @GetMapping("/adminsManager")
     public String adminsMager(Model model) {
         model.addAttribute("admin", new Admin());
@@ -117,7 +116,7 @@ public class AdminController {
     public String addAdmin(@ModelAttribute(value = "admin") @Valid Admin adm,
             BindingResult r) {
         if (r.hasErrors()) {
-            return "adminsManager"; //return lổi
+            return "adminsManager2"; //return lổi
         }
         if (this.adminService.addAdmin(adm) == true) {
             return "redirect:adminsManager"; //return về trang gì đó
@@ -137,7 +136,7 @@ public class AdminController {
     public String updateAdmin(@PathVariable(value = "adminId") int id,
             @ModelAttribute(value = "adminUpdate") @Valid Admin adm,
             BindingResult r) {
-      
+
         if (r.hasErrors()) {
             return "register"; //return lổi
         }
@@ -146,20 +145,30 @@ public class AdminController {
         }
         return "adminsManager";
     }
+
     //Trang Ca nhan Admin
-    @PostMapping("/adminsProfile/{adminProfileId}")
-    public String updateProfileAdmin(@PathVariable(value = "adminProfileId") int id,
+    @GetMapping("/adminsProfile")
+    public String adminsProfile(Model model, HttpSession session) {
+        model.addAttribute("currentUser", session.getAttribute("currentUser"));
+        model.addAttribute("updateProfileAdmin", new Admin());
+        return "adminsProfile";
+    }
+
+    @PostMapping("/adminsProfile")
+    public String updateProfileAdmin(HttpSession session,
             @ModelAttribute(value = "updateProfileAdmin") @Valid Admin adm,
             BindingResult r) {
         if (r.hasErrors()) {
             return "adminsProfile";
             //return lổi
         }
-        if (this.adminService.updateAdmin(id, adm) == true) {
+        Admin a = (Admin) session.getAttribute("currentUser");
+        if (this.adminService.updateAdmin(a.getId(), adm) == true) {
             return "redirect:adminsProfile"; //return về trang gì đó
         }
         return "adminsProfile";
     }
+
     //Employee
     @GetMapping("/employeesManager")
     public String employeesManager(Model model) {
@@ -313,7 +322,7 @@ public class AdminController {
             @RequestParam(value = "kw", defaultValue = "", required = false) String kw,
             @RequestParam Map<String, String> params) {
         model.addAttribute("medicine", new Medicine());
-        
+
         Search.setParam(params);
         return "medicinesManager";
     }

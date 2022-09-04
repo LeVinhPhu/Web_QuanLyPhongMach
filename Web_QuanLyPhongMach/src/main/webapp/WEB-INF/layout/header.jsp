@@ -90,7 +90,7 @@
                     </li>
                     <li>
                         <c:if test="${currentUser != null}">
-                            <a class="dropdown-item" href="#">Thông tin cá nhân</a>
+                            <a id = "role" class="dropdown-item" href="">Thông tin cá nhân</a>
                         </c:if>
                     </li>
                     <li>
@@ -107,4 +107,4 @@
 
     </div>
 </nav>
-<!-- Navbar -->
+
