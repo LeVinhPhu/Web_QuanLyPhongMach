@@ -86,6 +86,28 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return kq;
     }
 
+
+    @Override
+
+    public boolean updateCustomer(Customer e) {
+        return true;
+    }
+
+    @Override
+    public boolean deleteCustomer(int customerId) {
+        return true;
+    }
+
+    @Override
+    public List<Object[]> countEmployeeByCate() {
+        return null;
+    }
+
+    @Override
+    public Customer getCustomerID(int id) {
+        return null;
+    }
+
     @Override // username là phone number
     public Customer getCustomerByUsername(String username) {
         Session session = this.sessionFactory.getObject().getCurrentSession();

@@ -12,24 +12,24 @@ function getAdmin(endpoint) {
         let h = "";
         for (let i = 0; i < data.length; i++)
             h += `
-                <tr id="row${data[i].id}">
-                    <td>${data[i].firstName}</td>
-                    <td>${data[i].lastName}</td>
-                    <td>${moment(data[i].dateOfBirth).format("DD/MM/YYYY")}</td>
-                    <td>${data[i].sex}</td>
-                    <td>${data[i].phone}</td>
-                    <td>${data[i].address}</td>
+                <tr id="row${data[i][0]}">
+                    <td>${i+1}</td>
+                    <td>${data[i][1]}</td>
+                    <td>${data[i][2]}</td>
+                    <td>${data[i][11]}/${data[i][12]}/${data[i][13]}</td>
+                    <td>${data[i][6]}</td>
+                    <td>${data[i][5]}</td>
                     <td>
-                        <div class="spinner-border text-secondary" style="display:none" id="load${data[i].id}"></div>
-                        <button class='btn btn-warning' onclick="deleteAdmin('${endpoint + "/" + data[i].id}', ${data[i].id}, this)">DELETE</button>
+                        <div class="spinner-border text-secondary" style="display:none" id="load${data[i][0]}"></div>
+                        <i onclick="deleteAdmin('${endpoint + "/" + data[i][0]}', ${data[i][0]}, this)" class="fas fa-trash-alt"></i>
                     </td>
                     <td>
-                        <div class="spinner-border text-secondary" style="display:none" id="load${data[i].id}"></div>
-                        <button class='btn btn-primary' onclick="delProduct('${endpoint + "/" + data[i].id}', ${data[i].id})">UPDATE</button>
+                        <div class="spinner-border text-secondary" style="display:none" id="load${data[i][0]}"></div>
+                        <a style="color:black" href="/Web_QuanLyPhongMach/admins/adminsManager/${data[i][0]}"><i class="fas fa-pencil-alt"></i></a>
                     </td>
                     <td>
-                        <div class="spinner-border text-secondary" style="display:none" id="load${data[i].id}"></div>
-                        <button class="btn btn-success" data-bs-toggle="modal" onclick="detailAdmin('${endpoint}', ${data[i].id})">DETAILS</button>
+                        <div class="spinner-border text-secondary" style="display:none" id="load${data[i][0]}"></div>
+                        <i class="fas fa-info-circle" data-bs-toggle="modal" onclick="detailAdmin('${endpoint}', ${data[i][0]})"></i>
                     </td>
                 </tr>
         `
@@ -49,8 +49,8 @@ function deleteAdmin(endpoint, id, btn) {
     fetch(endpoint, {
         method: "delete"
     }).then(function (res) {
-        if (res.status === 204)
-            alert("Đang gặp sự cố !");
+//        if (res.status === 204)
+//            alert("Đang gặp sự cố !");
         load.style.display = "none";
         r.style.display = "none";
     }).catch(function (err) {
@@ -68,30 +68,29 @@ function detailAdmin(endpoint, id) {
         console.info(data);
         let h = "";
         for (let i = 0; i < data.length; i++)
-            if (data[i].id == id)
+            if (data[i][0] == id)
             {
                 h += `
                 <div style="text-align: center" class="boder rounded bg-light"> 
                     <img
-                        src="${data[i].image}"
+                        src="${data[i][3]}"
                         class="rounded-circle"
                         height="70"
                         width="70"
                         alt="Black and White Portrait of a Man"
                         loading="lazy"
                         />
-                    <h6>${data[i].firstName} ${data[i].lastName}</h6>
+                    <h6>${data[i][1]} ${data[i][2]}</h6>
                 </div>
 
                 <div>
-                    <h6>Ngày sinh: ${moment(data[i].dateOfBirth).format("DD/MM/YYYY")}</h6>
-                    <h6>Giới tính: ${data[i].sex}</h6>
-                    <h6>Quyền: ${data[i].typeOfAdmin}</h6> 
-                    <h6>Địa chỉ: ${data[i].address}</h6>
-                    <h6>Email: ${data[i].email}</h6>
-                    <h6>Phone: ${data[i].phone}</h6>
-                    <h6>Username: ${data[i].username}</h6>
-                    <h6>Password: ${data[i].password}</h6>
+                    <h6>Ngày sinh: ${data[i][11]}/${data[i][12]}/${data[i][13]}</h6>
+                    <h6>Giới tính: ${data[i][6]}</h6>
+                    <h6>Quyền: ${data[i][8]}</h6> 
+                    <h6>Địa chỉ: ${data[i][7]}</h6>
+                    <h6>Email: ${data[i][4]}</h6>
+                    <h6>Phone: ${data[i][5]}</h6>
+                    <h6>Username: ${data[i][10]}</h6>
                 </div>
             `
             }

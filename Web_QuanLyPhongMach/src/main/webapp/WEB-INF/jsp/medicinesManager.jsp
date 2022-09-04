@@ -11,9 +11,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
-
-
-
 <!-- THÊM THUỐC -->
 <div class="modal" id="myModal">
     <div class="modal-dialog">
@@ -95,7 +92,13 @@
 <div class="row mt-4 mb-4">
     <div class="col-md-10 col-12">
         <div style="text-align: center;" ><h3>QUẢN LÝ THUỐC</h3></div></div>
-    <div class="col-md-2 col-12"></div>
+    <div class="col-md-2 col-12">
+        <c:url value="/admins/medicinesManager" var="action" />
+        <form action="${action}" class="d-flex">
+            <input class="form-control me-2" type="text" name="kw" placeholder="Nhập tên thuốc...">
+            <button type="submit" class="btn"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
 </div>
 
 
@@ -108,7 +111,7 @@
 
     <div class="col-md-8 col-12 shadow" style="overflow: auto; height: 500px; border-radius: 10px">
         <div data-bs-toggle="modal" data-bs-target="#myModal" style="margin: 8px; width: 20%"><i class="fas fa-plus"></i>  Thêm thuốc</div>
-        
+
         <table class="table table-hover ">
             <tr>
                 <th>

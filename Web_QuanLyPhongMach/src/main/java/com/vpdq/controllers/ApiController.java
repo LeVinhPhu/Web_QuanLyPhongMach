@@ -16,6 +16,7 @@ import com.vpdq.service.CustomerService;
 import com.vpdq.service.MedicalRecordService;
 import com.vpdq.service.MedicineService;
 import com.vpdq.service.PrescriptionService;
+import com.vpdq.utils.Search;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,7 +56,10 @@ public class ApiController {
     @GetMapping("/medicines")
     public ResponseEntity<List<Object[]>> listMedicine() {
         //api/medicines lấy danh sách thuốc phục vụ cho admin/medicines
-        return new ResponseEntity<>(this.medicineService.getMedicines(null, 0), HttpStatus.OK);
+        if(Search.getParam().isEmpty()==false)
+            return new ResponseEntity<>(this.medicineService.getMedicines(Search.getParam(), 0), HttpStatus.OK);
+        else
+            return new ResponseEntity<>(this.medicineService.getMedicines(null, 0), HttpStatus.OK);
     }
 
     @DeleteMapping("/medicines/{medicineId}")
@@ -85,10 +89,10 @@ public class ApiController {
     public void deleteEmployee(@PathVariable(value = "employeeId") int employeeId) {
         this.employeeServic.deleteEmployee(employeeId);
     }
-
+    
     @GetMapping("/adminsManager")
-    public ResponseEntity<List<Admin>> listAdm() {
-        return new ResponseEntity<>(this.adminService.getAdmin(null, 0), HttpStatus.OK);
+    public ResponseEntity<List<Object[]>> listAdmin() {
+        return new ResponseEntity<>(this.adminService.getAllAdmin(), HttpStatus.OK);
     }
 
     @DeleteMapping("/adminsManager/{adminId}")
@@ -96,7 +100,7 @@ public class ApiController {
     public void deleteAdmin(@PathVariable(value = "adminId") int adminId) {
         this.adminService.deleteAdmin(adminId);
     }
-
+    
     @GetMapping("/medicine/{mID}")
     public Medicine getMedicine(@PathVariable(value = "mID") int id) {
         return medicineService.getMedicineByID(id);

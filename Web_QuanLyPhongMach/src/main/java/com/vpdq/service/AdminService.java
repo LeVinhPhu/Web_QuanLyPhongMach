@@ -14,8 +14,6 @@ import java.util.Map;
  */
 public interface AdminService {
 
-    List<Admin> getAdmin(Map<String, String> params, int page);
-
     int countAdmin();
 
     boolean addAdmin(Admin adm);
@@ -29,6 +27,9 @@ public interface AdminService {
     Admin getAdminByID(int id);
 
     Admin getAdminByUsername(String username);
-    
+
     boolean updateImageAdmin(int id, String image);
+
+    List<Object[]> getAllAdmin();
+
 }

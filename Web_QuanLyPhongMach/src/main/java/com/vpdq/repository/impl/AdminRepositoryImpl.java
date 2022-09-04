@@ -5,19 +5,20 @@
 package com.vpdq.repository.impl;
 
 import com.vpdq.pojo.Admin;
+import com.vpdq.pojo.OnCall;
 import com.vpdq.repository.AdminRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
+import org.hibernate.HibernateException;
 import org.springframework.core.env.Environment;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-@PropertySource("classpath:messages.properties")
+//@PropertySource("classpath:messages.properties")
 public class AdminRepositoryImpl implements AdminRepository {
 
     // lien ket voi pojo
@@ -38,8 +39,6 @@ public class AdminRepositoryImpl implements AdminRepository {
 
     @Autowired
     private Environment env;
-    
-    
 
     @Override
     public int countAdmin() {
@@ -62,19 +61,20 @@ public class AdminRepositoryImpl implements AdminRepository {
     public boolean updateAdmin(int id, Admin adm) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Admin admnew = getAdminByID(id);
-        
+
         admnew.setFirstName(adm.getFirstName());
-        admnew.setLastName(adm.getLastName());
-        admnew.setDateOfBirth(adm.getDateOfBirth());
-        admnew.setSex(adm.getSex());
-        admnew.setAddress(adm.getAddress());
-        admnew.setEmail(adm.getEmail());
-        admnew.setPhone(adm.getPhone());
-        admnew.setUsername(adm.getUsername());
-        admnew.setPassword(adm.getPassword());
+//        admnew.setLastName(adm.getLastName());
+//        admnew.setDateOfBirth(adm.getDateOfBirth());
+//        admnew.setSex(adm.getSex());
+//        admnew.setAddress(adm.getAddress());
+//        admnew.setEmail(adm.getEmail());
+//        admnew.setPhone(adm.getPhone());
+//        admnew.setUsername(adm.getUsername());
+//        admnew.setPassword(adm.getPassword());
+//        admnew.setNote(adm.getNote());
         try {
             session.saveOrUpdate(admnew);
-          return true;
+            return true;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -97,7 +97,7 @@ public class AdminRepositoryImpl implements AdminRepository {
 
     @Override
     public List<Object[]> countAdminByCate() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return null;
     }
 
     @Override
@@ -110,7 +110,6 @@ public class AdminRepositoryImpl implements AdminRepository {
         query.select(root);
         query.where(builder.equal(root.get("id"), id));
         Admin adm = session.createQuery(query).uniqueResult();
-
         return adm;
     }
 
@@ -130,47 +129,30 @@ public class AdminRepositoryImpl implements AdminRepository {
     }
 
     @Override
-    public List<Admin> getAdmin(Map<String, String> params, int page) {
+    public List<Object[]> getAllAdmin() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-
         CriteriaBuilder b = session.getCriteriaBuilder();
-        CriteriaQuery<Admin> q = b.createQuery(Admin.class);
+
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
         Root root = q.from(Admin.class);
-        q.select(root);
 
-        if (params != null) {
-            List<Predicate> predicates = new ArrayList<>();
+        q.multiselect(root.get("id"),
+                root.get("firstName"),
+                root.get("lastName"),
+                root.get("image"),
+                root.get("email"),
+                root.get("phone"),
+                root.get("sex"),
+                root.get("address"),
+                root.get("typeOfAdmin"),
+                root.get("note"),
+                root.get("username"),
+                b.function("DAY", Integer.class, root.get("dateOfBirth")),
+                b.function("MONTH", Integer.class, root.get("dateOfBirth")),
+                b.function("YEAR", Integer.class, root.get("dateOfBirth"))
+        );
 
-            //Tìm theo tên
-            String kw = params.get("kw");
-            if (kw != null && !kw.isEmpty()) {
-                Predicate pfn = b.like(root.get("first_name").as(String.class), String.format("%%%s%%", kw));
-                predicates.add(pfn);
-
-                Predicate pln = b.like(root.get("last_name").as(String.class), String.format("%%%s%%", kw));
-                if (!pfn.equals(pln)) {
-                    predicates.add(pln);
-                }
-
-            }
-
-            //Tìm theo ngày sinh
-            //Tìm theo posision
-
-            q.where(predicates.toArray(Predicate[]::new));
-        }
-
-        q.orderBy(b.desc(root.get("id")));
-
-        Query query = session.createQuery(q);
-
-        //Phân trang
-        if (page > 0) {
-            int size = Integer.parseInt(env.getProperty("page.size").toString());
-            int start = (page - 1) * size;
-            query.setFirstResult(start);
-            query.setMaxResults(size);
-        }
+        Query<Object[]> query = session.createQuery(q);
 
         return query.getResultList();
     }

@@ -13,7 +13,6 @@ import java.util.Map;
  * @author vinhp
  */
 public interface AdminRepository {
-
     List<Admin> getAdmin(Map<String, String> params, int page);
 
     int countAdmin();
@@ -31,4 +30,7 @@ public interface AdminRepository {
     Admin getAdminByUsername(String username);
     
     boolean updateImageAdmin(int id, String image);
+
+    List<Object[]> getAllAdmin();
+
 }

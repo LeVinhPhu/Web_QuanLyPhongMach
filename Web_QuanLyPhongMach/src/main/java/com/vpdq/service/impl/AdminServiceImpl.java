@@ -18,15 +18,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AdminServiceImpl implements AdminService{
-    
     @Autowired
     private AdminRepository adminRepository;
-    
-    @Override
-    public List<Admin> getAdmin(Map<String, String> params, int page) {
-        return this.adminRepository.getAdmin(params, page);
-    }
-
+ 
     @Override
     public int countAdmin() {
         return this.adminRepository.countAdmin();
@@ -52,7 +46,7 @@ public class AdminServiceImpl implements AdminService{
 
     @Override
     public List<Object[]> countAdminByCate() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return null;
     }
 
     @Override
@@ -66,8 +60,13 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
+
     public boolean updateImageAdmin(int id, String image) {
         return this.adminRepository.updateImageAdmin(id, image);
+
+    public List<Object[]> getAllAdmin() {
+        return this.adminRepository.getAllAdmin();
+
     }
     
 }

@@ -46,6 +46,12 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
                        value="/WEB-INF/jsp/adminsManager.jsp" />
     </definition>
     
+    <definition name="updateAdmin" extends="baseLayout">
+        <put-attribute name="title" value="Sửa Thông Tin Admin" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/updateAdmin.jsp" />
+    </definition>
+    
     <definition name="employeesManager" extends="baseLayout">
         <put-attribute name="title" value="Quản Lý Nhân Viên" />
         <put-attribute name="content"
