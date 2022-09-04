@@ -85,12 +85,14 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+
     //dung chung
     @ModelAttribute
     public void commonAttribute(Model model) {
         model.addAttribute("positions", this.positionService.getPosition());
         model.addAttribute("units", this.unitService.getUnits());
         model.addAttribute("suppliers", this.supplierService.getSuppliers());
+//        model.addAttribute("services", this.serviceService.getService());
 //        model.addAttribute("revenueStats", this.medicalRecordService.revenueStatistics());
     }
 

@@ -7,7 +7,11 @@ package com.vpdq.controllers;
 import com.vpdq.pojo.Appointment;
 import com.vpdq.pojo.Customer;
 import com.vpdq.service.AppointmentService;
+
 import com.vpdq.service.CustomerService;
+
+import com.vpdq.utils.Search;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,18 +46,19 @@ public class CustomerController {
     public String showAppointments (Model model, HttpSession session){
         model.addAttribute("appointments", new Appointment());
         model.addAttribute("currentUser",session.getAttribute("currentUser"));
+        
+        Customer cs = (Customer) session.getAttribute("currentUser");
+        Search.setIdCus(cs.getId());
         return "appointments";
     }
     
     //Đặt lịch khám
     @PostMapping("/appointments")
-    public String addAppointments (Model model,  
-            @ModelAttribute(value = "appointments") Appointment a,
-            @RequestParam(value = "idCus", defaultValue = "", required = false) int idCus) {
-
-        Customer c = new Customer();
-        c.setId(idCus);
+    public String addAppointments (Model model, HttpSession session,
+            @ModelAttribute(value = "appointments") Appointment a) {
+        Customer c = (Customer) session.getAttribute("currentUser");
         a.setCustomerId(c);
+        
         if(this.appointmentService.addAppointment(a))
             return "appointments";
         return "appointments";

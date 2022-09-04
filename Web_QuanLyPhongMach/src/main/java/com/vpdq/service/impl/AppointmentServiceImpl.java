@@ -7,6 +7,7 @@ package com.vpdq.service.impl;
 import com.vpdq.pojo.Appointment;
 import com.vpdq.repository.AppointmentRepository;
 import com.vpdq.service.AppointmentService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,16 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public boolean addAppointment(Appointment a) {
         return this.appointmentRepository.addAppointment(a);
+    }
+
+    @Override
+    public List<Object[]> getAppointment(float idCus) {
+        return this.appointmentRepository.getAppointment(idCus);
+    }
+
+    @Override
+    public boolean deleteAppointment(int id) {
+        return this.appointmentRepository.deleteAppointment(id);
     }
     
 }

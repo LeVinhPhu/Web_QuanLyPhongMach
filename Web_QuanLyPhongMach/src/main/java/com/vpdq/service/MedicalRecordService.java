@@ -4,6 +4,7 @@
  */
 package com.vpdq.service;
 
+import com.vpdq.pojo.MedicalRecord;
 import java.util.List;
 
 /**
