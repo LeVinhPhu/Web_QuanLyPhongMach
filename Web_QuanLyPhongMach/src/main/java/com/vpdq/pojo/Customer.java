@@ -27,6 +27,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -104,6 +105,10 @@ public class Customer implements Serializable {
     @NotNull
     @Size(min = 1, max = 60)
     private String confirmPassword;
+    
+    @Transient
+    private MultipartFile file;
+    
     public Customer() {
     }
 
@@ -260,6 +265,20 @@ public class Customer implements Serializable {
      */
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
     
 }

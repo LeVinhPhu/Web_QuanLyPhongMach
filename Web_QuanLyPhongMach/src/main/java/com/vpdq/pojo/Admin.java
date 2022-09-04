@@ -23,11 +23,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -69,12 +71,12 @@ public class Admin implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "last_name")
     private String lastName;
-    
+
     @Column(name = "date_of_birth")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
-    
+
     @Size(max = 45)
     @Column(name = "sex")
     private String sex;
@@ -120,6 +122,9 @@ public class Admin implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "adminId")
     @JsonIgnore //
     private Collection<OnCall> onCallCollection;
+
+    @Transient
+    private MultipartFile file;
 
     public Admin() {
     }
@@ -291,5 +296,19 @@ public class Admin implements Serializable {
     public String toString() {
         return "com.vpdq.pojo.Admin[ id=" + id + " ]";
     }
-    
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
 }

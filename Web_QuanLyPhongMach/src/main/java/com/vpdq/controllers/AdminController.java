@@ -45,17 +45,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/admins")
 @ControllerAdvice //dung trong khai bao thuoc tinh dung chung 
 public class AdminController {
-
-    @Bean
-    public Cloudinary cloudinary() {
-        Cloudinary cloudinary
-                = new Cloudinary(ObjectUtils.asMap(
-                        "cloud_name", "vinhphuvtv2",
-                        "api_key", "335115886111226",
-                        "api_secret", "Y4A5vCe_8f-liruLKg5FRmjl9tw",
-                        "secure", true));
-        return cloudinary;
-    }
+//
+//    @Bean
+//    public Cloudinary cloudinary() {
+//        Cloudinary cloudinary
+//                = new Cloudinary(ObjectUtils.asMap(
+//                        "cloud_name", "vinhphuvtv2",
+//                        "api_key", "335115886111226",
+//                        "api_secret", "Y4A5vCe_8f-liruLKg5FRmjl9tw",
+//                        "secure", true));
+//        return cloudinary;
+//    }
 
     //Kết nối vs service
     @Autowired
@@ -85,7 +85,6 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-
     //dung chung
     @ModelAttribute
     public void commonAttribute(Model model) {
@@ -101,6 +100,7 @@ public class AdminController {
     public String index() {
         return "adminIndex";
     }
+
     /**
      *
      * @return
@@ -158,6 +158,18 @@ public class AdminController {
     public String updateProfileAdmin(HttpSession session,
             @ModelAttribute(value = "updateProfileAdmin") @Valid Admin adm,
             BindingResult r) {
+//        if (adm.getFile().isEmpty() == false) {
+//            try {
+//                Map image = this.cloudinary.uploader().upload(adm.getFile().getBytes(),
+//                        ObjectUtils.asMap("resource_type", "auto"));
+//                String img = (String) image.get("secure_url");
+//                if (this.adminService.updateImageAdmin(a.getId(), img) == true) {
+//                    return "redirect:adminsProfile"; //return về trang gì đó
+//                }
+//            } catch (IOException ex) {
+//                System.err.println("ADD ADMIN " + ex.getMessage());
+//            }
+//        }
         if (r.hasErrors()) {
             return "adminsProfile";
             //return lổi
@@ -171,15 +183,18 @@ public class AdminController {
 
     //Employee
     @GetMapping("/employeesManager")
-    public String employeesManager(Model model) {
+    public String employeesManager(Model model
+    ) {
         model.addAttribute("employee", new Employee());
         return "employeesManager";
     }
 
     //Thêm Nhân Viên
     @PostMapping("/employeesManager")
-    public String addEmployee(@ModelAttribute(value = "employee") @Valid Employee e,
-            BindingResult r) {
+    public String addEmployee(@ModelAttribute(value = "employee")
+            @Valid Employee e,
+            BindingResult r
+    ) {
         if (r.hasErrors()) {
             return "employeesManager"; //return lổi
         }
@@ -193,7 +208,8 @@ public class AdminController {
     @PostMapping("/employeesManager/{employeeId}")
     public String updateEmployee(@PathVariable(value = "employeeId") int id,
             @ModelAttribute(value = "employeeUpdate") @Valid Employee e,
-            BindingResult r) {
+            BindingResult r
+    ) {
         if (r.hasErrors()) {
             return "employeesManager"; //return lổi
         }
@@ -204,14 +220,16 @@ public class AdminController {
     }
 
     @GetMapping("/customersManager")
-    public String customersManager(Model model) {
+    public String customersManager(Model model
+    ) {
         return "customersManager";
     }
 
     @RequestMapping("/reportsManager")
     public String reportsManager(Model model,
             @RequestParam(value = "year", defaultValue = "2022", required = false) int year,
-            @RequestParam(value = "year2", defaultValue = "2022", required = false) int year2) {
+            @RequestParam(value = "year2", defaultValue = "2022", required = false) int year2
+    ) {
         model.addAttribute("total", this.medicalRecordService.totalRevenueStatistics());
         model.addAttribute("revenueStats", this.medicalRecordService.revenueStatistics());
         model.addAttribute("revenueStatsByQuarter", this.medicalRecordService.revenueStatisticsByQuarter(year));
@@ -242,7 +260,8 @@ public class AdminController {
     @RequestMapping("/reports2Manager")
     public String reports2Manager(Model model,
             @RequestParam(value = "year1", defaultValue = "2022", required = false) int year1,
-            @RequestParam(value = "year2", defaultValue = "2022", required = false) int year2) {
+            @RequestParam(value = "year2", defaultValue = "2022", required = false) int year2
+    ) {
         model.addAttribute("patientStats", this.customerService.patientStatistics());
         model.addAttribute("patientStatsByYear", this.customerService.patientStatisticsByYear());
         model.addAttribute("patientStatsByQuarter", this.customerService.patientStatisticsByQuater(year1));
@@ -276,7 +295,8 @@ public class AdminController {
             @RequestParam(value = "year2", defaultValue = "2022", required = false) int year2,
             @RequestParam(value = "year3", defaultValue = "2022", required = false) int year3,
             @RequestParam(value = "quarter2", defaultValue = "1", required = false) int quarter2,
-            @RequestParam(value = "month3", defaultValue = "1", required = false) int month3) {
+            @RequestParam(value = "month3", defaultValue = "1", required = false) int month3
+    ) {
         model.addAttribute("frequencyMedicineUsageStatsByYear", this.medicineService.frequencyOfMedicineUsageStatisticsByYear(year1));
         model.addAttribute("year1", year1);
 
@@ -320,7 +340,8 @@ public class AdminController {
     @GetMapping("/medicinesManager")
     public String listMedicine(Model model,
             @RequestParam(value = "kw", defaultValue = "", required = false) String kw,
-            @RequestParam Map<String, String> params) {
+            @RequestParam Map<String, String> params
+    ) {
         model.addAttribute("medicine", new Medicine());
 
         Search.setParam(params);
@@ -328,7 +349,8 @@ public class AdminController {
     }
 
     @PostMapping("/medicinesManager")
-    public String addMedicine(@ModelAttribute(value = "medicine") @Valid Medicine m,
+    public String addMedicine(@ModelAttribute(value = "medicine")
+            @Valid Medicine m,
             BindingResult rs) throws IOException {
         //nếu có ảnh thì upload lên cloudinary
         if (m.getFile().isEmpty() == false) {
@@ -358,7 +380,9 @@ public class AdminController {
     }
 
     @GetMapping("/medicinesManager/{mID}")
-    public String getMedicine(Model model, Medicine m, @PathVariable(value = "mID") int id) {
+    public String getMedicine(Model model, Medicine m,
+            @PathVariable(value = "mID") int id
+    ) {
         model.addAttribute("medicine", this.medicineService.getMedicineByID(id));
         return "updateMedicine";
     }
@@ -366,7 +390,8 @@ public class AdminController {
     @PostMapping("/medicinesManager/{mID}")
     public String updateMedicine(@PathVariable(value = "mID") int id,
             @ModelAttribute(value = "medicine") @Valid Medicine m,
-            BindingResult rs) {
+            BindingResult rs
+    ) {
         Medicine me = this.medicineService.getMedicineByID(id);
 
         if (m.getFile().isEmpty() == false) {
