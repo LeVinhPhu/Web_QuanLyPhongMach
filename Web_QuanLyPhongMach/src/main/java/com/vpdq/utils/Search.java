@@ -12,22 +12,9 @@ import java.util.Map;
  */
 public class Search {
 
-    private static String kw;
+    private static int idCus;
     private static Map<String, String> param;
 
-    /**
-     * @return the kw
-     */
-    public static String getKw() {
-        return kw;
-    }
-
-    /**
-     * @param aKw the kw to set
-     */
-    public static void setKw(String aKw) {
-        kw = aKw;
-    }
 
     /**
      * @return the param
@@ -41,6 +28,20 @@ public class Search {
      */
     public static void setParam(Map<String, String> aParam) {
         param = aParam;
+    }
+
+    /**
+     * @return the idCus
+     */
+    public static int getIdCus() {
+        return idCus;
+    }
+
+    /**
+     * @param aIdCus the idCus to set
+     */
+    public static void setIdCus(int aIdCus) {
+        idCus = aIdCus;
     }
 
 }

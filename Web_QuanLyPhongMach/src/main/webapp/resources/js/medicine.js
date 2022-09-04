@@ -35,8 +35,6 @@ function deleteMedicine(endpoint, id, btn) {
             }
         }
     });
-
-
 }
 
 
@@ -73,7 +71,7 @@ function getMedicines(endpoint) {
 
     }).catch(function (err) {
         console.error(err);
-    })
+    });
 }
 
 

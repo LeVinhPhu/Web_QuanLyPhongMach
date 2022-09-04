@@ -5,6 +5,7 @@
 package com.vpdq.repository;
 
 import com.vpdq.pojo.Appointment;
+import java.util.List;
 
 /**
  *
@@ -12,4 +13,6 @@ import com.vpdq.pojo.Appointment;
  */
 public interface AppointmentRepository {
     boolean addAppointment (Appointment a);
+    List<Object[]> getAppointment(int idCus);
+    boolean deleteAppointment(int id);
 }

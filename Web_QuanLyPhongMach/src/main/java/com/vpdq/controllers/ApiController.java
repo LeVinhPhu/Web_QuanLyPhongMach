@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.vpdq.controllers;
+
 import com.vpdq.pojo.Admin;
+import com.vpdq.pojo.Appointment;
 import com.vpdq.pojo.Employee;
 import com.vpdq.pojo.Medicine;
 import com.vpdq.pojo.Unit;
@@ -12,6 +14,7 @@ import com.vpdq.pojo.Customer;
 import com.vpdq.pojo.Medicine;
 import com.vpdq.service.AdminService;
 import com.vpdq.pojo.Prescription;
+import com.vpdq.service.AppointmentService;
 import com.vpdq.service.CustomerService;
 import com.vpdq.service.MedicalRecordService;
 import com.vpdq.service.MedicineService;
@@ -45,21 +48,27 @@ public class ApiController {
 
     @Autowired
     private EmployeeService employeeServic;
-    
+
     @Autowired
     private PrescriptionService prescriptionService;
 
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private AppointmentService appointmentService;
+    
 //  API-Que
     @GetMapping("/medicines")
     public ResponseEntity<List<Object[]>> listMedicine() {
         //api/medicines lấy danh sách thuốc phục vụ cho admin/medicines
-        if(Search.getParam().isEmpty()==false)
+        if (Search.getParam().isEmpty() == false)
+        {
             return new ResponseEntity<>(this.medicineService.getMedicines(Search.getParam(), 0), HttpStatus.OK);
-        else
+        } else
+        {
             return new ResponseEntity<>(this.medicineService.getMedicines(null, 0), HttpStatus.OK);
+        }
     }
 
     @DeleteMapping("/medicines/{medicineId}")
@@ -72,7 +81,7 @@ public class ApiController {
     public ResponseEntity<List<Customer>> listPhoneNumber() {
         return new ResponseEntity<>(this.customerService.getAllPhoneNumber(), HttpStatus.OK);
     }
-    
+
     @GetMapping("/prescription")
     public ResponseEntity<List<Object[]>> listPrescription() {
         return new ResponseEntity<>(this.prescriptionService.getPrescription(), HttpStatus.OK);
@@ -89,7 +98,7 @@ public class ApiController {
     public void deleteEmployee(@PathVariable(value = "employeeId") int employeeId) {
         this.employeeServic.deleteEmployee(employeeId);
     }
-    
+
     @GetMapping("/adminsManager")
     public ResponseEntity<List<Object[]>> listAdmin() {
         return new ResponseEntity<>(this.adminService.getAllAdmin(), HttpStatus.OK);
@@ -100,15 +109,31 @@ public class ApiController {
     public void deleteAdmin(@PathVariable(value = "adminId") int adminId) {
         this.adminService.deleteAdmin(adminId);
     }
-    
-    @GetMapping("/medicine/{mID}")
-    public Medicine getMedicine(@PathVariable(value = "mID") int id) {
-        return medicineService.getMedicineByID(id);
-    }
-    
+
+//    @GetMapping("/medicine/{mID}")
+//    public Medicine getMedicine(@PathVariable(value = "mID") int id) {
+//        return medicineService.getMedicineByID(id);
+//    }
+
     @GetMapping("/customersManager")
     public ResponseEntity<List<Customer>> listCustomer() {
         return new ResponseEntity<>(this.customerService.getCustomer(null, 0), HttpStatus.OK);
     }
 
+    //DANH SÁCH PHIẾU ĐẶT
+    @GetMapping("/appointment")
+    public ResponseEntity<List<Object[]>> listAppointment() {
+        if (Search.getIdCus()==0)
+            return new ResponseEntity<>(this.appointmentService.getAppointment(0), HttpStatus.OK);
+        else
+            return new ResponseEntity<>(this.appointmentService.getAppointment(Search.getIdCus()), HttpStatus.OK);
+
+    }
+    
+    //HUỶ PHIẾU ĐẶT KHÁM
+    @DeleteMapping("/appointment/{aId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAppointment(@PathVariable(value = "aId") int aId) {
+        this.appointmentService.deleteAppointment(aId);
+    }
 }
