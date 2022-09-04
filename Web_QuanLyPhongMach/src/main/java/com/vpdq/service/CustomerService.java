@@ -6,6 +6,7 @@ package com.vpdq.service;
 
 import com.vpdq.pojo.Customer;
 import java.util.List;
+import java.util.Map;
 //import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
@@ -14,12 +15,30 @@ import java.util.List;
  */
 //extends UserDetailsService 
 public interface CustomerService {
+
     boolean addCustomer(Customer c);
-//    Customer getCusByPhoneNumber(String phoneNumber);
+
+    boolean updateCustomer(int id, Customer c);
+    
+    boolean updateImageCustomer(int id, String image);
+
+    boolean deleteCustomer(int customerId);
+    
+    Customer getCustomerByID(int id);
+
     List<Customer> getAllPhoneNumber();
+
     boolean check(String phone);
+
     List<Object[]> patientStatistics();
+
     List<Object[]> patientStatisticsByYear();
+
     List<Object[]> patientStatisticsByQuater(int year);
+
     List<Object[]> patientStatisticsByMonth(int year);
+
+    List<Customer> getCustomer(Map<String, String> params, int page);
+
+
 }

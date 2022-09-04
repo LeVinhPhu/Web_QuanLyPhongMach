@@ -21,18 +21,22 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author vinhp
  */
-
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
     @Autowired
     private AppointmentService appointmentService;
-    
+
     @GetMapping("/customersIndex")
-    public String index (){
+    public String index() {
         return "customersIndex";
     }
-    
+
+    @GetMapping("/customersProfile")
+    public String customersProfile() {
+        return "customersProfile";
+    }
+
     @GetMapping("/appointments")
     public String showAppointments (Model model, HttpSession session){
         model.addAttribute("appointments", new Appointment());
@@ -53,5 +57,5 @@ public class CustomerController {
             return "appointments";
         return "appointments";
     }
-    
+
 }

@@ -60,8 +60,13 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
+
+    public boolean updateImageAdmin(int id, String image) {
+        return this.adminRepository.updateImageAdmin(id, image);
+
     public List<Object[]> getAllAdmin() {
         return this.adminRepository.getAllAdmin();
+
     }
     
 }

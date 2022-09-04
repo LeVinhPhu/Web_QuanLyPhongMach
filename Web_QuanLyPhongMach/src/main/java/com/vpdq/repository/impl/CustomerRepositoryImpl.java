@@ -6,9 +6,6 @@ package com.vpdq.repository.impl;
 
 import com.vpdq.pojo.Customer;
 import com.vpdq.pojo.MedicalRecord;
-import com.vpdq.pojo.Medicine;
-import com.vpdq.pojo.Prescription;
-import com.vpdq.pojo.Unit;
 import com.vpdq.repository.CustomerRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +19,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +35,9 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
+
+    @Autowired
+    private Environment env;
 
     @Override
     public boolean addCustomer(Customer c) {
@@ -84,6 +85,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         }
         return kq;
     }
+
 
     @Override
 
@@ -187,4 +189,113 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return query.getResultList();
     }
 
+    @Override
+    public List<Customer> getCustomer(Map<String, String> params, int page) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Customer> q = b.createQuery(Customer.class);
+        Root root = q.from(Customer.class);
+        q.select(root);
+
+        if (params != null) {
+            List<Predicate> predicates = new ArrayList<>();
+
+            //Tìm theo tên
+            String kw = params.get("kw");
+            if (kw != null && !kw.isEmpty()) {
+                Predicate pfn = b.like(root.get("first_name").as(String.class), String.format("%%%s%%", kw));
+                predicates.add(pfn);
+
+                Predicate pln = b.like(root.get("last_name").as(String.class), String.format("%%%s%%", kw));
+                if (!pfn.equals(pln)) {
+                    predicates.add(pln);
+                }
+
+            }
+
+            //Tìm theo ngày sinh
+            //Tìm theo posision
+            String positionId = params.get("positionId");
+            if (positionId != null) {
+                Predicate p = b.equal(root.get("positionId"), Integer.parseInt(positionId));
+                predicates.add(p);
+            }
+
+            q.where(predicates.toArray(Predicate[]::new));
+        }
+
+        q.orderBy(b.desc(root.get("id")));
+
+        Query query = session.createQuery(q);
+
+        //Phân trang
+        return query.getResultList();
+    }
+
+    @Override
+    public boolean updateCustomer(int id, Customer c) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Customer cnew = getCustomerByID(id);
+
+        cnew.setFirstName(c.getFirstName());
+        cnew.setLastName(c.getLastName());
+        cnew.setDateOfBirth(c.getDateOfBirth());
+        cnew.setSex(c.getSex());
+        cnew.setAddress(c.getAddress());
+        cnew.setEmail(c.getEmail());
+        cnew.setPhoneNumber(c.getPhoneNumber());
+        cnew.setPassword(c.getPassword());
+        cnew.setConfirmPassword(c.getConfirmPassword());
+        try {
+            session.saveOrUpdate(cnew);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public Customer getCustomerByID(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+
+        CriteriaQuery<Customer> query = builder.createQuery(Customer.class);
+        Root<Customer> root = query.from(Customer.class);
+        query.select(root);
+        query.where(builder.equal(root.get("id"), id));
+        Customer c = session.createQuery(query).uniqueResult();
+
+        return c;
+    }
+
+    @Override
+    public boolean deleteCustomer(int customerId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        try {
+            Customer c = session.get(Customer.class, customerId);
+            session.delete(c);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateImageCustomer(int id, String image) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Customer cnew = getCustomerByID(id);
+
+        cnew.setImage(image);
+        try {
+            session.saveOrUpdate(cnew);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 }

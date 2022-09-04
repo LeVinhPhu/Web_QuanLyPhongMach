@@ -105,5 +105,10 @@ public class ApiController {
     public Medicine getMedicine(@PathVariable(value = "mID") int id) {
         return medicineService.getMedicineByID(id);
     }
+    
+    @GetMapping("/customersManager")
+    public ResponseEntity<List<Customer>> listCustomer() {
+        return new ResponseEntity<>(this.customerService.getCustomer(null, 0), HttpStatus.OK);
+    }
 
 }

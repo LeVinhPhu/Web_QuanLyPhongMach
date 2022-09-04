@@ -99,6 +99,11 @@ public class AdminController {
         return "adminIndex";
     }
 
+    @GetMapping("/adminsProfile")
+    public String adminsProfile() {
+        return "adminsProfile";
+    }
+    
     @GetMapping("/adminsManager")
     public String adminsMager(Model model) {
         model.addAttribute("admin", new Admin());
@@ -139,7 +144,20 @@ public class AdminController {
         }
         return "adminsManager";
     }
-
+    //Trang Ca nhan Admin
+    @PostMapping("/adminsProfile/{adminProfileId}")
+    public String updateProfileAdmin(@PathVariable(value = "adminProfileId") int id,
+            @ModelAttribute(value = "updateProfileAdmin") @Valid Admin adm,
+            BindingResult r) {
+        if (r.hasErrors()) {
+            return "adminsProfile";
+            //return lổi
+        }
+        if (this.adminService.updateAdmin(id, adm) == true) {
+            return "redirect:adminsProfile"; //return về trang gì đó
+        }
+        return "adminsProfile";
+    }
     //Employee
     @GetMapping("/employeesManager")
     public String employeesManager(Model model) {
@@ -368,5 +386,4 @@ public class AdminController {
     public String onCallManager() {
         return "onCallManager";
     }
-
 }

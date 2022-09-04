@@ -187,4 +187,19 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         return (Employee) query.getSingleResult();
     }
 
+    @Override
+    public boolean updateImageEmployee(int id, String image) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Employee enew = getEmployeeByID(id);
+
+        enew.setImage(image);
+        try {
+            session.saveOrUpdate(enew);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
 }

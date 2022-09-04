@@ -110,11 +110,9 @@ public class AdminRepositoryImpl implements AdminRepository {
         query.select(root);
         query.where(builder.equal(root.get("id"), id));
         Admin adm = session.createQuery(query).uniqueResult();
-
         return adm;
     }
-    
-    
+
     @Override
     public Admin getAdminByUsername(String username) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -157,6 +155,20 @@ public class AdminRepositoryImpl implements AdminRepository {
         Query<Object[]> query = session.createQuery(q);
 
         return query.getResultList();
+    }
+
+    @Override
+    public boolean updateImageAdmin(int id, String image) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Admin admnew = getAdminByID(id);
+        admnew.setImage(image);
+        try {
+            session.saveOrUpdate(admnew);
+          return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 
 }
