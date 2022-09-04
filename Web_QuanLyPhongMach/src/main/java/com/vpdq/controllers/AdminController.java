@@ -16,6 +16,7 @@ import com.vpdq.service.EmployeeService;
 import com.vpdq.service.MedicalRecordService;
 import com.vpdq.service.MedicineService;
 import com.vpdq.service.PositionService;
+import com.vpdq.service.ServiceClinicService;
 import com.vpdq.service.SupplierService;
 import com.vpdq.service.UnitService;
 import com.vpdq.utils.Search;
@@ -91,7 +92,6 @@ public class AdminController {
         model.addAttribute("positions", this.positionService.getPosition());
         model.addAttribute("units", this.unitService.getUnits());
         model.addAttribute("suppliers", this.supplierService.getSuppliers());
-//        model.addAttribute("services", this.serviceService.getService());
 //        model.addAttribute("revenueStats", this.medicalRecordService.revenueStatistics());
     }
 

@@ -6,6 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div class="col-md-2 col-12 mb-2 btn btn-success">
@@ -15,7 +16,7 @@
 </div>
 
 
-<c:url value="/medicalRecord/{cusID}" var="action" />
+<c:url value="/employees/medicalRecord/${cusID}" var="action" />
 <form:form id="myForm" method="post" action="${action}" modelAttribute="medicalRecord" enctype="multipart/form-data">
 
     <div class="form-floating input-row">
@@ -26,26 +27,18 @@
         </form:select>
         <label for="serviceId" class="form-label">Loại dịch vụ</label>
     </div>
-    
+
     <div class="form-floating input-row">
-        <form:input type="text" path="name" class="form-control" id="name" placeholder="Nhap ten" name="name" />
+        <form:input type="text" path="symptom" class="form-control" id="symptom" placeholder="Nhap trieu chung" name="name" />
         <label for="name">Triệu chứng</label>
         <%--<form:errors path="name" element="div" cssClass="alert alert-danger" />--%>
         <small></small>
     </div>
 
-    
-
     <div class="form-floating input-row">
-        <form:input type="number" path="unitPrice" class="form-control" id="unitPrice" placeholder="Nhap gia" name="unitPrice" />
-        <label for="unitPrice">Đơn giá</label>
+        <form:input type="text" path="conclusion" class="form-control" id="conclusion" placeholder="Nhap ket luan benh" name="conclusion" />
+        <label for="conclusion">Kết luận</label>
         <%--<form:errors path="unitPrice" element="div" cssClass="alert alert-danger" />--%>
-        <small></small>
-    </div>
-
-    <div class="form-floating input-row">
-        <form:input type="number" path="quantity" class="form-control" id="quantity" placeholder="Nhap so luong" name="quantity" />
-        <label for="quantity">Số lượng</label>
         <small></small>
     </div>
 
@@ -54,8 +47,8 @@
         <label for="note">Ghi chú</label>
     </div>
 
-    <div class="form-floating mt-2" style="text-align: right">
-        <input type="submit" id="btnAdd" value="Thêm thuốc" class="btn mb-3 mt-3" style="background-color: #d1e7dd" />
+    <div class="form-floating mt-2">
+        <input type="submit" id="btnAdd" value="Lập phiếu" class="btn mb-3 mt-3 btn btn-primary"/>
     </div>
 
 </form:form>  

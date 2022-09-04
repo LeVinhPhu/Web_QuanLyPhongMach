@@ -40,5 +40,10 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
         return this.medicalRecordRepository.totalRevenueStatistics();
     }
 
+    @Override
+    public boolean addMedicalRecord(MedicalRecord m) {
+        return this.medicalRecordRepository.addMedicalRecord(m);
+    }
+
     
 }

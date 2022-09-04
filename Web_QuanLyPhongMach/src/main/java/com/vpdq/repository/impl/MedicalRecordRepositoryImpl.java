@@ -125,4 +125,17 @@ public class MedicalRecordRepositoryImpl implements MedicalRecordRepository {
         return query.getResultList();
     }
 
+    @Override
+    public boolean addMedicalRecord(MedicalRecord m) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        try {
+            session.save(m);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
 }
