@@ -26,7 +26,7 @@
             </div>
             <h4 class="card-title">Đặt Lịch Khám</h4>
             <div class="card-body">
-                <a href="<c:url value="/employees/medicalRecord"/>" class="btn btn-primary">Xác Nhận</a>
+                <a href="<c:url value="/customers/appointments"/>" class="btn btn-primary">Xác Nhận</a>
             </div>
         </div>
     </div>

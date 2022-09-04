@@ -17,10 +17,11 @@ import org.springframework.stereotype.Service;
  * @author vinhp
  */
 @Service
-public class AdminServiceImpl implements AdminService{
+public class AdminServiceImpl implements AdminService {
+
     @Autowired
     private AdminRepository adminRepository;
- 
+
     @Override
     public int countAdmin() {
         return this.adminRepository.countAdmin();
@@ -60,13 +61,14 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-
     public boolean updateImageAdmin(int id, String image) {
         return this.adminRepository.updateImageAdmin(id, image);
+    }
 
+    @Override
     public List<Object[]> getAllAdmin() {
         return this.adminRepository.getAllAdmin();
 
     }
-    
+
 }
