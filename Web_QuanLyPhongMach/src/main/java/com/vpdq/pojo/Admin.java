@@ -69,10 +69,12 @@ public class Admin implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "last_name")
     private String lastName;
+    
     @Column(name = "date_of_birth")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
+    
     @Size(max = 45)
     @Column(name = "sex")
     private String sex;

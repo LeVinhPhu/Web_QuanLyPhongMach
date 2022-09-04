@@ -24,7 +24,7 @@
         </div>
         <div class="form-floating input-row">
             <form:select path="unitId" class="form-select" id="unit" name="unit">
-                <option selected="selected" value="${medicine.unitId.id}"}>Chọn đơn vị</option>
+                <option selected="selected" value="${medicine.unitId.id}">Chọn đơn vị</option>
                 <c:forEach items="${units}" var="u">
                     <option value="${u.id}">${u.name}</option>
                 </c:forEach>

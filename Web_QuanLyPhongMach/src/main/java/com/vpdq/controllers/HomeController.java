@@ -28,8 +28,6 @@ public class HomeController {
     
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("employees", this.employeeService.getEmployee_Demo());
-        
         return "home";
     }
     

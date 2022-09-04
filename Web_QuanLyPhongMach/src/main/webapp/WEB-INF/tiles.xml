@@ -163,7 +163,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     </definition>
     
     <definition name="customersProfile" extends="baseLayout">
-        <put-attribute name="title" value="Đặt Lịch Khám" />
+        <put-attribute name="title" value="Trang cá nhân" />
         <put-attribute name="content"
                        value="/WEB-INF/jsp/customersProfile.jsp" />
     </definition>
