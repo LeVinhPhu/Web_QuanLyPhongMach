@@ -36,12 +36,12 @@ import org.springframework.transaction.annotation.Transactional;
 @PropertySource("classpath:messages.properties")
 @Transactional
 public class MedicineRepositoryImpl implements MedicineRepository {
-    
+
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
     @Autowired
     private Environment env;
-    
+
     @Override
     public List<Object[]> getMedicines(Map<String, String> params, int page) {
         //sử dụng api để lấy thuốc
@@ -51,100 +51,53 @@ public class MedicineRepositoryImpl implements MedicineRepository {
         Root<Medicine> mRoot = q.from(Medicine.class);
         Root<Unit> uRoot = q.from(Unit.class);
         q.where(b.equal(mRoot.get("unitId"), uRoot.get("id")));
-        
-        q.multiselect(mRoot.get("id"), 
-                mRoot.get("name"), 
-                mRoot.get("quantity"), 
-                mRoot.get("unitPrice"), 
-                uRoot.get("name"), 
+
+        q.multiselect(mRoot.get("id"),
+                mRoot.get("name"),
+                mRoot.get("quantity"),
+                mRoot.get("unitPrice"),
+                uRoot.get("name"),
                 mRoot.get("image"),
                 mRoot.get("note"));
 
         //sap xep thuoc theo ten
         q.orderBy(b.asc(mRoot.get("name")));
-        
+
         if (params != null) {
             List<Predicate> predicates = new ArrayList<>();
-
-            q.where(predicates.toArray(Predicate[]::new));
+            String kw = params.get("kw");
+            
+            if (kw != null && !kw.isEmpty()) {
+                Predicate p = b.like(mRoot.get("name").as(String.class), String.format("%%%s%%", kw));
+                Predicate p2 = b.equal(mRoot.get("unitId"), uRoot.get("id"));
+                q = q.where(b.and(p, p2));
+            }   
         }
-        
+
         Query<Object[]> query = session.createQuery(q);
-//        
-//        if (page > 0) {
-//            int size = Integer.parseInt(env.getProperty("page.size").toString());
-//            int start = (page - 1) * size;
-//            query.setFirstResult(start);
-//            query.setMaxResults(size);
-//        }
-        
+
         return query.getResultList();
     }
 
-//     public List<Object[]> getMedicines2(Map<String, String> params, int page) {
-//        //sử dụng api để lấy thuốc
-//        Session session = this.sessionFactory.getObject().getCurrentSession();
-//        CriteriaBuilder b = session.getCriteriaBuilder();
-//        CriteriaQuery<Object[]> q = b.createQuery(Medicine.class);
-//        Root root = q.from(Medicine.class);
-//     
-//        if (params != null) {
-//            List<Predicate> predicates = new ArrayList<>();
-//            String kw = params.get("kw");
-//            if (kw != null && !kw.isEmpty()) {
-//                Predicate p = b.like(root.get("name").as(String.class), String.format("%%%s%%", kw));
-//                predicates.add(p);
-//            }
-//
-//                String fp = params.get("fromPrice");
-//                if (fp != null) {
-//                    Predicate p = b.greaterThanOrEqualTo(root.get("unitPrice").as(Long.class), Long.parseLong(fp));
-//                    predicates.add(p);
-//                }
-//
-//                String tp = params.get("toPrice");
-//                if (tp != null) {
-//                    Predicate p = b.lessThanOrEqualTo(root.get("unitPrice").as(Long.class), Long.parseLong(tp));
-//                    predicates.add(p);
-//                }
-//                String mediId = params.get("mediId");
-//                if (mediId != null) {
-//                    Predicate p = b.equal(root.get("categoryId"), Integer.parseInt(mediId));
-//                    predicates.add(p);
-//                }
-//                
-//            q.where(predicates.toArray(Predicate[]::new));
-//        }
-//
-//        Query<Object[]> query = session.createQuery(q);
-//
-//            if (page > 0) {
-//                int size = Integer.parseInt(env.getProperty("page.size").toString());
-//                int start = (page - 1) * size;
-//                query.setFirstResult(start);
-//                query.setMaxResults(size);
-//            }
-//        return query.getResultList();
-//    }
     @Override
     public boolean deleteMedicine(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        
+
         try {
             Medicine m = session.get(Medicine.class, id);
             session.delete(m);
-            
+
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
     }
-    
+
     @Override
     public boolean addMedicine(Medicine m) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        
+
         try {
             session.save(m);
             return true;
@@ -153,7 +106,7 @@ public class MedicineRepositoryImpl implements MedicineRepository {
             return false;
         }
     }
-    
+
     @Override
     public List<Medicine> getMedicines2(Map<String, String> params, int page) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -161,35 +114,35 @@ public class MedicineRepositoryImpl implements MedicineRepository {
         CriteriaQuery<Medicine> q = b.createQuery(Medicine.class);
         Root root = q.from(Medicine.class);
         q.select(root);
-        
+
         if (params != null) {
             List<Predicate> predicates = new ArrayList<>();
             q.where(predicates.toArray(Predicate[]::new));
         }
-        
+
         Query query = session.createQuery(q);
         if (page > 0) {
             int size = Integer.parseInt(env.getProperty("page.size").toString());
             int start = (page - 1) * size;
             query.setFirstResult(start);
             query.setMaxResults(size);
-            
+
         }
-        
+
         return query.getResultList();
     }
-    
+
     @Override
     public Medicine getMedicineByID(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        
+
         CriteriaQuery<Medicine> query = builder.createQuery(Medicine.class);
         Root<Medicine> root = query.from(Medicine.class);
         query.select(root);
         query.where(builder.equal(root.get("id"), id));
         Medicine m = session.createQuery(query).uniqueResult();
-        
+
         return m;
     }
 
@@ -197,7 +150,7 @@ public class MedicineRepositoryImpl implements MedicineRepository {
     public boolean updateMedicineByID(int id, Medicine medicine) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Medicine m = getMedicineByID(id);
-        
+
         m.setName(medicine.getName());
         m.setQuantity(medicine.getQuantity());
         m.setUnitPrice(medicine.getUnitPrice());
@@ -205,10 +158,10 @@ public class MedicineRepositoryImpl implements MedicineRepository {
         m.setSupplierId(medicine.getSupplierId());
         m.setNote(medicine.getNote());
         m.setImage(medicine.getImage());
-        
+
         try {
             session.saveOrUpdate(m);
-          return true;
+            return true;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -230,12 +183,12 @@ public class MedicineRepositoryImpl implements MedicineRepository {
                 b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
                 b.equal(b.function("YEAR", Integer.class, mRoot.get("billingDate")), year));
 
-        q.multiselect(medicineRoot.get("name"), 
+        q.multiselect(medicineRoot.get("name"),
                 b.count(pRoot.get("medicineId")));
 
         q.groupBy(pRoot.get("medicineId"));
         q.orderBy(b.asc(medicineRoot.get("name")));
-        
+
         Query query = session.createQuery(q);
 
         return query.getResultList();
@@ -257,12 +210,12 @@ public class MedicineRepositoryImpl implements MedicineRepository {
                 b.equal(b.function("YEAR", Integer.class, mRoot.get("billingDate")), year),
                 b.equal(b.function("QUARTER", Integer.class, mRoot.get("billingDate")), quarter));
 
-        q.multiselect(medicineRoot.get("name"), 
+        q.multiselect(medicineRoot.get("name"),
                 b.count(pRoot.get("medicineId")));
 
         q.groupBy(pRoot.get("medicineId"));
         q.orderBy(b.asc(medicineRoot.get("name")));
-        
+
         Query query = session.createQuery(q);
 
         return query.getResultList();
@@ -284,19 +237,15 @@ public class MedicineRepositoryImpl implements MedicineRepository {
                 b.equal(b.function("YEAR", Integer.class, mRoot.get("billingDate")), year),
                 b.equal(b.function("MONTH", Integer.class, mRoot.get("billingDate")), month));
 
-        q.multiselect(medicineRoot.get("name"), 
+        q.multiselect(medicineRoot.get("name"),
                 b.count(pRoot.get("medicineId")));
-               
 
         q.groupBy(pRoot.get("medicineId"));
         q.orderBy(b.asc(medicineRoot.get("name")));
-        
+
         Query query = session.createQuery(q);
 
         return query.getResultList();
     }
 
-
-    
 }
-

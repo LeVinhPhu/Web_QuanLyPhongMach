@@ -6,8 +6,10 @@ package com.vpdq.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.vpdq.formatters.CustomerFormatter;
 import com.vpdq.formatters.MedicalRecordFormatter;
 import com.vpdq.formatters.PositionFormatter;
+import com.vpdq.formatters.StatusFormatter;
 import com.vpdq.formatters.SupplierFormatter;
 import com.vpdq.formatters.UnitFormatter;
 import org.springframework.context.MessageSource;
@@ -77,6 +79,8 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         r.addFormatter(new UnitFormatter());
         r.addFormatter(new SupplierFormatter());
         r.addFormatter(new PositionFormatter());
+        r.addFormatter(new CustomerFormatter());
+        r.addFormatter(new StatusFormatter());
 //        r.addFormatter(new MedicalRecordFormatter());
     }
 

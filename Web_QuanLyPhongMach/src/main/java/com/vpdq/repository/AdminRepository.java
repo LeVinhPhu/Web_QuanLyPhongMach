@@ -13,7 +13,6 @@ import java.util.Map;
  * @author vinhp
  */
 public interface AdminRepository {
-    List<Admin> getAdmin(Map<String, String> params, int page);
     int countAdmin();
     boolean addAdmin(Admin adm);
     boolean updateAdmin(int id, Admin adm);
@@ -21,4 +20,5 @@ public interface AdminRepository {
     List<Object[]> countAdminByCate();
     Admin getAdminByID(int id);
     Admin getAdminByUsername(String username);
+    List<Object[]> getAllAdmin();
 }

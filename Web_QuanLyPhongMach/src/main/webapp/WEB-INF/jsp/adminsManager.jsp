@@ -12,44 +12,31 @@
 
 <h2 style="text-align: center; margin-top: 10px">QUẢN LÝ ADMIN</h2>
 
-<div class="row mt-2 bg-light">
-    <div class="col-md-8 col-12 mt-2 mb-2">
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal" id="btn-add">ADD EMPLOYEE</button>
+<!--DANH SÁCH ADMIN-->
+<div class="row mt-3 mb-3">
+    <div class="col-md-1 col-12"></div>
+    <div class="col-md-8 col-12 shadow" style="overflow: auto; height: 500px; border-radius: 10px">
+        <div data-bs-toggle="modal" data-bs-target="#myModal" style="margin: 8px; width: 20%"><i class="fas fa-plus"></i>  Thêm admin</div>   
+        <table class="table table-hover ">
+            <tr>
+                <th>
+                    <i onclick="load()" class="fas fa-redo-alt"></i>
+                </th>
+                <th>Họ và tên đệm</th>
+                <th>Tên</th>
+                <th>Ngày sinh</th>
+                <th>Giới tính</th>
+                <th>Số điện thoại</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tbody id="myAdmin">
+            </tbody>
+        </table>
     </div>
-
-    <div class="col-md-4 col-12 mt-2 mb-2">
-        <c:url value="/" var="action" />
-        <form action="${action}" class="d-flex">
-            <input class="form-control me-2" type="text" name="kw" placeholder="Nhap tu khoa...">
-            <button typeubmit" class="btn btn-primary" type="button">SEARCH</button>
-        </form>
-    </div>
-</div>
-
-<div class="row mt-2 mb-2">
-    <div class="col-md-10 sol-12 border rounded bg-light">
-        <div class = "col-md-12 col-12">
-
-            <h3 class="text-center" style="margin-top: 10px; margin-bottom: 10px">Danh Sách Admin</h3>
-
-            <table class="table table-hover" style="margin-left: 5px; margin-right: 5px">
-                <tr class="table-success">
-                    <th>Họ</th>
-                    <th>Tên</th>
-                    <th>Ngày Sinh</th>
-                    <th>Giới Tính</th>
-                    <th>SĐT</th>
-                    <th>Địa Chỉ</th>
-                    <th></th>
-                    <th><th>
-                </tr>
-                <tbody id="myAdmin" style="width: 10px; height: 50em">
-                    <tr>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+    
+    <div class="col-md-1 col-12"></div>
 
     <div class="col-md-2 col-12">
         <div class="list-group">
@@ -67,105 +54,6 @@
     </div>
 </div>
 
-
-
-<!-- The Modal Add 
-<div class="modal" id="addModal">
-    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
-        <div class="modal-content">
-
-            <h6></h6>
-             Modal Header 
-            <div class="modal-header">
-                <h4 class="modal-title">Thêm Admin</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-             Modal body 
-            <div class="modal-body" id="AddAdmin">
-                <div class = "col-md-12 col-xs-12">
-                    <%--<c:url value="/admins/adminsManager" var="action"></c:url>--%>
-                    <%--<form:form id="myForm" method="post" action="${action}" modelAttribute="admin" enctype="multipart/form-data">--%>
-                        <div class="form-floating input-row">
-                            <%--<form:input type="text" path="firstName" class="form-control" id="firstName" placeholder="Nhap ho va ten dem" name="name" value="" />--%>
-                            <label for="firstName">Họ và tên đệm</label>
-                            <small>Error</small>
-                        </div>
-                        <div class="form-floating input-row">
-                            <%--<form:input type="text" path="lastName" class="form-control" id="lastName" placeholder="Nhap ten" name="name" />--%>
-                            <label for="lastName">Tên</label>
-                            <small>Error</small>
-                        </div>
-                        <div class="input-row form-floating">
-                            <%--<form:input type="date" class="form-control" path="dateOfBirth" id="dateOfBirth" value="0000-00-00"/>--%>
-                            <label for="dateOfBirth">Ngày Sinh:</label>
-                            Sinh lổi
-                            <small></small>
-                        </div>      
-
-                        <div class="input-row form-floating">
-                            <%--<form:select path="sex" class="form-select" id="sex" name="sex">--%>
-                                <option value="Nam">Nam</option>
-                                <option value="Nữ">Nữ</option>
-                                <option value="Khác">Khác</option>
-                            <%--</form:select>--%>
-                            <label for="sex" class="form-label">Giới Tính</label>
-                            Sinh lổi
-                            <small></small>
-
-                        </div>
-
-                        <div class="input-row form-floating">
-                            <%--<form:input type="text" class="form-control" path="address" id="address" placeholder="address" />--%>
-                            <label for="address">Địa chỉ:</label>
-                            Sinh lổi
-                            <small></small>
-
-                        </div>
-
-
-                        <div class="input-row form-floating">
-                            <%--<form:input type="text" class="form-control" path="email" id="email" placeholder="email" />--%>
-                            <label for="email">Email:</label>
-                            Sinh lổi
-                            <small></small>
-
-                        </div>
-
-                        <div class="input-row form-floating">
-                            <%--<form:input type="text" class="form-control" path="phone" id="phone" placeholder="phone" />--%>
-                            <label for="phone">Số điện thoại:</label>
-                            Sinh lổi
-                            <small></small>
-
-                        </div>
-
-                        <div class="input-row form-floating">
-                            <%--<form:input type="text" class="form-control" path="username" id="username" placeholder="username" />--%>
-                            <label for="username">Username:</label>
-                            Sinh lổi
-                            <small></small>
-
-                        </div>
-
-                        <div class="input-row form-floating">
-                            <%--<form:input type="text" class="form-control" path="password" id="password" placeholder="password" />--%>
-                            <label for="password">Password:</label>
-                            Sinh lổi
-                            <small></small>
-
-                        </div>
-
-                        <div class="form-floating mb-2" style="text-align: right;">
-                            <input type="submit" value="Xác nhận" class="btn btn-danger" id="bt-submit"/>
-                        </div>
-                    <%--</form:form>--%>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>-->
-
 <!-- The Modal Detail -->
 <div class="modal" id="detailModal">
     <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
@@ -173,7 +61,7 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title">Chi tiết admin</h5>
+                <h5 class="modal-title">Thông tin chi tiết admin</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
@@ -189,7 +77,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>        
 
-<script src="<c:url value="/js/employee.js" />"></script>
+<script src="<c:url value="/js/admin.js" />"></script>
 <script>
     <c:url value="/api/adminsManager" var="u" />
     window.onload = function () {
