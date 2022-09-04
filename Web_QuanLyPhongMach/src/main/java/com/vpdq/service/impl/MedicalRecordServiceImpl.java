@@ -4,6 +4,7 @@
  */
 package com.vpdq.service.impl;
 
+import com.vpdq.pojo.MedicalRecord;
 import com.vpdq.repository.MedicalRecordRepository;
 import com.vpdq.service.MedicalRecordService;
 import java.util.List;
@@ -38,5 +39,6 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     public List<Object[]> totalRevenueStatistics() {
         return this.medicalRecordRepository.totalRevenueStatistics();
     }
+
     
 }

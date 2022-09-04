@@ -15,6 +15,28 @@
             <h6 style="font-family: courier">The best doctor gives the least medicines</h6>
             <hr>
         </div>
+   
+        <!--DANH SÁCH PHIẾU ĐẶT CỦA KHÁCH HÀNG-->
+        <div class=""> 
+            <div style="height: 250px; overflow: auto"class="">
+                <table class="table table-hover ">
+                    <tr>
+                        <th>
+                            <i onclick="load()" class="fas fa-redo-alt"></i>
+                        </th>
+                        <th>Tên khách hàng</th>
+                        <th></th>
+                    </tr>
+                    <tbody id="myAppointmentForDoctor">
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+
+
     </div>
     <div class = "col-md-3 col-xs-12 mt-2 mb-2">
         <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
@@ -45,3 +67,12 @@
         </div>
     </div>
 </div>
+
+
+<script src="<c:url value="/js/appointment.js" />"></script>
+<script>
+    <c:url value="/api/appointment" var="m" />
+                                window.onload = function () {
+                                    getAppointmentForDoctor('${m}');
+                                };
+</script>

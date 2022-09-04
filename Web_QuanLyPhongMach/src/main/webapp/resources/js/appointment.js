@@ -4,7 +4,7 @@
  */
 
 
-//LẤY PHIẾU ĐẶT
+//LẤY PHIẾU ĐẶT (KHÁCH HÀNG)
 function getAppointment(endpoint) {
     fetch(endpoint).then(function (res) {
         return  res.json();
@@ -36,7 +36,7 @@ function getAppointment(endpoint) {
 }
 
 
-// XOÁ PHIẾU ĐẶT 
+// XOÁ PHIẾU ĐẶT (khách hàng)
 function deleteAppointment(endpoint, id, btn) {
     fetch('/Web_QuanLyPhongMach/api/appointment').then(function (res) {
         return  res.json();
@@ -68,6 +68,32 @@ function deleteAppointment(endpoint, id, btn) {
             }
         }
     });
+}
 
 
+
+//LẤY PHIẾU ĐẶT ĐÃ ĐƯỢC XÁC NHẬN(BÁC SĨ)
+function getAppointmentForDoctor(endpoint) {
+    fetch(endpoint).then(function (res) {
+        return  res.json();
+    }).then(function (data) {
+        let d = document.getElementById("myAppointmentForDoctor");
+        if (d !== null) {
+            let h = "";
+            for (let i = 0; i < data.length; i++)
+                h += `
+                    <tr id="row${data[i][0]}">
+                        <td></td>
+                        <td>${data[i][5]} ${data[i][6]}</td>
+                        <td>
+                            <a href="/Web_QuanLyPhongMach/employees/medicalRecord/${data[i][4]}">Lập phiếu</a>
+                        </td>
+                    </tr>
+                    `;
+            d.innerHTML = h;
+        }
+
+    }).catch(function (err) {
+        console.error(err);
+    });
 }

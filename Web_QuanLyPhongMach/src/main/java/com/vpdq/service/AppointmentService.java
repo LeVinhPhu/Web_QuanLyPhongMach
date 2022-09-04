@@ -13,6 +13,6 @@ import java.util.List;
  */
 public interface AppointmentService {
     boolean addAppointment (Appointment a);
-    List<Object[]> getAppointment(int idCus);
+    List<Object[]> getAppointment(float idCus);
     boolean deleteAppointment(int id);
 }

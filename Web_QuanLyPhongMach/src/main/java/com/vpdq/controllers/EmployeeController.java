@@ -4,10 +4,12 @@
  */
 package com.vpdq.controllers;
 
+import com.vpdq.pojo.MedicalRecord;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -32,8 +34,11 @@ public class EmployeeController {
         return "doctorsProfile";
     }
     
-    @GetMapping("/medicalRecord")
-    public String medicalRecord (){
+    @GetMapping("/medicalRecord/{cusID}")
+    public String medicalRecord (Model model, @PathVariable(value = "cusID") int cusID){
+        
+        model.addAttribute("medicalRecord", new MedicalRecord());
+        
         return "medicalRecord";
     }
     

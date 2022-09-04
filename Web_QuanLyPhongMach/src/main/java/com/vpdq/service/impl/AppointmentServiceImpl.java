@@ -26,7 +26,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public List<Object[]> getAppointment(int idCus) {
+    public List<Object[]> getAppointment(float idCus) {
         return this.appointmentRepository.getAppointment(idCus);
     }
 

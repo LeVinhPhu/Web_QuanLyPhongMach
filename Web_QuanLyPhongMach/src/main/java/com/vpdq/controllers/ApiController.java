@@ -21,6 +21,7 @@ import com.vpdq.service.MedicineService;
 import com.vpdq.service.PrescriptionService;
 import com.vpdq.utils.Search;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,7 +58,7 @@ public class ApiController {
 
     @Autowired
     private AppointmentService appointmentService;
-    
+
 //  API-Que
     @GetMapping("/medicines")
     public ResponseEntity<List<Object[]>> listMedicine() {
@@ -114,7 +115,6 @@ public class ApiController {
 //    public Medicine getMedicine(@PathVariable(value = "mID") int id) {
 //        return medicineService.getMedicineByID(id);
 //    }
-
     @GetMapping("/customersManager")
     public ResponseEntity<List<Customer>> listCustomer() {
         return new ResponseEntity<>(this.customerService.getCustomer(null, 0), HttpStatus.OK);
@@ -122,14 +122,24 @@ public class ApiController {
 
     //DANH SÁCH PHIẾU ĐẶT
     @GetMapping("/appointment")
-    public ResponseEntity<List<Object[]>> listAppointment() {
-        if (Search.getIdCus()==0)
-            return new ResponseEntity<>(this.appointmentService.getAppointment(0), HttpStatus.OK);
-        else
+    public ResponseEntity<List<Object[]>> listAppointment(HttpSession session, Model model) {
+        //nếu là bệnh nhân, lấy api theo ID bệnh nhân
+        if (Search.getIdCus() != 0) {
             return new ResponseEntity<>(this.appointmentService.getAppointment(Search.getIdCus()), HttpStatus.OK);
+        }
+        
+        Employee e = (Employee) session.getAttribute("currentUser");
 
+        if (e.getPositionId().getId() == 1) {
+            return new ResponseEntity<>(this.appointmentService.getAppointment(-1), HttpStatus.OK);
+        } else //nếu là y tá thì nạp phiếu có trạng thái chưa xác nhận
+        if (e.getPositionId().getId() == 2) {
+            return new ResponseEntity<>(this.appointmentService.getAppointment(0), HttpStatus.OK);
+        }
+        
+        return new ResponseEntity<>(this.appointmentService.getAppointment(0), HttpStatus.OK);
     }
-    
+
     //HUỶ PHIẾU ĐẶT KHÁM
     @DeleteMapping("/appointment/{aId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

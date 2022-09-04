@@ -4,15 +4,13 @@
  */
 package com.vpdq.repository;
 
-import com.vpdq.pojo.Appointment;
+import com.vpdq.pojo.Service;
 import java.util.List;
 
 /**
  *
  * @author phamt
  */
-public interface AppointmentRepository {
-    boolean addAppointment (Appointment a);
-    List<Object[]> getAppointment(float idCus);
-    boolean deleteAppointment(int id);
+public interface ServiceRepository {
+    List<Service> getService();
 }

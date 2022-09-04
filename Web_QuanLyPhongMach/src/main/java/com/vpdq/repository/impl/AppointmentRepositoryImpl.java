@@ -50,7 +50,7 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
     }
 
     @Override
-    public List<Object[]> getAppointment(int idCus) {
+    public List<Object[]> getAppointment(float idCus) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
         CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
@@ -63,7 +63,13 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
                 b.equal(aRoot.get("statusId"), sRoot.get("id")),
                 b.equal(aRoot.get("statusId"), 1));
 
-        if (idCus != 0) {
+        if (idCus < 0) {
+            q.where(b.equal(aRoot.get("customerId"), cRoot.get("id")),
+                b.equal(aRoot.get("statusId"), sRoot.get("id")),
+                b.equal(aRoot.get("statusId"), 2));
+        }
+        
+        if (idCus > 0) {
             q.where(b.equal(aRoot.get("customerId"), cRoot.get("id")),
                 b.equal(aRoot.get("statusId"), sRoot.get("id")),
                 b.equal(cRoot.get("id"), idCus));

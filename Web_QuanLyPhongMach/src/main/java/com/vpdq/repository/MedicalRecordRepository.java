@@ -4,6 +4,7 @@
  */
 package com.vpdq.repository;
 
+import com.vpdq.pojo.MedicalRecord;
 import java.util.List;
 import java.util.Map;
 
