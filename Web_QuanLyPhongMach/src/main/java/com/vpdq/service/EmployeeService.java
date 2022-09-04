@@ -14,14 +14,22 @@ import java.util.Map;
  */
 public interface EmployeeService {
     // lien ket voi Repository
-    
+
     List<Employee> getEmployee_Demo();
-    
+
     List<Employee> getEmployee(Map<String, String> params, int page);
+
     int countEmployee();
+
     boolean addEmployee(Employee e);
+
     boolean updateEmployee(int id, Employee e);
+
     boolean deleteEmployee(int employeeId);
+
     List<Object[]> countEmployeeByCate();
+
     Employee getEmployeeByID(int id);
+
+    boolean updateImageEmployee(int id, String image);
 }

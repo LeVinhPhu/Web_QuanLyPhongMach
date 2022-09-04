@@ -15,26 +15,29 @@ import java.util.Map;
 public interface CustomerRepository {
 
     boolean addCustomer(Customer c);
-//    Customer getCusByPhoneNumber(String phoneNumber);
 
     List<Customer> getAllPhoneNumber();
 
     boolean check(String phone);
 
-    boolean updateCustomer(Customer e);
+    boolean updateCustomer(int id, Customer c);
+    
+    boolean updateImageCustomer(int id, String image);
 
     boolean deleteCustomer(int customerId);
 
-    List<Object[]> countEmployeeByCate();
-
-    Customer getCustomerID(int id);
+    Customer getCustomerByID(int id);
 
     Customer getCustomerByUsername(String username);
 
+    List<Customer> getCustomer(Map<String, String> params, int page);
 
     List<Object[]> patientStatistics();
+
     List<Object[]> patientStatisticsByYear();
+
     List<Object[]> patientStatisticsByQuater(int year);
+
     List<Object[]> patientStatisticsByMonth(int year);
 
 }

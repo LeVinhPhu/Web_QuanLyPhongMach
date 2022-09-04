@@ -43,7 +43,7 @@ public class AdminRepositoryImpl implements AdminRepository {
 
     @Override
     public int countAdmin() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return 0;
     }
 
     @Override
@@ -92,7 +92,8 @@ public class AdminRepositoryImpl implements AdminRepository {
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
-        }}
+        }
+    }
 
     @Override
     public List<Object[]> countAdminByCate() {
@@ -103,14 +104,15 @@ public class AdminRepositoryImpl implements AdminRepository {
     public Admin getAdminByID(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        
+
         CriteriaQuery<Admin> query = builder.createQuery(Admin.class);
         Root<Admin> root = query.from(Admin.class);
         query.select(root);
         query.where(builder.equal(root.get("id"), id));
         Admin adm = session.createQuery(query).uniqueResult();
-        
-        return adm;}
+
+        return adm;
+    }
 
     @Override
     public Admin getAdminByUsername(String username) {
@@ -171,6 +173,20 @@ public class AdminRepositoryImpl implements AdminRepository {
         }
 
         return query.getResultList();
+    }
+
+    @Override
+    public boolean updateImageAdmin(int id, String image) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Admin admnew = getAdminByID(id);
+        admnew.setImage(image);
+        try {
+            session.saveOrUpdate(admnew);
+          return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 
 }

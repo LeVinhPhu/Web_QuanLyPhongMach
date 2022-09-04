@@ -9,6 +9,7 @@ import com.vpdq.repository.AdminRepository;
 import com.vpdq.service.AdminService;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,7 +18,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AdminServiceImpl implements AdminService{
-
+    
+    @Autowired
     private AdminRepository adminRepository;
     
     @Override
@@ -61,6 +63,11 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public Admin getAdminByUsername(String username) {
         return this.adminRepository.getAdminByUsername(username);
+    }
+
+    @Override
+    public boolean updateImageAdmin(int id, String image) {
+        return this.adminRepository.updateImageAdmin(id, image);
     }
     
 }

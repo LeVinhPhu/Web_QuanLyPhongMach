@@ -27,6 +27,11 @@ public class EmployeeController {
         return "doctorsIndex";
     }
     
+    @GetMapping("/doctorsProfile")
+    public String doctorsProfile (){
+        return "doctorsProfile";
+    }
+    
     @GetMapping("/medicalRecord")
     public String medicalRecord (){
         return "medicalRecord";

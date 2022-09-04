@@ -29,4 +29,6 @@ public interface AdminService {
     Admin getAdminByID(int id);
 
     Admin getAdminByUsername(String username);
+    
+    boolean updateImageAdmin(int id, String image);
 }

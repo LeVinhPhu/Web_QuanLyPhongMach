@@ -91,6 +91,11 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
                        value="/WEB-INF/jsp/onCallManager.jsp" />
     </definition>
     
+    <definition name="adminsProfile" extends="baseLayout">
+        <put-attribute name="title" value="Trang cá nhân" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/adminsProfile.jsp" />
+    </definition>
     <!--Bác sĩ quản lý-->
     
     <definition name="doctorsIndex" extends="baseLayout">
@@ -131,6 +136,12 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
                        value="/WEB-INF/jsp/billsManager.jsp" />
     </definition>
     
+    <definition name="employeesProfile" extends="baseLayout">
+        <put-attribute name="title" value="Trang cá nhân" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/employeesProfile.jsp" />
+    </definition>
+    
     <!--Khách hàng quản lý-->
     
     <definition name="customersIndex" extends="baseLayout">
@@ -143,6 +154,12 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Đặt Lịch Khám" />
         <put-attribute name="content"
                        value="/WEB-INF/jsp/appointments.jsp" />
+    </definition>
+    
+    <definition name="customersProfile" extends="baseLayout">
+        <put-attribute name="title" value="Đặt Lịch Khám" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/customersProfile.jsp" />
     </definition>
     
 </tiles-definitions>

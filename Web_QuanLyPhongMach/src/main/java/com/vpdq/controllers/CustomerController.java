@@ -12,19 +12,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  * @author vinhp
  */
-
 @Controller
-@RequestMapping("customers")
+@RequestMapping("/customers")
 public class CustomerController {
-    
+
     @GetMapping("/customersIndex")
-    public String index (){
+    public String index() {
         return "customersIndex";
     }
-    
+
+    @GetMapping("/customersProfile")
+    public String customersProfile() {
+        return "customersProfile";
+    }
+
     @GetMapping("/appointments")
-    public String appointments (){
+    public String appointments() {
         return "appointments";
     }
-    
+
 }

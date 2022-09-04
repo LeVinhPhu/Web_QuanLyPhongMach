@@ -48,7 +48,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public boolean deleteEmployee(int employeeId) {
         //Xữ lý việc ràng buộc
-        
+
         return this.employeeRepository.deleteEmployee(employeeId);
     }
 
@@ -63,7 +63,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public boolean updateEmployee(int id,Employee e) {
+    public boolean updateEmployee(int id, Employee e) {
         return this.employeeRepository.updateEmployee(id, e);
+    }
+
+    @Override
+    public boolean updateImageEmployee(int id, String image) {
+        return this.employeeRepository.updateImageEmployee(id, image);
     }
 }

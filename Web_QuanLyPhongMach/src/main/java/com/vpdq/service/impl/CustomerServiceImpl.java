@@ -10,6 +10,7 @@ import com.vpdq.repository.CustomerRepository;
 import com.vpdq.service.CustomerService;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -46,25 +47,6 @@ public class CustomerServiceImpl implements CustomerService {
         return this.customerRepository.addCustomer(c);
     }
 
-//    @Override
-//    public Customer getCusByPhoneNumber(String phoneNumber) {
-//        return this.customerRepository.getCusByPhoneNumber(phoneNumber);
-//    }
-
-    
-//    @Override
-//    public UserDetails loadUserByUsername(String phoneNumber) throws UsernameNotFoundException {
-//        Customer c = this.getCusByPhoneNumber(phoneNumber);
-//        if (c == null) {
-//            throw new UsernameNotFoundException("Invalid phone number");
-//        }
-//
-//        Set<GrantedAuthority> authorities = new HashSet<>();
-//
-//        return new org.springframework.security.core.userdetails.User(
-//                c.getPhoneNumber(), c.getPassword(), authorities);
-//    }
-
     @Override
     public List<Customer> getAllPhoneNumber() {
         return this.customerRepository.getAllPhoneNumber();
@@ -95,5 +77,28 @@ public class CustomerServiceImpl implements CustomerService {
         return this.customerRepository.patientStatisticsByMonth(year);
     }
 
+    @Override
+    public List<Customer> getCustomer(Map<String, String> params, int page) {
+        return this.customerRepository.getCustomer(params, page);
+    }
 
+    @Override
+    public boolean updateCustomer(int id, Customer c) {
+        return this.customerRepository.updateCustomer(id, c);
+    }
+
+    @Override
+    public boolean deleteCustomer(int customerId) {
+        return this.customerRepository.deleteCustomer(customerId);
+    }
+
+    @Override
+    public Customer getCustomerByID(int id) {
+        return this.customerRepository.getCustomerByID(id);
+    }
+
+    @Override
+    public boolean updateImageCustomer(int id, String image) {
+        return this.customerRepository.updateImageCustomer(id, image);
+    }
 }
