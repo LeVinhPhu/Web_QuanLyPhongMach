@@ -5,6 +5,7 @@
 package com.vpdq.repository.impl;
 
 import com.vpdq.pojo.Employee;
+import com.vpdq.pojo.Position;
 import com.vpdq.repository.EmployeeRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -200,6 +201,41 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             ex.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public List<Object[]> getEmployeeOnCall(Map<String, String> params, int page) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+        Root<Employee> eRoot = q.from(Employee.class);
+        Root<Position> pRoot = q.from(Position.class);
+        q.where(b.equal(eRoot.get("positionId"), pRoot.get("id")));
+
+        q.multiselect(
+                eRoot.get("id"),
+                eRoot.get("firstName"),
+                eRoot.get("lastName"),
+                pRoot.get("name"),
+                eRoot.get("phone"),
+                eRoot.get("specialize"));
+
+        q.orderBy(b.asc(eRoot.get("id")));
+
+        if (params != null) {
+            List<Predicate> predicates = new ArrayList<>();
+            String kw = params.get("kw");
+
+            if (kw != null && !kw.isEmpty()) {
+                Predicate p = b.like(eRoot.get("lastName").as(String.class), String.format("%%%s%%", kw));
+                Predicate p2 = b.equal(eRoot.get("positionId"), pRoot.get("id"));
+                q = q.where(b.and(p, p2));
+            }
+        }
+
+        Query<Object[]> query = session.createQuery(q);
+
+        return query.getResultList();
     }
 
 }

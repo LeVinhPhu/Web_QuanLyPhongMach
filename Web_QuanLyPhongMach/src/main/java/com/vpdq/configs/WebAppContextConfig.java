@@ -6,7 +6,10 @@ package com.vpdq.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.vpdq.formatters.AdminFormatter;
 import com.vpdq.formatters.CustomerFormatter;
+import com.vpdq.formatters.DepartmentFormatter;
+import com.vpdq.formatters.EmployeeFormatter;
 import com.vpdq.formatters.MedicalRecordFormatter;
 import com.vpdq.formatters.PositionFormatter;
 import com.vpdq.formatters.StatusFormatter;
@@ -82,6 +85,9 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         r.addFormatter(new CustomerFormatter());
         r.addFormatter(new StatusFormatter());
 //        r.addFormatter(new MedicalRecordFormatter());
+        r.addFormatter(new AdminFormatter());
+        r.addFormatter(new EmployeeFormatter());
+        r.addFormatter(new DepartmentFormatter());
     }
 
     @Override

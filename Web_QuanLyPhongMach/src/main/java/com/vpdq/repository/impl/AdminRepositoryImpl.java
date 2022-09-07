@@ -19,6 +19,7 @@ import org.springframework.core.env.Environment;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-//@PropertySource("classpath:messages.properties")
+@PropertySource("classpath:messages.properties")
 public class AdminRepositoryImpl implements AdminRepository {
 
     // lien ket voi pojo
@@ -62,6 +63,7 @@ public class AdminRepositoryImpl implements AdminRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Admin admnew = getAdminByID(id);
 
+        admnew.setId(id);
         admnew.setFirstName(adm.getFirstName());
 //        admnew.setLastName(adm.getLastName());
 //        admnew.setDateOfBirth(adm.getDateOfBirth());
