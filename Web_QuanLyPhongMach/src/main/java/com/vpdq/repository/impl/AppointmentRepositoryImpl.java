@@ -72,7 +72,8 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
         if (idCus > 0) {
             q.where(b.equal(aRoot.get("customerId"), cRoot.get("id")),
                 b.equal(aRoot.get("statusId"), sRoot.get("id")),
-                b.equal(cRoot.get("id"), idCus));
+                b.equal(cRoot.get("id"), idCus),
+                b.or(b.equal(aRoot.get("statusId"), 1), b.equal(aRoot.get("statusId"), 2)));
         }
         
         q.multiselect(aRoot.get("id"),
@@ -83,7 +84,8 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
                 cRoot.get("firstName"),
                 cRoot.get("lastName"),
                 sRoot.get("id"),
-                sRoot.get("name"));
+                sRoot.get("name"),
+                aRoot.get("id"));
         
         Query<Object[]> query = session.createQuery(q);
         return query.getResultList();
@@ -103,4 +105,68 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
         }
     }
 
+    @Override
+    public boolean changeStatusAppointmentByID(int id, int status) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Appointment a = getAppointmentByID(id);
+        
+        Status s = new Status();
+        s.setId(status);
+        a.setStatusId(s);
+        try {
+            session.update(a);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public Appointment getAppointmentByID(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+
+        CriteriaQuery<Appointment> query = builder.createQuery(Appointment.class);
+        Root<Appointment> root = query.from(Appointment.class);
+        query.select(root);
+        query.where(builder.equal(root.get("id"), id));
+        Appointment a = session.createQuery(query).uniqueResult();
+
+        return a;
+    }
+
+    @Override
+    public Appointment getAppointmentByIdCustomer(int idCus) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+
+        CriteriaQuery<Appointment> query = builder.createQuery(Appointment.class);
+        Root<Appointment> root = query.from(Appointment.class);
+        query.select(root);
+        query.where(builder.equal(root.get("customerId"), idCus),
+                        builder.equal(root.get("statusId"), 2));
+        Appointment a = session.createQuery(query).uniqueResult();
+
+        return a;
+    }
+
+    @Override
+    public boolean checkAppointmentExists(int idCus) {
+        boolean kq = false;
+//        Session session = this.sessionFactory.getObject().getCurrentSession();
+//        CriteriaBuilder builder = session.getCriteriaBuilder();
+//
+//        CriteriaQuery<Appointment> query = builder.createQuery(Appointment.class);
+//        Root<Appointment> root = query.from(Appointment.class);
+//        query.select(root);
+//        query.where(builder.equal(root.get("customerId"), idCus),
+//                builder.or(builder.equal(root.get("statusId"), 1), builder.equal(root.get("statusId"), 2)));
+//        
+//        Appointment a = session.createQuery(query).uniqueResult();
+//        
+//        if(a.getStatusId().getId()==1 || a.getStatusId().getId()==2)
+//            kq= true;
+        return kq;
+    }
 }

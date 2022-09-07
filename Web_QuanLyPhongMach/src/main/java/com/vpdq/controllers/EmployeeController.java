@@ -7,26 +7,34 @@ package com.vpdq.controllers;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.vpdq.pojo.Appointment;
 import com.vpdq.service.EmployeeService;
 import org.springframework.context.annotation.Bean;
 import com.vpdq.pojo.Customer;
 import com.vpdq.pojo.Employee;
 import com.vpdq.pojo.MedicalRecord;
 import com.vpdq.pojo.Medicine;
+import com.vpdq.pojo.Prescription;
 import com.vpdq.pojo.Service;
+import com.vpdq.service.AppointmentService;
 import com.vpdq.service.MedicalRecordService;
+import com.vpdq.service.MedicineService;
+import com.vpdq.service.PrescriptionService;
 import com.vpdq.service.ServiceClinicService;
+import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -34,6 +42,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 @Controller
+@ControllerAdvice
 @RequestMapping("/employees")
 public class EmployeeController {
 
@@ -46,6 +55,22 @@ public class EmployeeController {
     @Autowired
     private MedicalRecordService medicalRecordService;
     
+    @Autowired
+    private AppointmentService appointmentService;
+    
+    @Autowired
+    private PrescriptionService prescriptionService;
+    
+    @Autowired
+    private MedicineService medicineService;
+    
+    //dung chung
+    @ModelAttribute
+    public void commonAttribute(Model model) {
+        model.addAttribute("services", this.serviceClinicService.getService());
+        model.addAttribute("appointments", this.appointmentService.getAppointment(0));
+        model.addAttribute("medicine", this.medicineService.getMedicines(null, 0));
+    }
     
     //Bác sĩ quản lý
     
@@ -61,45 +86,104 @@ public class EmployeeController {
     
     
     @GetMapping("/medicalRecord/{cusID}")
-    public String medicalRecord (Model model, @PathVariable(value = "cusID") int cusID){
-        
+    public String medicalRecord(Model model, @PathVariable(value = "cusID") int cusID) {
+
         model.addAttribute("medicalRecord", new MedicalRecord());
-        model.addAttribute("services", this.serviceClinicService.getService());
-        
+        return "medicalRecord";
+    }
+
+//    Tạo phiếu khám
+    @PostMapping("/medicalRecord/{cusID}")
+    public String addMedicalRecord(Model model, HttpSession session,
+            @PathVariable(value = "cusID") int cusID,
+            @ModelAttribute(value = "medicalRecord") @Valid MedicalRecord m,
+            BindingResult rs) {
+
+        model.addAttribute("cusID", cusID);
+        Employee e = (Employee) session.getAttribute("currentUser");
+
+        m.setDoctorId(e);
+        Customer c = new Customer();
+        c.setId(cusID);
+        m.setCustomerId(c);
+
+        if (rs.hasErrors())
+        {
+            return "medicalRecord";
+        }
+
+        if (this.medicalRecordService.addMedicalRecord(m) == true)
+        {
+            Appointment a1 = this.appointmentService.getAppointmentByIdCustomer(cusID);
+            
+            if (this.appointmentService.changeStatusAppointmentByID(a1.getId(), 3))
+            return "redirect:/employees/prescription";
+        }
+
         return "medicalRecord";
     }
     
-    //Tạo phiếu khám - VẪN ĐANG LỖI
-//    @PostMapping("/medicalRecord/{cusID}")
-//    public String addMedicalRecord (Model model, HttpSession session,
-//            @PathVariable(value = "cusID") int cusID,
-//            @ModelAttribute(value = "medicalRecord") @Valid MedicalRecord m,
-//            BindingResult rs){
-//        
-//        model.addAttribute("services", this.serviceClinicService.getService());
-//        
-//        Employee e = (Employee) session.getAttribute("currentUser");
-//        m.setDoctorId(e);
-//        
-//        Customer c = new Customer();
-//        c.setId(cusID);
-//        m.setCustomerId(c);
-//              
-//        if (rs.hasErrors()) {
-//            return "Web_QuanLyPhongMach/";
-//        }
-//        
-//        if (this.medicalRecordService.addMedicalRecord(m) == true) {
-//            return "redirect:medicalRecord";
-//        }
-//        
-//        return "medicalRecord";
-//    }
     
-    
+    //Hiển thị các phiếu khám bệnh
     @GetMapping("/prescription")
-    public String prescription (){
+    public String prescription(Model model) {
+        model.addAttribute("medicalRecord2", this.medicalRecordService.getMedicalRecord("doctor"));
         return "prescription";
+    }
+
+    //lấy mã phiếu khám, qua trang kê toa thuốc
+    @PostMapping("/prescription")
+    public String postprescription(Model model) {
+        return "prescription";
+    }
+    
+    
+    //KÊ TOA THUỐC
+    @GetMapping("/prescription/{medicalRecordID}")
+    public String prescriptions(Model model,
+            @PathVariable(value = "medicalRecordID") int medicalRecordID,
+            @RequestParam(value = "kw", defaultValue = "", required = false) String kw,
+            @RequestParam Map<String, String> params) {
+         
+        model.addAttribute("medicines", this.medicineService.getMedicinesByKeyword(null));
+        if (kw != null && !kw.isEmpty())
+             model.addAttribute("medicines", this.medicineService.getMedicinesByKeyword(kw));
+
+        model.addAttribute("prescription", new Prescription());
+        model.addAttribute("medicalRecordID", medicalRecordID);
+        model.addAttribute("info", this.medicalRecordService.getInfoMedicalRecordByID(medicalRecordID));
+        model.addAttribute("medicineInPrescription", this.prescriptionService.getPreByMedicalRecordID(medicalRecordID));
+
+        return "prescribeTheDrug";
+    }
+
+    //Thêm thuốc vào toa thuốc
+    @PostMapping("/prescription/{medicalRecordID}")
+    public String addPrescription(Model model,
+            @ModelAttribute(value = "prescription") Prescription p,
+            @PathVariable(value = "medicalRecordID") int medicalRecordID,
+            @RequestParam(value = "addMedicine", defaultValue = "0", required = false) int addMedicine,
+            @RequestParam(value = "kw", defaultValue = "", required = false) String kw,
+            @RequestParam Map<String, String> params) {
+
+        MedicalRecord m = new MedicalRecord();
+        m.setId(medicalRecordID);
+        p.setMedicalRecordId(m);
+
+        if (addMedicine != 0) {
+            if (this.prescriptionService.addPrescription(p) == true) {
+                model.addAttribute("medicineInPrescription", this.prescriptionService.getPreByMedicalRecordID(medicalRecordID));
+                model.addAttribute("medicines", this.medicineService.getMedicinesByKeyword(null));
+                model.addAttribute("info", this.medicalRecordService.getInfoMedicalRecordByID(medicalRecordID));
+                if (kw != null && !kw.isEmpty())
+                    model.addAttribute("medicines", this.medicineService.getMedicinesByKeyword(kw));
+                return "prescribeTheDrug";
+                
+             
+            }
+        }
+
+        return "redirect:prescription";
     }
     
     //Y tá quản lý
@@ -117,6 +201,17 @@ public class EmployeeController {
     
     @GetMapping("/appointmentsManager")
     public String appointmentsManager (){
+        return "appointmentsManager";
+    }
+    
+    @PostMapping("/appointmentsManager")
+    public String ChangeStatusForAppointment(Model model,
+            @RequestParam(value = "idAppointment") int idAppointment) {
+
+        if (this.appointmentService.changeStatusAppointmentByID(idAppointment, 2))
+        {
+            return "nursesIndex";
+        }
         return "appointmentsManager";
     }
     

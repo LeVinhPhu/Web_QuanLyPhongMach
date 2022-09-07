@@ -15,4 +15,8 @@ public interface AppointmentRepository {
     boolean addAppointment (Appointment a);
     List<Object[]> getAppointment(float idCus);
     boolean deleteAppointment(int id);
+    boolean changeStatusAppointmentByID(int id, int status);
+    Appointment getAppointmentByID(int id);
+    Appointment getAppointmentByIdCustomer(int idCus);
+    boolean checkAppointmentExists(int idCus);
 }

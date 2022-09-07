@@ -4,6 +4,8 @@
  */
 package com.vpdq.repository.impl;
 
+import com.vpdq.pojo.Customer;
+import com.vpdq.pojo.MedicalRecord;
 import com.vpdq.pojo.Medicine;
 import com.vpdq.pojo.Prescription;
 import com.vpdq.pojo.Unit;
@@ -51,6 +53,54 @@ public class PrescriptionRepositoryImpl implements PrescriptionRepository {
         Query<Object[]> query = session.createQuery(q);
         return query.getResultList();
         
+    }
+
+    @Override
+    public boolean addPrescription(Prescription p) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.saveOrUpdate(p);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public List<Object[]> getPreByMedicalRecordID(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root mRoot = q.from(MedicalRecord.class);
+        Root pRoot = q.from(Prescription.class);
+        Root medicineRoot = q.from(Medicine.class);
+        Root cRoot = q.from(Customer.class);
+        Root uRoot = q.from(Unit.class);
+
+        q.where(b.equal(pRoot.get("medicalRecordId"), mRoot.get("id")),
+                b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
+                b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
+                b.equal(mRoot.get("customerId"), cRoot.get("id")),
+                b.equal(medicineRoot.get("unitId"), uRoot.get("id")),
+                b.equal(pRoot.get("medicalRecordId"), id)
+                );
+
+        q.multiselect(mRoot.get("id"),
+                cRoot.get("firstName"),
+                cRoot.get("lastName"),
+                medicineRoot.get("id"),
+                medicineRoot.get("name"),
+                pRoot.get("quantity"),
+                uRoot.get("name"),
+                medicineRoot.get("unitPrice"),
+                pRoot.get("note")
+                );
+
+        Query query = session.createQuery(q);
+
+        return query.getResultList();
     }
 
 }

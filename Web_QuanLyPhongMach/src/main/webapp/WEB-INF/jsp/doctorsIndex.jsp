@@ -21,9 +21,7 @@
             <div style="height: 250px; overflow: auto"class="">
                 <table class="table table-hover ">
                     <tr>
-                        <th>
-                            <i onclick="load()" class="fas fa-redo-alt"></i>
-                        </th>
+                        <th>Mã phiếu đặt</th>
                         <th>Tên khách hàng</th>
                         <th></th>
                     </tr>

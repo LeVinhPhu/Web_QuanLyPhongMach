@@ -25,4 +25,14 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     public List<Object[]> getPrescription() {
         return this.prescriptionRepository.getPrescription();
     }       
+
+    @Override
+    public boolean addPrescription(Prescription p) {
+        return this.prescriptionRepository.addPrescription(p);
+    }
+
+    @Override
+    public List<Object[]> getPreByMedicalRecordID(int id) {
+        return this.prescriptionRepository.getPreByMedicalRecordID(id);
+    }
 }

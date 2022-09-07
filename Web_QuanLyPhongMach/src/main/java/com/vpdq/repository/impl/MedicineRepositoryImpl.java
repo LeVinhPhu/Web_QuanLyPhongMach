@@ -248,4 +248,33 @@ public class MedicineRepositoryImpl implements MedicineRepository {
         return query.getResultList();
     }
 
+    @Override
+    public List<Object[]> getMedicinesByKeyword(String kw) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+       
+        Root<Medicine> mRoot = q.from(Medicine.class);
+        Root<Unit> uRoot = q.from(Unit.class);
+        q.where(b.equal(mRoot.get("unitId"), uRoot.get("id")));
+
+        q.multiselect(mRoot.get("image"),
+                mRoot.get("name"),
+                uRoot.get("name"),
+                mRoot.get("unitPrice"),
+                mRoot.get("note"));
+
+        if (kw != null && !kw.isEmpty()) {
+                Predicate p = b.like(mRoot.get("name").as(String.class), String.format("%%%s%%", kw));
+                Predicate p2 = b.equal(mRoot.get("unitId"), uRoot.get("id"));
+                q = q.where(b.and(p, p2));
+            }  
+        
+        //sap xep thuoc theo ten
+        q.orderBy(b.asc(mRoot.get("name")));
+        
+        Query<Object[]> query = session.createQuery(q);
+        return query.getResultList();
+    }
+
 }

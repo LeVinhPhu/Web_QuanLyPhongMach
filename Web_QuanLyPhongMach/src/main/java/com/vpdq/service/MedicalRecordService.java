@@ -17,4 +17,7 @@ public interface MedicalRecordService {
     List<Object[]> revenueStatisticsByMonth(int year);
     List<Object[]> revenueStatisticsByQuarter(int year);
     boolean addMedicalRecord (MedicalRecord m);
+    List<Object[]> getMedicalRecord(String name);
+    MedicalRecord getMedicalRecordByID(int id);
+    List<Object[]> getInfoMedicalRecordByID(int id);
 }

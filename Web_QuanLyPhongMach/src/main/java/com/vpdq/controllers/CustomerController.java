@@ -53,9 +53,16 @@ public class CustomerController {
 
     @GetMapping("/appointments")
     public String showAppointments(Model model, HttpSession session) {
-        model.addAttribute("appointments", new Appointment());
+        model.addAttribute("setAppointments", new Appointment());
         model.addAttribute("currentUser", session.getAttribute("currentUser"));
-
+        
+//        Customer c1 = (Customer) session.getAttribute("currentUser");
+//        int check=1;
+//        if(this.appointmentService.checkAppointmentExists(2)==false)
+//            check=0;
+//        
+//        model.addAttribute("check", check);
+        
         Customer cs = (Customer) session.getAttribute("currentUser");
         Search.setIdCus(cs.getId());
         return "appointments";
@@ -64,10 +71,10 @@ public class CustomerController {
     //Đặt lịch khám
     @PostMapping("/appointments")
     public String addAppointments(Model model, HttpSession session,
-            @ModelAttribute(value = "appointments") Appointment a) {
+            @ModelAttribute(value = "setAppointments") Appointment a) {
         Customer c = (Customer) session.getAttribute("currentUser");
         a.setCustomerId(c);
-
+        
         if (this.appointmentService.addAppointment(a)) {
             return "appointments";
         }

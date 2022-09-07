@@ -122,6 +122,11 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
                        value="/WEB-INF/jsp/prescription.jsp" />
     </definition>
     
+    <definition name="prescribeTheDrug" extends="baseLayout">
+        <put-attribute name="title" value="Kê Toa Thuốc" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/prescribeTheDrug.jsp" />
+    </definition>
     <!--Ý tá quản lý-->
     
     <definition name="nursesIndex" extends="baseLayout">

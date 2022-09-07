@@ -4,16 +4,13 @@
  */
 package com.vpdq.service;
 
-import com.vpdq.pojo.Prescription;
+import com.vpdq.pojo.Service;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
  * @author phamt
  */
-public interface PrescriptionService {
-    List<Object[]> getPrescription();
-    boolean addPrescription(Prescription p);
-    List<Object[]> getPreByMedicalRecordID(int id);
+public interface ServiceService {
+    List<Service> getService();
 }

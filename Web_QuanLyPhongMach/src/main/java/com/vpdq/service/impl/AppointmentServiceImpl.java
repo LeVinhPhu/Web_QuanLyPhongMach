@@ -34,5 +34,25 @@ public class AppointmentServiceImpl implements AppointmentService {
     public boolean deleteAppointment(int id) {
         return this.appointmentRepository.deleteAppointment(id);
     }
+
+    @Override
+    public boolean changeStatusAppointmentByID(int id, int status) {
+        return this.appointmentRepository.changeStatusAppointmentByID(id, status);
+    }
+
+    @Override
+    public Appointment getAppointmentByID(int id) {
+        return this.appointmentRepository.getAppointmentByID(id);
+    }
+
+    @Override
+    public Appointment getAppointmentByIdCustomer(int idCus) {
+        return this.appointmentRepository.getAppointmentByIdCustomer(idCus);
+    }
+
+    @Override
+    public boolean checkAppointmentExists(int idCus) {
+        return this.appointmentRepository.checkAppointmentExists(idCus);
+    }
     
 }

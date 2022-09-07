@@ -143,9 +143,10 @@ public class ApiController {
     @GetMapping("/appointment")
     public ResponseEntity<List<Object[]>> listAppointment(HttpSession session, Model model) {
         //nếu là bệnh nhân, lấy api theo ID bệnh nhân
-        if (Search.getIdCus() != 0) {
+        
+        if (Search.getIdCus() != 0)
             return new ResponseEntity<>(this.appointmentService.getAppointment(Search.getIdCus()), HttpStatus.OK);
-        }
+        
 
         Employee e = (Employee) session.getAttribute("currentUser");
 

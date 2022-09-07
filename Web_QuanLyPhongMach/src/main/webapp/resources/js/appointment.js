@@ -83,7 +83,7 @@ function getAppointmentForDoctor(endpoint) {
             for (let i = 0; i < data.length; i++)
                 h += `
                     <tr id="row${data[i][0]}">
-                        <td></td>
+                        <td>${data[i][9]}</td>
                         <td>${data[i][5]} ${data[i][6]}</td>
                         <td>
                             <a href="/Web_QuanLyPhongMach/employees/medicalRecord/${data[i][4]}">Lập phiếu</a>
@@ -97,3 +97,4 @@ function getAppointmentForDoctor(endpoint) {
         console.error(err);
     });
 }
+

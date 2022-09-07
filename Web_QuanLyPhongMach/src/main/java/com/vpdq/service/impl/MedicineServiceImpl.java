@@ -66,5 +66,10 @@ public class MedicineServiceImpl implements MedicineService {
     public List<Object[]> frequencyOfMedicineUsageStatisticsByMonth(int year, int month) {
         return this.medicineRepository.frequencyOfMedicineUsageStatisticsByMonth(year, month);
     }
+
+    @Override
+    public List<Object[]> getMedicinesByKeyword(String kw) {
+        return this.medicineRepository.getMedicinesByKeyword(kw);
+    }
     
 }

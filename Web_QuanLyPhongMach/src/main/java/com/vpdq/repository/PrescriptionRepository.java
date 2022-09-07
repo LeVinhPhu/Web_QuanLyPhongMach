@@ -14,4 +14,6 @@ import java.util.Map;
  */
 public interface PrescriptionRepository {
     List<Object[]> getPrescription();
+    boolean addPrescription(Prescription p);
+    List<Object[]> getPreByMedicalRecordID(int id);
 }
