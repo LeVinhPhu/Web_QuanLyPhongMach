@@ -19,6 +19,8 @@ public interface EmployeeService {
 
     List<Employee> getEmployee(Map<String, String> params, int page);
 
+    List<Object[]> getEmployeeOnCall(Map<String, String> params, int page);
+
     int countEmployee();
 
     boolean addEmployee(Employee e);

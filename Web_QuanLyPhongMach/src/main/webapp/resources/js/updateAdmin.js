@@ -8,9 +8,9 @@
 //SỬA ADMIN
 const firstName = document.getElementById('firstName');
 const lastName = document.getElementById('lastName');
-const dateOfBirth = document.getElementById('dateOfBirth');
-const email = document.getElementById('email');
-const phone = document.getElementById('phone');
+//const dateOfBirth = document.getElementById('dateOfBirth');
+//const email = document.getElementById('email');
+//const phone = document.getElementById('phone');
 
 
 const btnUpdate = document.getElementById('btnUpdate');
@@ -47,10 +47,12 @@ btnUpdate.addEventListener('click', function () {
             });
         });
         alert('Sửa thành công1');
+        window.location = "/Web_QuanLyPhongMach/admins/adminsManager";
     }
 
     if (flag && t === 0) {
         alert('Sửa thành công2');
+        window.location = "/Web_QuanLyPhongMach/admins/adminsManager";
     }
 });
 

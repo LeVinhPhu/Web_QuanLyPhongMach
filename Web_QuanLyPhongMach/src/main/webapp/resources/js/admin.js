@@ -25,7 +25,7 @@ function getAdmin(endpoint) {
                     </td>
                     <td>
                         <div class="spinner-border text-secondary" style="display:none" id="load${data[i][0]}"></div>
-                        <a style="color:black" href="/Web_QuanLyPhongMach/admins/adminsManager/${data[i][0]}"><i class="fas fa-pencil-alt"></i></a>
+                        <a style="color:black" href="/Web_QuanLyPhongMach/admins/updateAdmin/${data[i][0]}"><i class="fas fa-pencil-alt"></i></a>
                     </td>
                     <td>
                         <div class="spinner-border text-secondary" style="display:none" id="load${data[i][0]}"></div>

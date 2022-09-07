@@ -14,12 +14,14 @@ import com.vpdq.pojo.Unit;
 import com.vpdq.service.EmployeeService;
 import com.vpdq.pojo.Customer;
 import com.vpdq.pojo.Medicine;
+import com.vpdq.pojo.OnCall;
 import com.vpdq.service.AdminService;
 import com.vpdq.pojo.Prescription;
 import com.vpdq.service.AppointmentService;
 import com.vpdq.service.CustomerService;
 import com.vpdq.service.MedicalRecordService;
 import com.vpdq.service.MedicineService;
+import com.vpdq.service.OnCallService;
 import com.vpdq.service.PrescriptionService;
 import com.vpdq.utils.Search;
 import java.util.List;
@@ -54,7 +56,7 @@ public class ApiController {
                         "secure", true));
         return cloudinary;
     }
-    
+
     @Autowired
     private MedicineService medicineService;
 
@@ -77,11 +79,9 @@ public class ApiController {
     @GetMapping("/medicines")
     public ResponseEntity<List<Object[]>> listMedicine() {
         //api/medicines lấy danh sách thuốc phục vụ cho admin/medicines
-        if (Search.getParam().isEmpty() == false)
-        {
+        if (Search.getParam().isEmpty() == false) {
             return new ResponseEntity<>(this.medicineService.getMedicines(Search.getParam(), 0), HttpStatus.OK);
-        } else
-        {
+        } else {
             return new ResponseEntity<>(this.medicineService.getMedicines(null, 0), HttpStatus.OK);
         }
     }
@@ -106,6 +106,11 @@ public class ApiController {
     @GetMapping("/employeesManager")
     public ResponseEntity<List<Employee>> list() {
         return new ResponseEntity<>(this.employeeServic.getEmployee(null, 0), HttpStatus.OK);
+    }
+
+    @GetMapping("/employeesOncall")
+    public ResponseEntity<List<Object[]>> listEmployeeOncall() {
+        return new ResponseEntity<>(this.employeeServic.getEmployeeOnCall(null, 0), HttpStatus.OK);
     }
 
     @DeleteMapping("/employeesManager/{employeeId}")
@@ -141,7 +146,7 @@ public class ApiController {
         if (Search.getIdCus() != 0) {
             return new ResponseEntity<>(this.appointmentService.getAppointment(Search.getIdCus()), HttpStatus.OK);
         }
-        
+
         Employee e = (Employee) session.getAttribute("currentUser");
 
         if (e.getPositionId().getId() == 1) {
@@ -150,7 +155,7 @@ public class ApiController {
         if (e.getPositionId().getId() == 2) {
             return new ResponseEntity<>(this.appointmentService.getAppointment(0), HttpStatus.OK);
         }
-        
+
         return new ResponseEntity<>(this.appointmentService.getAppointment(0), HttpStatus.OK);
     }
 
@@ -160,4 +165,20 @@ public class ApiController {
     public void deleteAppointment(@PathVariable(value = "aId") int aId) {
         this.appointmentService.deleteAppointment(aId);
     }
+
+    //------------------ONCALL-------------------------
+    @Autowired
+    private OnCallService onCallService;
+
+    @DeleteMapping("/onCallManager/{onCallId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteOncall(@PathVariable(value = "onCallId") int onCallId) {
+        this.onCallService.deleteOnCall(onCallId);
+    }
+
+    @GetMapping("/onCallManager")
+    public ResponseEntity<List<Object[]>> listOnCall() {
+        return new ResponseEntity<>(this.onCallService.getOnCallView(null, 0), HttpStatus.OK);
+    }
+
 }

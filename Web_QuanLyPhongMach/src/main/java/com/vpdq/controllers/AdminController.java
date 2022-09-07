@@ -9,12 +9,15 @@ import com.cloudinary.utils.ObjectUtils;
 import com.vpdq.pojo.Admin;
 import com.vpdq.pojo.Employee;
 import com.vpdq.pojo.Medicine;
+import com.vpdq.pojo.OnCall;
 import com.vpdq.pojo.Supplier;
 import com.vpdq.service.AdminService;
 import com.vpdq.service.CustomerService;
+import com.vpdq.service.DepartmentService;
 import com.vpdq.service.EmployeeService;
 import com.vpdq.service.MedicalRecordService;
 import com.vpdq.service.MedicineService;
+import com.vpdq.service.OnCallService;
 import com.vpdq.service.PositionService;
 import com.vpdq.service.ServiceClinicService;
 import com.vpdq.service.SupplierService;
@@ -30,6 +33,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -86,10 +90,13 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private DepartmentService departmentService;
     //dung chung
     @ModelAttribute
     public void commonAttribute(Model model) {
         model.addAttribute("positions", this.positionService.getPosition());
+        model.addAttribute("department", this.departmentService.getDepartment());
         model.addAttribute("units", this.unitService.getUnits());
         model.addAttribute("suppliers", this.supplierService.getSuppliers());
 //        model.addAttribute("revenueStats", this.medicalRecordService.revenueStatistics());
@@ -116,7 +123,7 @@ public class AdminController {
     public String addAdmin(@ModelAttribute(value = "admin") @Valid Admin adm,
             BindingResult r) {
         if (r.hasErrors()) {
-            return "adminsManager2"; //return lổi
+            return "adminsManager"; //return lổi
         }
         if (this.adminService.addAdmin(adm) == true) {
             return "redirect:adminsManager"; //return về trang gì đó
@@ -125,20 +132,20 @@ public class AdminController {
     }
 
     //Trang sửa admin
-    @GetMapping("/adminsManager/{adminId}")
+    @GetMapping("/updateAdmin/{adminId}")
     public String getAdmin(Model model, @PathVariable(value = "adminId") int id) {
         model.addAttribute("adminUpdate", this.adminService.getAdminByID(id));
         return "updateAdmin";
     }
 
     // Sửa Admin
-    @PostMapping("/adminsManager/{adminId}")
+    @PostMapping("/updateAdmin/{adminId}")
     public String updateAdmin(@PathVariable(value = "adminId") int id,
             @ModelAttribute(value = "adminUpdate") @Valid Admin adm,
             BindingResult r) {
 
         if (r.hasErrors()) {
-            return "register"; //return lổi
+            return "adminsManager"; //return lổi
         }
         if (this.adminService.updateAdmin(id, adm) == true) {
             return "redirect:adminsManager";
@@ -417,9 +424,26 @@ public class AdminController {
         return "updateMedicine";
     }
 
-//LỊCH TRỰC
+//---------------------LỊCH TRỰC----------------------------
+    @Autowired
+    private OnCallService onCallService;
+
     @GetMapping("/onCallManager")
-    public String onCallManager() {
+    public String onCallManager(Model model) {
+        model.addAttribute("onCall", new OnCall());
+        return "onCallManager";
+    }
+
+    //Thêm lịch trực
+    @PostMapping("/onCallManager")
+    public String addOnCall(@ModelAttribute(value = "onCall") @Valid OnCall ocl,
+            BindingResult r ) {
+        if (r.hasErrors()) {
+            return "onCallManager"; //return lổi
+        }
+        if (this.onCallService.addOnCall(ocl) == true) {
+            return "redirect:onCallManager"; //return về trang gì đó
+        }
         return "onCallManager";
     }
 }

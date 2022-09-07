@@ -71,4 +71,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public boolean updateImageEmployee(int id, String image) {
         return this.employeeRepository.updateImageEmployee(id, image);
     }
+
+    @Override
+    public List<Object[]> getEmployeeOnCall(Map<String, String> params, int page) {
+        return this.employeeRepository.getEmployeeOnCall(params, page);
+    }
 }

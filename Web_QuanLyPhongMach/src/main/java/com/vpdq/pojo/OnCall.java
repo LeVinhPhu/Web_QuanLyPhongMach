@@ -4,6 +4,7 @@
  */
 package com.vpdq.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -22,6 +23,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -47,18 +49,22 @@ public class OnCall implements Serializable {
     @NotNull
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     @Size(max = 200)
     @Column(name = "note")
     private String note;
     @JoinColumn(name = "admin_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore //
     private Admin adminId;
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore //
     private Department departmentId;
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore //
     private Employee employeeId;
 
     public OnCall() {
@@ -145,5 +151,5 @@ public class OnCall implements Serializable {
     public String toString() {
         return "com.vpdq.pojo.OnCall[ id=" + id + " ]";
     }
-    
+
 }
