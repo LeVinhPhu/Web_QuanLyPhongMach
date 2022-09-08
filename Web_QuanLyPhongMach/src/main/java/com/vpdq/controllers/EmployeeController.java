@@ -7,6 +7,7 @@ package com.vpdq.controllers;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.vpdq.mail.Mail;
 import com.vpdq.pojo.Appointment;
 import com.vpdq.service.EmployeeService;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +22,9 @@ import com.vpdq.service.MedicalRecordService;
 import com.vpdq.service.MedicineService;
 import com.vpdq.service.PrescriptionService;
 import com.vpdq.service.ServiceClinicService;
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -226,16 +229,21 @@ public class EmployeeController {
    
     
     @GetMapping("/appointmentsManager")
-    public String appointmentsManager (){
+    public String appointmentsManager (Model model){
         return "appointmentsManager";
     }
     
     @PostMapping("/appointmentsManager")
     public String ChangeStatusForAppointment(Model model,
-            @RequestParam(value = "idAppointment") int idAppointment) {
+            @RequestParam(value = "idAppointment") int idAppointment) throws MessagingException, UnsupportedEncodingException {
 
         if (this.appointmentService.changeStatusAppointmentByID(idAppointment, 2))
-        {
+        { 
+            Object[] ob = this.appointmentService.getCusFromAppointmentById(idAppointment).get(0);
+            String contentbody = "P&QCLINIC - Đã xác nhận lịch khám của bạn"
+                     + ". Xin Cảm ơn.";
+            String mail = (String) ob[1];
+            Mail.SendEmail(contentbody, mail);
             return "nursesIndex";
         }
         return "appointmentsManager";

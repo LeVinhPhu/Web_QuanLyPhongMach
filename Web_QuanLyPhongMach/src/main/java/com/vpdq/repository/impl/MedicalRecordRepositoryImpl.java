@@ -209,6 +209,7 @@ public class MedicalRecordRepositoryImpl implements MedicalRecordRepository {
         return query.getResultList();
     }
 
+
     @Override
     public List<Object[]> getMedicalRecordForPayment() {
         Session session = this.sessionFactory.getObject().getCurrentSession();

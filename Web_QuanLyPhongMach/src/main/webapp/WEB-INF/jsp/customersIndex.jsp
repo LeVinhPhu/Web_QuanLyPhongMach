@@ -40,7 +40,7 @@
             </div>
             <h4 class="card-title">Tra cứu thông tin</h4>
             <div class="card-body">
-                <a href="<c:url value="/employees/medicalRecord"/>" class="btn btn-primary">Xác Nhận</a>
+                <a href="<c:url value="/customers/customersIndex"/>" class="btn btn-primary">Xác Nhận</a>
             </div>
         </div>
     </div>

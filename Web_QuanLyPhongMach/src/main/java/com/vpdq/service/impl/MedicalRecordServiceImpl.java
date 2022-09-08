@@ -59,6 +59,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     @Override
     public List<Object[]> getInfoMedicalRecordByID(int id) {
         return this.medicalRecordRepository.getInfoMedicalRecordByID(id);
+
     }
 
     @Override
@@ -75,6 +76,4 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     public boolean payment(int idM, int idNurse, Date date) {
         return this.medicalRecordRepository.payment(idM, idNurse, date);
     }
-
-    
 }

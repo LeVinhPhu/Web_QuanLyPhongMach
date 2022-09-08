@@ -54,5 +54,10 @@ public class AppointmentServiceImpl implements AppointmentService {
     public boolean checkAppointmentExists(int idCus) {
         return this.appointmentRepository.checkAppointmentExists(idCus);
     }
+
+    @Override
+    public List<Object[]> getCusFromAppointmentById(int idAp) {
+        return this.appointmentRepository.getCusFromAppointmentById(idAp);
+    }
     
 }

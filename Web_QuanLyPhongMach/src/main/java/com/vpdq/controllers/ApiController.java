@@ -195,4 +195,5 @@ public class ApiController {
     public ResponseEntity<List<Object[]>> medical() {
         return new ResponseEntity<>(this.medicalRecordService.getMedicalRecordForPaymentByID(43),HttpStatus.OK);
     }
+
 }

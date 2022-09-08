@@ -97,3 +97,73 @@ function getOnCall(endpoint) {
 }
 
 //----------------------Kiểm Tra Ngày hợp lệ----------------
+
+const date = document.getElementById('date2');
+
+const btnSubmit = document.getElementById('bt-submit');
+const input = document.querySelectorAll('.input-row');
+
+var temp = 0;
+btnSubmit.addEventListener('click', function () {
+    Array.from(input).map((ele) =>
+        ele.classList.remove('error'));
+    let flag = checkValidate();
+    if (!flag) {
+        $('#myForm').on('submit', function (e) {
+            e.preventDefault(); // Now nothing will happen
+        });
+        temp++;
+    }
+
+    if (flag && temp >= 1)
+    {
+        $(document).ready(function () {
+            $('form').submit(function () {
+                $.ajax({
+                    method: $(this).attr('method'),
+                    url: $(this).attr('action'),
+                    data: $(this).serialize()
+                });
+            });
+        });
+        alert('Gửi đăng ký thành công  !');
+        window.location = "/Web_QuanLyPhongMach/admins/onCallManager";
+    }
+
+    console.log(temp);
+    if (flag && temp <= 0)
+    {
+        alert('Gửi đăng ký thành công !');
+        window.location = "/Web_QuanLyPhongMach/admins/onCallManager";
+    }
+});
+
+
+function checkValidate() {
+    
+    let dateOfBirthValues = date.value;
+
+    var todayCheck = new Date();
+    todayCheck.setDate(todayCheck.getDate() - 1);
+    var dateOfBirthCheck = new Date(dateOfBirthValues);
+
+    let isCheck = true;
+
+    if (dateOfBirthValues == "") {
+        setError(date, 'Ngày không hợp lệ!');
+        isCheck = false;
+    }
+    // Kiểm tra ngày sinh
+    if (dateOfBirthCheck <= todayCheck) {
+        setError(date, 'Ngày không hợp lệ!');
+        isCheck = false;
+    }
+
+    return isCheck;
+}
+
+function setError(err, message) {
+    let parentEle = err.parentNode;
+    parentEle.classList.add('error');
+    parentEle.querySelector('small').innerText = message;
+}

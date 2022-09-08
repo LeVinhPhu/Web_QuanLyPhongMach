@@ -21,7 +21,9 @@ public interface MedicalRecordService {
     List<Object[]> getMedicalRecord(String name);
     MedicalRecord getMedicalRecordByID(int id);
     List<Object[]> getInfoMedicalRecordByID(int id);
+
     List<Object[]> getMedicalRecordForPayment();
     List<Object[]> getMedicalRecordForPaymentByID(int id);
     boolean payment(int idM, int idNurse, Date date);
+
 }
