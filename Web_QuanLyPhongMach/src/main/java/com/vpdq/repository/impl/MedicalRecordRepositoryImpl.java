@@ -208,32 +208,4 @@ public class MedicalRecordRepositoryImpl implements MedicalRecordRepository {
         return query.getResultList();
     }
 
-    @Override
-    public List<Object[]> getMedicalRecordForPayment() {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        CriteriaBuilder b = session.getCriteriaBuilder();
-
-        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
-
-        Root mRoot = q.from(MedicalRecord.class);
-        Root pRoot = q.from(Prescription.class);
-//        Root medicineRoot = q.from(Medicine.class);
-//        Root sRoot = q.from(Service.class);
-//        Root cRoot = q.from(Customer.class);
-
-        q.where(b.equal(pRoot.get("medicalRecordId"), mRoot.get("id")),
-//                b.equal(cRoot.get("id"), mRoot.get("customerId")),
-//                b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
-//                b.equal(mRoot.get("serviceId"), sRoot.get("id")),
-                b.isNull(mRoot.get("billingDate")));
-
-//        q.multiselect(b.sum(b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice")), sRoot.get("price"))));
-        q.multiselect(mRoot.get("id"));
-        q.groupBy(mRoot.get("id"));
-//        q.orderBy(b.asc(b.function("YEAR", Integer.class, mRoot.get("billingDate"))));
-        
-        Query<Object[]> query = session.createQuery(q);
-        return query.getResultList();
-    }
-
 }

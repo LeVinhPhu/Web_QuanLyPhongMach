@@ -46,9 +46,11 @@ btnUpdateProfile.addEventListener('click', function () {
             });
         });
         alert('Sửa thành công1');
+        window.location = "/Web_QuanLyPhongMach/customers/customersIndex";
     }
     if (flag && t === 0) {
         alert('Sửa thành công2');
+        window.location = "/Web_QuanLyPhongMach/customers/customersIndex";
     }
 });
 

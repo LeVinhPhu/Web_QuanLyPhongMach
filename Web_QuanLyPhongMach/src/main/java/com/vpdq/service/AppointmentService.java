@@ -19,4 +19,5 @@ public interface AppointmentService {
     Appointment getAppointmentByID(int id);
     Appointment getAppointmentByIdCustomer(int idCus);
     boolean checkAppointmentExists(int idCus);
+    List<Object[]> getCusFromAppointmentById(int idAp);
 }

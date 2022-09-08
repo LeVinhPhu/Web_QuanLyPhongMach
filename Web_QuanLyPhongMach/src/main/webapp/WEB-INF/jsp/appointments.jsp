@@ -35,7 +35,7 @@
         </a>
     </div>
     <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
-        <a href="/Web_QuanLyPhongMach/employees/prescription" style="color: black; text-decoration: none">
+        <a href="/Web_QuanLyPhongMach/customers/appointments" style="color: black; text-decoration: none">
             <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
                 <div class="mt-3 mb-2">
                     <img class="card-img-top"
@@ -49,7 +49,7 @@
     </div>
 
     <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
-        <a href="/Web_QuanLyPhongMach/employees/doctorsIndex" style="color: black; text-decoration: none">
+        <a href="/Web_QuanLyPhongMach/customers/customersIndex" style="color: black; text-decoration: none">
             <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
                 <div class="mt-3 mb-2">
                     <img class="card-img-top"

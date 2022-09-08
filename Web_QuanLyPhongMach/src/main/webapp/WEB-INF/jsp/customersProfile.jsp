@@ -82,11 +82,6 @@
         <label for="p2">Xác nhận mật khẩu <span style="color: red">*</span></label>
         <small>Error</small>
     </div>-->
-
-        <div class="form-floating input-row">
-            <form:input type="text" path="note" class="form-control" id="name" placeholder="Nhap ten" name="name" />
-            <label for="name">Ghi chú</label>
-        </div>
         <div>
             <input id="btnUpdateProfile" type="submit" value="Cập nhật" class="btn btn-warning mb-3 mt-3" />
         </div>    
@@ -102,4 +97,5 @@
     document.getElementById('phoneNumber').value = "${currentUser.phoneNumber}";
     document.getElementById('password').value = "${currentUser.password}";
     document.getElementById('confirmPassword').value = "${currentUser.password}";
+    document.getElementById('address').value = "${currentUser.address}";
 </script>

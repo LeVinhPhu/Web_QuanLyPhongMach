@@ -180,7 +180,7 @@
                     <c:url value="/admins/onCallManager" var="action"></c:url>
                     <form:form id="myForm" method="post" action="${action}" modelAttribute="onCall" enctype="multipart/form-data">
                         <div class="input-row form-floating">
-                            <form:input type="date" class="form-control" path="date" id="date"/>
+                            <form:input type="date" class="form-control" path="date" id="date2"/>
                             <label for="date">Ngày Trực:</label>
                             <!--Sinh lổi-->
                             <small></small>
@@ -239,8 +239,5 @@
 </script>
 
 <script>
-    $(function () {
         $('#addOncall').modal('show');
-        $('#date').datepicker({minDate: 0, dateFormat: 'mm-dd-yyyy'});
-    });
 </script>

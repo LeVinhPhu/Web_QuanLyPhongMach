@@ -90,7 +90,7 @@
                     </li>
                     <li>
                         <c:if test="${currentUser != null}">
-                            <a id = "role" class="dropdown-item" href="">Thông tin cá nhân</a>
+                            <a id = "role" class="dropdown-item" href="/Web_QuanLyPhongMach/customers/customersProfile">Thông tin cá nhân</a>
                         </c:if>
                     </li>
                     <li>

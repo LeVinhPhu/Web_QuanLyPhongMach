@@ -185,8 +185,4 @@ public class ApiController {
         return new ResponseEntity<>(this.onCallService.getOnCallView(null, 0), HttpStatus.OK);
     }
 
-    @GetMapping("/medi")
-    public ResponseEntity<List<Object[]>> listMedi() {
-        return new ResponseEntity<>(this.medicalRecordService.getMedicalRecordForPayment(), HttpStatus.OK);
-    }
 }

@@ -22,5 +22,4 @@ public interface MedicalRecordRepository {
     List<Object[]> getMedicalRecord(String name);
     MedicalRecord getMedicalRecordByID(int id);
     List<Object[]> getInfoMedicalRecordByID(int id);
-    List<Object[]> getMedicalRecordForPayment();
 }

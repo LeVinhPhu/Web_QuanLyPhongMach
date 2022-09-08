@@ -220,12 +220,9 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         cnew.setFirstName(c.getFirstName());
         cnew.setLastName(c.getLastName());
         cnew.setDateOfBirth(c.getDateOfBirth());
-        cnew.setSex(c.getSex());
         cnew.setAddress(c.getAddress());
         cnew.setEmail(c.getEmail());
         cnew.setPhoneNumber(c.getPhoneNumber());
-        cnew.setPassword(c.getPassword());
-        cnew.setConfirmPassword(c.getConfirmPassword());
         try {
             session.saveOrUpdate(cnew);
             return true;

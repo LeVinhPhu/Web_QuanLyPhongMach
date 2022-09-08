@@ -113,7 +113,6 @@ function getAppointmentForNurse(endpoint) {
                         <td>${data[i][5]} ${data[i][6]}</td>
                         <td>${moment(data[i][1]).format("DD/MM/YYYY")}</td>
                         <td>${data[i][2]}</td>
-                        <td>${data[i][3]}</td>
                         <td>
                             <input style="display: none" type="number" class="form-control" value="${data[i][0]}" name="idAppointment">
                                 <button type="submit" class="btn btn-primary" >Xác nhận</button>
