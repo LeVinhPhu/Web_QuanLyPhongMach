@@ -26,6 +26,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -61,6 +62,7 @@ public class MedicalRecord implements Serializable {
     private String conclusion;
     @Column(name = "billing_date")
     @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date billingDate;
     @Size(max = 200)
     @Column(name = "note")
