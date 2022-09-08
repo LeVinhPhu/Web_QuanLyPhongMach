@@ -17,10 +17,10 @@
         </div>
 
         <!--DANH SÁCH PHIẾU ĐẶT CỦA KHÁCH HÀNG-->
-        <div class=""> 
-            <div style="height: 250px; overflow: auto"class="">
+        <div> 
+            <div style="height: 250px; overflow: auto;border-radius: 10px">
                 <table class="table table-hover ">
-                    <tr>
+                    <tr class="table-primary">
                         <th>Mã phiếu đặt</th>
                         <th>Tên khách hàng</th>
                         <th></th>
@@ -35,13 +35,13 @@
         <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
             <div class="mb-4 mt-5">
                 <img class="card-img-top"
-                     src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662061416/Web_QLPM/Avatar/payment_bkbf0p.png"
+                     src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662569031/Web_QLPM/Avatar/prescription_hguwgz.png"
                      alt="Card image"
                      style="width:60%">
             </div>
             <div class="card-body">
-                <h4 class="card-title">Khám bệnh</h4>
-                <a href="<c:url value="/employees/medicalRecord"/>" class="btn btn-primary">Xác Nhận</a>
+                <h4 class="card-title">Ra Toa Thuốc</h4>
+                <a href="<c:url value="/employees/prescription"/>" class="btn btn-primary">Xác Nhận</a>
             </div>
         </div>
     </div>
@@ -49,12 +49,12 @@
         <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
             <div class="mb-4 mt-5">
                 <img class="card-img-top"
-                     src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662061415/Web_QLPM/Avatar/hospital_vzru5y.png"
+                     src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662568896/Web_QLPM/Avatar/medical-record_1_mfwahh.png"
                      alt="Card image"
                      style="width:60%">
             </div>
             <div class="card-body">
-                <h4 class="card-title">Tra cứu thông tin</h4>
+                <h4 class="card-title">Khám Bệnh</h4>
                 <a href="<c:url value="/employees/medicalRecord"/>" class="btn btn-primary">Xác Nhận</a>
             </div>
         </div>
@@ -65,7 +65,7 @@
 <script src="<c:url value="/js/appointment.js" />"></script>
 <script>
     <c:url value="/api/appointment" var="m" />
-                                window.onload = function () {
-                                    getAppointmentForDoctor('${m}');
-                                };
+    window.onload = function () {
+        getAppointmentForDoctor('${m}');
+    };
 </script>

@@ -17,7 +17,7 @@ function getAppointment(endpoint) {
                     <tr id="row${data[i][0]}">
                         <td></td>
                         <td>${data[i][0]}</td>
-                        <td>${data[i][1]}</td>
+                        <td>${moment(data[i][1]).format("DD/MM/YYYY")}</td>
                         <td>${data[i][2]}</td>
                         <td>${data[i][3]}</td>
                         <td>${data[i][8]}</td>
@@ -86,7 +86,7 @@ function getAppointmentForDoctor(endpoint) {
                         <td>${data[i][9]}</td>
                         <td>${data[i][5]} ${data[i][6]}</td>
                         <td>
-                            <a href="/Web_QuanLyPhongMach/employees/medicalRecord/${data[i][4]}">Lập phiếu</a>
+                            <a style="text-decoration: none;" href="/Web_QuanLyPhongMach/employees/medicalRecord/${data[i][4]}"><i class="fas fa-pencil-alt"></i>  Lập Phiếu</a>
                         </td>
                     </tr>
                     `;
@@ -98,3 +98,32 @@ function getAppointmentForDoctor(endpoint) {
     });
 }
 
+
+function getAppointmentForNurse(endpoint) {
+    fetch(endpoint).then(function (res) {
+        return  res.json();
+    }).then(function (data) {
+        let d = document.getElementById("myAppointmentForNurse");
+        if (d !== null) {
+            let h = "";
+            for (let i = 0; i < data.length; i++)
+                h += `
+                    <tr id="row${data[i][0]}">
+                        <td>${data[i][0]}</td>
+                        <td>${data[i][5]} ${data[i][6]}</td>
+                        <td>${moment(data[i][1]).format("DD/MM/YYYY")}</td>
+                        <td>${data[i][2]}</td>
+                        <td>${data[i][3]}</td>
+                        <td>
+                            <input style="display: none" type="number" class="form-control" value="${data[i][0]}" name="idAppointment">
+                                <button type="submit" class="btn btn-primary" >Xác nhận</button>
+                        </td>
+                    </tr>
+                    `;
+            d.innerHTML = h;
+        }
+
+    }).catch(function (err) {
+        console.error(err);
+    });
+}

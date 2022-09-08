@@ -8,55 +8,107 @@
 <%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<div class="row mt-3">
-    <div class="col-md-12 col-12">
-        <h5>Thông báo</h5>
-    </div>
-</div>
 
-<div class="row mt-2 mb-2">
-    <div class="col-md-10 sol-12">
-        <div id="demo" class="carousel slide" data-bs-ride="carousel">
-
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-            </div>
-
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img
-                        src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1660922740/Web_QLPM/content4_grhsjb.png" alt="Los Angeles" class="d-block w-100">
-                </div>
-                <div class="carousel-item">
-                    <img
-                        src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1660922735/Web_QLPM/content3_sikeqe.png" alt="Chicago" class="d-block w-100">
-                </div>
-            </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
+<div class="row  mb-4 mt-3" style="">
+    <div class="col-md-5 col-12">
+        <div class="mt-3">
+            <h2 style="font-family: fantasy;">P&Q CLINIC </h2>
+            <h6 style="font-family: courier">Only a life lived for others is a life worthwhile</h6>
+            <c:if test="${param.accessDenied != null}"> 
+                <h6 style="font-family: courier; color: red; font-weight: bold">Bạn cần đăng nhập để tiếp tục !</h6>
+            </c:if>
+            <hr>
         </div>
     </div>
-
-    <div class="col-md-2 col-12">
-        <div class="list-group">
-            <a class="list-group-item list-group-item-action active">
-                Tiện ích
-            </a>
-            <a href="/Web_QuanLyPhongMach/admins/adminIndex" class="list-group-item list-group-item-action">Trang Chủ</a>
-            <a href="/Web_QuanLyPhongMach/admins/adminsManager" class="list-group-item list-group-item-action">Quản lý Admin</a>
-            <a href="/Web_QuanLyPhongMach/admins/employeesManager" class="list-group-item list-group-item-action">Quản lý Nhân viên</a>
-            <a href="/Web_QuanLyPhongMach/admins/medicinesManager" class="list-group-item list-group-item-action">Quản lý Thuốc</a>
-            <a href="/Web_QuanLyPhongMach/admins/customersManager" class="list-group-item list-group-item-action">Quản lý Khách Hàng</a>
-            <a href="/Web_QuanLyPhongMach/admins/reportsManager" class="list-group-item list-group-item-action">Quản lý Thống kê</a>
-            <a href="/Web_QuanLyPhongMach/admins/onCallManager" class="list-group-item list-group-item-action">Quản lý Lịch trực</a>
-        </div>
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/adminIndex" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556012/Web_QLPM/Avatar/home_hxzsfb.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">Trang Chủ</h6>
+            </div>
+        </a>
     </div>
-</div>
-
-<h1>HELLO ADMIN - WELCOM TO WORK</h1>
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/adminsManager" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556012/Web_QLPM/Avatar/writing_hkvivo.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">QL Admin</h6>
+            </div>
+        </a>
+    </div>    
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/employeesManager" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556012/Web_QLPM/Avatar/writing_hkvivo.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">QL Nhân Viên </h6>
+            </div>
+        </a>
+    </div>    
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/medicinesManager" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556012/Web_QLPM/Avatar/writing_hkvivo.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">QL Thuốc</h6>
+            </div>
+        </a>
+    </div>
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/customersManager" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556169/Web_QLPM/Avatar/rating_jgs7jn.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">Khách Hàng</h6>
+            </div>
+        </a>
+    </div>
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/reportsManager" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556013/Web_QLPM/Avatar/growth_z4ewzy.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">Thống Kê</h6>
+            </div>
+        </a>
+    </div>
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/onCallManager" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556012/Web_QLPM/Avatar/calendar_2_pbkqiv.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">Lịch Trực</h6>
+            </div>
+        </a>
+    </div>
+</div>   

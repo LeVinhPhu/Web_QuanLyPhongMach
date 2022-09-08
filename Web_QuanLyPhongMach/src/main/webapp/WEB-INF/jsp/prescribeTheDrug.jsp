@@ -9,11 +9,48 @@
 <%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModal">
-    <i style="font-size: 20px; color: #0d6efd"class="far fa-plus-square"></i>
-</button>
 
 
+<div class="row  mb-2 mt-3" style="">
+    <div class="col-md-10 col-12">
+        <div class="mt-3">
+            <h2 style="font-family: fantasy;">P&Q CLINIC </h2>
+            <h6 style="font-family: courier">The best doctor gives the least medicines</h6>
+            <c:if test="${param.accessDenied != null}"> 
+                <h6 style="font-family: courier; color: red; font-weight: bold">Bạn cần đăng nhập để tiếp tục !</h6>
+            </c:if>
+            <hr>
+        </div>
+    </div>
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/employees/doctorsIndex" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556012/Web_QLPM/Avatar/home_hxzsfb.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">Trang chủ</h6>
+            </div>
+        </a>
+    </div>
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/employees/prescription" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662569031/Web_QLPM/Avatar/prescription_hguwgz.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">Ra Toa</h6>
+            </div>
+        </a>
+    </div>
+</div>   
+
+<h2 style="text-align: center; margin-top: 10px">RA TOA THUỐC</h2>
 
 <!-- The Modal -->
 <div class="modal" id="myModal">
@@ -22,7 +59,7 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Modal Heading</h4>
+                <h4 class="modal-title">Thêm Thuốc</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
@@ -60,20 +97,36 @@
 
                 </form:form>
             </div>
-
-
         </div>
     </div>
 </div>
 
 
 <!--DANH SÁCH THUỐC TRONG PHIẾU KHÁM-->
-<div class="row"> 
-    <div class="col-md-6 col-12">
+<div class="row mt-4 mb-4">
+    <div class="col-md-6 col-12 shadow">
+        <div class="mb-4" style="border: dashed 1px white">
+            <div class="mt-3 mb-3" style="text-align: center; color: black"><h5>HỒ SƠ BỆNH ÁN</h5></div>
+            <hr>
+            <div class="mt-3 mb-3" style="padding-left: 10px">Mã phiếu khám: <b><i><c:out value="${info[0][0]}" /></i></b></div>
+            <div class="mt-3 mb-3" style="padding-left: 10px">Tên bệnh nhân: <b><i><c:out value="${info[0][1]}" /> <c:out value="${info[0][2]}" /></i></b></div>
+            <div class="mt-3 mb-3" style="padding-left: 10px">Triệu chứng bệnh: <b><i><c:out value="${info[0][3]}" /></i></b></div>
+            <div class="mt-3 mb-3" style="padding-left: 10px">Kết luận: <b><i><c:out value="${info[0][4]}" /></i></b></div>
+        </div>
+        <hr>
+    </div>
+    <div class="col-md-6 col-12 shadow"  style="overflow: auto">
+        <div class="mt-3 mb-3" style="text-align: center; color: black"><h5>TOA THUỐC</h5></div>
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModal">
+            <i style="font-size: 20px; color: #0d6efd"class="far fa-plus-square"></i>
+        </button>
+        <div class="mb-3" style="float:right">
+            <a class="btn btn-primary" href="/Web_QuanLyPhongMach/employees/prescription">Hoàn thành</a>
+        </div>
         <c:url value="/employees/prescription" var="action" />
         <form method="post" action="${action}">
             <table class="table table-hover shadow">
-                <tr>
+                <tr class="table-primary">
                     <th>Tên thuốc</th>
                     <th>Số lượng</th>
                     <th>Đơn vị </th>
@@ -95,31 +148,26 @@
                 </tbody>
             </table>
         </form>
+    </div>
+</div>
 
-        <div style="float:right">
-            <a class="btn btn-primary" href="/Web_QuanLyPhongMach/employees/prescription">Hoàn thành</a>
-        </div>
-            <br>
-        <div class="mt-5 shadow" style="border: dashed 1px white; color: #0d6efd;">
-            <div class="mt-3 mb-3" style="padding-left: 10px">Mã phiếu khám: <b><i><c:out value="${info[0][0]}" /></i></b></div>
-            <div class="mt-3 mb-3" style="padding-left: 10px">Tên bệnh nhân: <b><i><c:out value="${info[0][1]}" /> <c:out value="${info[0][2]}" /></i></b></div>
-            <div class="mt-3 mb-3" style="padding-left: 10px">Triệu chứng bệnh: <b><i><c:out value="${info[0][3]}" /></i></b></div>
-            <div class="mt-3 mb-3" style="padding-left: 10px">Kết luận: <b><i><c:out value="${info[0][4]}" /></i></b></div>
-        </div>
+<div class="row mb-1">
+    <div class="col-md-8 col-12"">
 
     </div>
-
-    <div class="col-md-1 col-12"></div>
-
-    <div class="col-md-5 col-12" style="font-size: 14px">
+    <div class="col-md-4 col-12"">
         <c:url value="/employees/prescription/${medicalRecordID}" var="action" />
         <form action="${action}" class="d-flex">
             <input class="form-control me-2" type="text" name="kw" placeholder="Nhập tên thuốc...">
             <button type="submit" class="btn"><i class="fas fa-search"></i></button>
         </form>
-            <div class="mt-2" style="height: 450px; overflow: auto">
+    </div>
+</div>
+<div class="row mb-5 shadow">
+    <div class="col-md-12 col-12" style="font-size: 14px">
+        <div class="mt-2" style="height: 300px; overflow: auto">
             <table class="table table-hover">
-                <tr>
+                <tr class="table-success">
                     <th></th>
                     <th>Tên</th>
                     <th>Đơn vị </th>
@@ -141,7 +189,6 @@
         </div>
     </div>
 </div>
-
 
 
 

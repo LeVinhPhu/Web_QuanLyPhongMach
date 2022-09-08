@@ -20,15 +20,15 @@ function getEmployees(endpoint) {
                     <td>${data[i].address}</td>
                     <td>
                         <div class="spinner-border text-secondary" style="display:none" id="load${data[i].id}"></div>
-                        <button class='btn btn-warning' onclick="deleteEmployee('${endpoint + "/" + data[i].id}', ${data[i].id}, this)">DELETE</button>
+                        <i class="fas fa-info-circle" data-bs-toggle="modal" onclick="detailEmployee('${endpoint}', ${data[i].id})"></i>
                     </td>
                     <td>
                         <div class="spinner-border text-secondary" style="display:none" id="load${data[i].id}"></div>
-                        <button class='btn btn-primary' onclick="delProduct('${endpoint + "/" + data[i].id}', ${data[i].id})">UPDATE</button>
+                        <a style="color:black" href="/Web_QuanLyPhongMach/admins/employeesManager/${data[i][0]}"><i class="fas fa-pencil-alt"></i></a>
                     </td>
                     <td>
                         <div class="spinner-border text-secondary" style="display:none" id="load${data[i].id}"></div>
-                        <button class="btn btn-success" data-bs-toggle="modal" onclick="detailEmployee('${endpoint}', ${data[i].id})">DETAILS</button>
+                        <i class="fas fa-trash-alt" onclick="deleteEmployee('${endpoint + "/" + data[i].id}', ${data[i].id}, this)"></i>
                     </td>
                 </tr>
         `

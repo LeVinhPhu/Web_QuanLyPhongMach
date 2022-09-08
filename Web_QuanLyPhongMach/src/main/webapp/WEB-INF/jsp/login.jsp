@@ -23,8 +23,12 @@
 
     <div class="col-md-4 col-12 bg-light shadow rounded-3">
 
-        <div class="mt-2 mb-2" style="">
-            <h2 style="font-family: Helvetica">Login</h2>
+        <div class="row mt-2 mb-2" style="">
+            <div class="col-md-8 col-8"><h2 style="font-family: Helvetica">Login</h2></div>
+            <div class="col-md-4 col-4" style="text-align: right;">
+                <a class="fas fa-home" href="/Web_QuanLyPhongMach/" 
+                   style="text-decoration: none; color: black;margin-right:10px; margin-top: 15px"></a>
+            </div>
         </div>
         <div class="mb-3">
             <c:url value="/login" var="action"></c:url>
@@ -45,7 +49,7 @@
                 <div class="form-floating"  style="text-align: center">
                     <input type="submit" value="Đăng nhập" class="btn btn-primary" id="bt-submit"/>
                 </div>
-
+                
                 <div class="form-floating" style="text-align: center">
                     <span style="font-size: 12px">Bạn chưa có tài khoản? <a href="/Web_QuanLyPhongMach/register" style="text-decoration: none">Đăng ký</a></span>
                 </div>

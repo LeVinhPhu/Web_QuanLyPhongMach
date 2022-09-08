@@ -152,7 +152,7 @@ public class ApiController {
 
         if (e.getPositionId().getId() == 1) {
             return new ResponseEntity<>(this.appointmentService.getAppointment(-1), HttpStatus.OK);
-        } else //nếu là y tá thì nạp phiếu có trạng thái chưa xác nhận
+        }  //nếu là y tá thì nạp phiếu có trạng thái chưa xác nhận
         if (e.getPositionId().getId() == 2) {
             return new ResponseEntity<>(this.appointmentService.getAppointment(0), HttpStatus.OK);
         }

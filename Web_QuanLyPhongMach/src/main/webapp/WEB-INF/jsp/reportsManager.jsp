@@ -9,49 +9,186 @@
 <%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<div class="row mb-2 mt-2">
-    <div class="col-md-9 col-12">
-        <div style="text-align: center"class="">
-            <div class="bg-light">
-                <div class="pt-2 pb-1">
-                    <h4 class="text-center">QUẢN LÝ THỐNG KÊ - DOANH THU</h4>
+
+
+<div class="row  mb-4 mt-3" style="">
+    <div class="col-md-5 col-12">
+        <div class="mt-3">
+            <h2 style="font-family: fantasy;">P&Q CLINIC </h2>
+            <h6 style="font-family: courier">Only a life lived for others is a life worthwhile</h6>
+            <c:if test="${param.accessDenied != null}"> 
+                <h6 style="font-family: courier; color: red; font-weight: bold">Bạn cần đăng nhập để tiếp tục !</h6>
+            </c:if>
+            <hr>
+        </div>
+    </div>
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/adminIndex" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556012/Web_QLPM/Avatar/home_hxzsfb.png"
+                         alt="Card image"
+                         style="width:50%">
                 </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">Trang Chủ</h6>
             </div>
-
-            <!--Tổng doanh thu-->
-            <div class="mt-3 mb-2 pt-2 pb-1">
-                <button style="width: 25%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal0">TỔNG DOANH THU</button>
+        </a>
+    </div>
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/adminsManager" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556012/Web_QLPM/Avatar/writing_hkvivo.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">QL Admin</h6>
             </div>
-
-            <!--Doanh thu theo năm-->
-            <div class="mt-3 mb-2 pt-2 pb-1">
-                <button style="width: 25%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">DOANH THU THEO NĂM</button>
+        </a>
+    </div>    
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/employeesManager" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556012/Web_QLPM/Avatar/writing_hkvivo.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">QL Nhân Viên </h6>
             </div>
-
-            <!--doanh thu theo quý-->
-            <div class="mt-3 mb-2 pt-2 pb-1">
-                <button style="width: 25%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal2">DOANH THU THEO QUÝ</button>
-                <c:if test="${err1 != null}">
-                    <div class="mt-2">
-                        <span style="color: red">
-                            ${err1}
-                        </span>
-                    </div>
-                </c:if>
+        </a>
+    </div>    
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/medicinesManager" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556012/Web_QLPM/Avatar/writing_hkvivo.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">QL Thuốc</h6>
             </div>
-
-            <!--doanh thu theo tháng-->
-            <div class="pt-2 pb-1">
-                <button style="width: 25%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal3">DOANH THU THEO THÁNG</button>
-                <c:if test="${err2 != null}">
-                    <div class="mt-2">
-                        <span style="color: red">
-                            ${err2}
-                        </span>
-                    </div>
-                </c:if>
+        </a>
+    </div>
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/customersManager" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556169/Web_QLPM/Avatar/rating_jgs7jn.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">Khách Hàng</h6>
             </div>
+        </a>
+    </div>
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/reportsManager" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556013/Web_QLPM/Avatar/growth_z4ewzy.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">Thống Kê</h6>
+            </div>
+        </a>
+    </div>
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/onCallManager" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556012/Web_QLPM/Avatar/calendar_2_pbkqiv.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">Lịch Trực</h6>
+            </div>
+        </a>
+    </div>
+</div>   
 
+
+<h2 style="text-align: center; margin-top: 10px">QUẢN LÝ DOANH THU</h2>
+
+
+<div class="row mb-2 mt-2">
+    <div data-bs-toggle="modal" data-bs-target="#myModal0" class="col-md-2 col-12"  style="text-align: center;">
+        <div style="color: black; border: none" class="card bg-light shadow rounded-3"">
+            <div class="mt-4 mb-3">
+                <img class="card-img-top"
+                     src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662562119/Web_QLPM/Avatar/turnover_xyafsh.png"
+                     alt="Card image"
+                     style="width:40%">
+            </div>
+            <h6 class="card-title">Tổng Doanh Thu</h6>
+        </div>
+    </div>
+
+    <div data-bs-toggle="modal" data-bs-target="#myModal" class="col-md-2 col-12"  style="text-align: center;">
+        <div style="color: black; border: none" class="card bg-light shadow rounded-3"">
+            <div class="mt-4 mb-3">
+                <img class="card-img-top"
+                     src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662562119/Web_QLPM/Avatar/statistics_2_r18oez.png"
+                     alt="Card image"
+                     style="width:40%">
+            </div>
+            <h6 class="card-title">Doanh Thu Theo Năm</h6>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-2 mt-2">
+    <div data-bs-toggle="modal" data-bs-target="#myModal2" class="col-md-2 col-12"  style="text-align: center;">
+        <div style="color: black; border: none" class="card bg-light shadow rounded-3"">
+            <div class="mt-4 mb-3">
+                <img class="card-img-top"
+                     src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662562259/Web_QLPM/Avatar/pie-graph_1_dwafob.png"
+                     alt="Card image"
+                     style="width:40%">
+            </div>
+            <h6 class="card-title">Doanh Thu Theo Quý</h6>
+        </div>
+        <c:if test="${err1 != null}">
+            <div class="mt-1">
+                <span style="color: red" class="fs-8">
+                    ${err1}
+                </span>
+            </div>
+        </c:if>
+    </div>
+    <div data-bs-toggle="modal" data-bs-target="#myModal3" class="col-md-2 col-12"  style="text-align: center;">
+        <div style="color: black; border: none" class="card bg-light shadow rounded-3"">
+            <div class="mt-4 mb-3">
+                <img class="card-img-top"
+                     src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662562119/Web_QLPM/Avatar/diagram_phb81d.png"
+                     alt="Card image"
+                     style="width:40%">
+            </div>
+            <h6 class="card-title">Doanh Thu Theo Tháng</h6u>
+        </div>
+        <c:if test="${err2 != null}">
+            <div class="mt-1">
+                <span style="color: red" class="fs-8">
+                    ${err2}
+                </span>
+            </div>
+        </c:if>
+    </div>
+</div>
+
+
+
+<div class="row mb-2 mt-2">
+    <div class="col-md-12 col-12">
+        <div style="text-align: center"class="">
             <!-- The Modal --> <!--TỔNG DOANH THU-->
             <div class="modal" id="myModal0">
                 <div class="modal-dialog">
@@ -221,30 +358,6 @@
                 </div>
             </div>                            
         </div>    
-    </div>
-
-    <div class="col-md-3 col-12">
-        <div class="list-group">
-            <a class="list-group-item list-group-item-action active">
-                Tiện ích
-            </a>
-            <a href="/Web_QuanLyPhongMach/admins/adminIndex" class="list-group-item list-group-item-action">Trang Chủ</a>
-            <a href="/Web_QuanLyPhongMach/admins/adminsManager" class="list-group-item list-group-item-action">Quản lý Admin</a>
-            <a href="/Web_QuanLyPhongMach/admins/employeesManager" class="list-group-item list-group-item-action">Quản lý Nhân viên</a>
-            <a href="/Web_QuanLyPhongMach/admins/medicinesManager" class="list-group-item list-group-item-action">Quản lý Thuốc</a>
-            <a href="/Web_QuanLyPhongMach/admins/customersManager" class="list-group-item list-group-item-action">Quản lý Khách Hàng</a>
-            <a href="/Web_QuanLyPhongMach/admins/reportsManager" class="list-group-item list-group-item-action">Quản lý Thống kê</a>
-            <a href="/Web_QuanLyPhongMach/admins/onCallManager" class="list-group-item list-group-item-action">Quản lý Lịch trực</a>
-        </div>
-
-        <div class="list-group mt-2">
-            <a class="list-group-item list-group-item-action active">
-                Thống Kê
-            </a>
-            <a href="/Web_QuanLyPhongMach/admins/reportsManager" class="list-group-item list-group-item-action">Thống kê Doanh thu</a>
-            <a href="/Web_QuanLyPhongMach/admins/reports2Manager" class="list-group-item list-group-item-action">Thống kê Số lượng Bệnh nhân</a>
-            <a href="/Web_QuanLyPhongMach/admins/reports3Manager" class="list-group-item list-group-item-action">Thống kê Tần suất sử dụng Thuốc</a>
-        </div>
     </div>
 </div>
 

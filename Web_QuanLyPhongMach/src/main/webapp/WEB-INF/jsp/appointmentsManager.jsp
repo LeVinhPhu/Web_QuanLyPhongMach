@@ -28,8 +28,8 @@
                     <th></th>
                 </tr>
                 <tbody id="myAppointmentForNurse">
-                    <c:forEach items="${appointments}" var="a">
-                        <tr>
+                    <%--<c:forEach items="${appointments}" var="a">--%>
+<!--                        <tr>
                             <td>${a[0]}</td>
                             <td>${a[5]} ${a[6]}</td>
                             <td>${a[1]}</td>
@@ -37,11 +37,22 @@
                             <td>${a[3]}</td>
                             <td><input style="display: none" type="number" class="form-control" value="${a[0]}" name="idAppointment">
                                 <button type="submit" class="btn btn-primary" >Xác nhận</button></td>
-                        </tr>
-                    </c:forEach>
+                        </tr>-->
+                    <%--</c:forEach>--%>
                 </tbody>
             </table>
         </form>
 
     </div>
 </div>
+            
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>        
+
+<script src="<c:url value="/js/appointment.js" />"></script>
+<script>
+    <c:url value="/api/appointment" var="m" />
+    window.onload = function () {
+        getAppointmentForNurse('${m}');
+    };
+</script>

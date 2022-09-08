@@ -10,30 +10,133 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
+
+<div class="row  mb-4 mt-3" style="">
+    <div class="col-md-5 col-12">
+        <div class="mt-3">
+            <h2 style="font-family: fantasy;">P&Q CLINIC </h2>
+            <h6 style="font-family: courier">Only a life lived for others is a life worthwhile</h6>
+            <c:if test="${param.accessDenied != null}"> 
+                <h6 style="font-family: courier; color: red; font-weight: bold">Bạn cần đăng nhập để tiếp tục !</h6>
+            </c:if>
+            <hr>
+        </div>
+    </div>
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/adminIndex" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556012/Web_QLPM/Avatar/home_hxzsfb.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">Trang Chủ</h6>
+            </div>
+        </a>
+    </div>
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/adminsManager" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556012/Web_QLPM/Avatar/writing_hkvivo.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">QL Admin</h6>
+            </div>
+        </a>
+    </div>    
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/employeesManager" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556012/Web_QLPM/Avatar/writing_hkvivo.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">QL Nhân Viên </h6>
+            </div>
+        </a>
+    </div>    
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/medicinesManager" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556012/Web_QLPM/Avatar/writing_hkvivo.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">QL Thuốc</h6>
+            </div>
+        </a>
+    </div>
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/customersManager" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556169/Web_QLPM/Avatar/rating_jgs7jn.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">Khách Hàng</h6>
+            </div>
+        </a>
+    </div>
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/reportsManager" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556013/Web_QLPM/Avatar/growth_z4ewzy.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">Thống Kê</h6>
+            </div>
+        </a>
+    </div>
+    <div class = "col-md-1 col-12 mt-2 mb-2" style="align-items: center;">
+        <a href="/Web_QuanLyPhongMach/admins/onCallManager" style="color: black; text-decoration: none">
+            <div class="card bg-light shadow rounded-3" style="text-align: center; align-items: center;border: none">
+                <div class="mt-3 mb-2">
+                    <img class="card-img-top"
+                         src="https://res.cloudinary.com/vinhphuvtv2/image/upload/v1662556012/Web_QLPM/Avatar/calendar_2_pbkqiv.png"
+                         alt="Card image"
+                         style="width:50%">
+                </div>
+                <h6 class="card-title" style="font-size: 13px;font-weight: bold">Lịch Trực</h6>
+            </div>
+        </a>
+    </div>
+</div>   
+
+
 <h2 style="text-align: center; margin-top: 10px">QUẢN LÝ NHÂN VIÊN</h2>
 
-<div class="row mt-2 bg-light">
-    <div class="col-md-8 col-12 mt-2 mb-2">
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal" id="btn-add">ADD EMPLOYEE</button>
+<div class="row mt-4 mb-4">
+    <div class="col-md-9 col-12">
+        <div data-bs-toggle="modal" data-bs-target="#addModal" style="margin: 8px; width: 20%"><i class="fas fa-plus"></i>  Thêm nhân viên</div>
     </div>
-
-    <div class="col-md-4 col-12 mt-2 mb-2">
-        <c:url value="/" var="action" />
+    <div class="col-md-3 col-12">
+        <c:url value="/admins/medicinesManager" var="action" />
         <form action="${action}" class="d-flex">
-            <input class="form-control me-2" type="text" name="kw" placeholder="Nhap tu khoa...">
-            <button typeubmit" class="btn btn-primary" type="button">SEARCH</button>
+            <input class="form-control me-2" type="text" name="kw" placeholder="Nhập tên thuốc...">
+            <button type="submit" class="btn"><i class="fas fa-search"></i></button>
         </form>
     </div>
 </div>
 
-<div class="row mt-2 mb-2">
-    <div class="col-md-10 sol-12 border rounded bg-light">
+<div class="row mt-2 mb-2 ">
+    <div class="col-md-12 sol-12 shadow" style="overflow: auto; height: 500px; border-radius: 10px">
         <div class = "col-md-12 col-12">
 
-            <h3 class="text-center" style="margin-top: 10px; margin-bottom: 10px">Danh Sách Nhân Viên</h3>
-
-            <table class="table table-hover" style="margin-left: 5px; margin-right: 5px">
-                <tr class="table-success">
+            <table class="table table-hover">
+                <tr class="table-info">
                     <th>Họ</th>
                     <th>Tên</th>
                     <th>Ngày Sinh</th>
@@ -43,26 +146,11 @@
                     <th></th>
                     <th><th>
                 </tr>
-                <tbody id="myEmployee" style="width: 10px; height: 50em">
+                <tbody id="myEmployee">
                     <tr>
                     </tr>
                 </tbody>
             </table>
-        </div>
-    </div>
-
-    <div class="col-md-2 col-12">
-        <div class="list-group">
-            <a class="list-group-item list-group-item-action active">
-                Tiện ích
-            </a>
-            <a href="/Web_QuanLyPhongMach/admins/adminIndex" class="list-group-item list-group-item-action">Trang Chủ</a>
-            <a href="/Web_QuanLyPhongMach/admins/adminsManager" class="list-group-item list-group-item-action">Quản lý Admin</a>
-            <a href="/Web_QuanLyPhongMach/admins/employeesManager" class="list-group-item list-group-item-action">Quản lý Nhân viên</a>
-            <a href="/Web_QuanLyPhongMach/admins/medicinesManager" class="list-group-item list-group-item-action">Quản lý Thuốc</a>
-            <a href="/Web_QuanLyPhongMach/admins/customersManager" class="list-group-item list-group-item-action">Quản lý Khách Hàng</a>
-            <a href="/Web_QuanLyPhongMach/admins/reportsManager" class="list-group-item list-group-item-action">Quản lý Thống kê</a>
-            <a href="/Web_QuanLyPhongMach/admins/onCallManager" class="list-group-item list-group-item-action">Quản lý Lịch trực</a>
         </div>
     </div>
 </div>
@@ -221,4 +309,5 @@
         getEmployees("${u}");
     }
 </script>
+
 
