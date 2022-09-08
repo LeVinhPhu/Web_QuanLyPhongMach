@@ -60,5 +60,10 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
         return this.medicalRecordRepository.getInfoMedicalRecordByID(id);
     }
 
+    @Override
+    public List<Object[]> getMedicalRecordForPayment() {
+        return this.medicalRecordRepository.getMedicalRecordForPayment();
+    }
+
     
 }

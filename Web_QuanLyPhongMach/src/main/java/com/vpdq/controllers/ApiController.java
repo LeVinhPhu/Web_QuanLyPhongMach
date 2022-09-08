@@ -74,6 +74,9 @@ public class ApiController {
 
     @Autowired
     private AppointmentService appointmentService;
+    
+    @Autowired
+    private MedicalRecordService medicalRecordService;
 
 //  API-Que
     @GetMapping("/medicines")
@@ -182,4 +185,8 @@ public class ApiController {
         return new ResponseEntity<>(this.onCallService.getOnCallView(null, 0), HttpStatus.OK);
     }
 
+    @GetMapping("/medi")
+    public ResponseEntity<List<Object[]>> listMedi() {
+        return new ResponseEntity<>(this.medicalRecordService.getMedicalRecordForPayment(), HttpStatus.OK);
+    }
 }

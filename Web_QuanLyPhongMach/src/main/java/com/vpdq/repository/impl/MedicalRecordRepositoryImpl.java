@@ -46,7 +46,8 @@ public class MedicalRecordRepositoryImpl implements MedicalRecordRepository {
         q.where(b.equal(pRoot.get("medicalRecordId"), mRoot.get("id")),
                 b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
                 b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
-                b.equal(mRoot.get("serviceId"), sRoot.get("id")));
+                b.equal(mRoot.get("serviceId"), sRoot.get("id")),
+                b.isNotNull(mRoot.get("billingDate")));
 
         q.multiselect(b.function("YEAR", Integer.class, mRoot.get("billingDate")), 
                 b.sum(b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice")), sRoot.get("price"))));
@@ -73,6 +74,7 @@ public class MedicalRecordRepositoryImpl implements MedicalRecordRepository {
                 b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
                 b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
                 b.equal(mRoot.get("serviceId"), sRoot.get("id")),
+                b.isNotNull(mRoot.get("billingDate")),
                 b.equal(b.function("YEAR", Integer.class, mRoot.get("billingDate")), year));
 
         q.multiselect(b.function("QUARTER", Integer.class, mRoot.get("billingDate")), 
@@ -101,6 +103,7 @@ public class MedicalRecordRepositoryImpl implements MedicalRecordRepository {
                 b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
                 b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
                 b.equal(mRoot.get("serviceId"), sRoot.get("id")),
+                b.isNotNull(mRoot.get("billingDate")),
                 b.equal(b.function("YEAR", Integer.class, mRoot.get("billingDate")), year));
 
         q.multiselect(b.function("MONTH", Integer.class, mRoot.get("billingDate")), 
@@ -128,7 +131,8 @@ public class MedicalRecordRepositoryImpl implements MedicalRecordRepository {
         q.where(b.equal(pRoot.get("medicalRecordId"), mRoot.get("id")),
                 b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
                 b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
-                b.equal(mRoot.get("serviceId"), sRoot.get("id")));
+                b.equal(mRoot.get("serviceId"), sRoot.get("id")),
+                b.isNotNull(mRoot.get("billingDate")));
 
         q.multiselect(b.sum(b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice")), sRoot.get("price"))));
         Query query = session.createQuery(q);
@@ -200,6 +204,34 @@ public class MedicalRecordRepositoryImpl implements MedicalRecordRepository {
                 cRoot.get("lastName"),
                 mRoot.get("symptom"),
                 mRoot.get("conclusion"));
+        Query<Object[]> query = session.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Object[]> getMedicalRecordForPayment() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root mRoot = q.from(MedicalRecord.class);
+        Root pRoot = q.from(Prescription.class);
+//        Root medicineRoot = q.from(Medicine.class);
+//        Root sRoot = q.from(Service.class);
+//        Root cRoot = q.from(Customer.class);
+
+        q.where(b.equal(pRoot.get("medicalRecordId"), mRoot.get("id")),
+//                b.equal(cRoot.get("id"), mRoot.get("customerId")),
+//                b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
+//                b.equal(mRoot.get("serviceId"), sRoot.get("id")),
+                b.isNull(mRoot.get("billingDate")));
+
+//        q.multiselect(b.sum(b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice")), sRoot.get("price"))));
+        q.multiselect(mRoot.get("id"));
+        q.groupBy(mRoot.get("id"));
+//        q.orderBy(b.asc(b.function("YEAR", Integer.class, mRoot.get("billingDate"))));
+        
         Query<Object[]> query = session.createQuery(q);
         return query.getResultList();
     }
