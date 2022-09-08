@@ -5,6 +5,7 @@
 package com.vpdq.repository;
 
 import com.vpdq.pojo.MedicalRecord;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -23,4 +24,6 @@ public interface MedicalRecordRepository {
     MedicalRecord getMedicalRecordByID(int id);
     List<Object[]> getInfoMedicalRecordByID(int id);
     List<Object[]> getMedicalRecordForPayment();
+    List<Object[]> getMedicalRecordForPaymentByID(int id);
+    boolean payment(int idM, int idNurse, Date date);
 }

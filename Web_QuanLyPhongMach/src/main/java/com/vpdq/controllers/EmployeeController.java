@@ -195,9 +195,35 @@ public class EmployeeController {
     }
     
     @GetMapping("/billsManager")
-    public String billsManager (){
+    public String billsManager (Model model){
+        model.addAttribute("medicalRecordForNurse", this.medicalRecordService.getMedicalRecordForPayment());
         return "billsManager";
     }
+    
+    @GetMapping("/billsManager/{medicalRecordID}")
+    public String billsManagerByID (Model model,
+             @PathVariable(value = "medicalRecordID") int medicalRecordID){
+        model.addAttribute("medicalPayment", this.medicalRecordService.getMedicalRecordForPaymentByID(medicalRecordID));
+        
+        return "billsManagerForPayment";
+    }
+    
+    @PostMapping("/billsManager/{medicalRecordID}")
+    public String payment (Model model, HttpSession session,
+            @PathVariable(value = "medicalRecordID") int medicalRecordID) {
+        
+        model.addAttribute("medicalRecordID", medicalRecordID);
+        java.util.Date date = new java.util.Date();
+        Employee e = (Employee) session.getAttribute("currentUser");
+        
+        if(this.medicalRecordService.payment(medicalRecordID, e.getId(), date)){
+            model.addAttribute("medicalRecordForNurse", this.medicalRecordService.getMedicalRecordForPayment());
+            return "billsManager";
+        }
+            
+        return "billsManagerForPayment";
+    }
+   
     
     @GetMapping("/appointmentsManager")
     public String appointmentsManager (){

@@ -5,11 +5,14 @@
 package com.vpdq.repository.impl;
 
 import com.vpdq.pojo.Customer;
+import com.vpdq.pojo.Employee;
 import com.vpdq.pojo.MedicalRecord;
 import com.vpdq.pojo.Medicine;
 import com.vpdq.pojo.Prescription;
 import com.vpdq.pojo.Service;
+import com.vpdq.pojo.Unit;
 import com.vpdq.repository.MedicalRecordRepository;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -160,8 +163,6 @@ public class MedicalRecordRepositoryImpl implements MedicalRecordRepository {
         CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
 
         Root mRoot = q.from(MedicalRecord.class);
-//        Root pRoot = q.from(Prescription.class);
-//        Root medicineRoot = q.from(Medicine.class);
         Root cRoot = q.from(Customer.class);
 
         q.where(b.equal(cRoot.get("id"), mRoot.get("customerId")),
@@ -212,28 +213,85 @@ public class MedicalRecordRepositoryImpl implements MedicalRecordRepository {
     public List<Object[]> getMedicalRecordForPayment() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
-
         CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
 
         Root mRoot = q.from(MedicalRecord.class);
         Root pRoot = q.from(Prescription.class);
-//        Root medicineRoot = q.from(Medicine.class);
-//        Root sRoot = q.from(Service.class);
-//        Root cRoot = q.from(Customer.class);
+        Root medicineRoot = q.from(Medicine.class);
+        Root cRoot = q.from(Customer.class);
+        Root sRoot = q.from(Service.class);
+       
 
         q.where(b.equal(pRoot.get("medicalRecordId"), mRoot.get("id")),
-//                b.equal(cRoot.get("id"), mRoot.get("customerId")),
-//                b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
-//                b.equal(mRoot.get("serviceId"), sRoot.get("id")),
+                b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
+                b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
+                b.equal(mRoot.get("customerId"), cRoot.get("id")),
+                b.equal(mRoot.get("serviceId"), sRoot.get("id")),
                 b.isNull(mRoot.get("billingDate")));
-
-//        q.multiselect(b.sum(b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice")), sRoot.get("price"))));
-        q.multiselect(mRoot.get("id"));
-        q.groupBy(mRoot.get("id"));
-//        q.orderBy(b.asc(b.function("YEAR", Integer.class, mRoot.get("billingDate"))));
+       
         
-        Query<Object[]> query = session.createQuery(q);
+        q.multiselect(b.sum(b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice"))), sRoot.get("price")),
+                mRoot.get("id"),
+                cRoot.get("firstName"),
+                cRoot.get("lastName"),
+                sRoot.get("name")
+                );
+
+        q.groupBy(mRoot.get("id"));
+        Query query = session.createQuery(q);
+
         return query.getResultList();
+    }
+
+    @Override
+    public List<Object[]> getMedicalRecordForPaymentByID(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root mRoot = q.from(MedicalRecord.class);
+        Root pRoot = q.from(Prescription.class);
+        Root medicineRoot = q.from(Medicine.class);
+        Root cRoot = q.from(Customer.class);
+        Root sRoot = q.from(Service.class);
+       
+        q.where(b.equal(mRoot.get("customerId"), cRoot.get("id")),
+                b.equal(mRoot.get("serviceId"), sRoot.get("id")),
+                b.equal(pRoot.get("medicalRecordId"), mRoot.get("id")),
+                b.equal(pRoot.get("medicineId"), medicineRoot.get("id")),
+                b.equal(mRoot.get("id"), id));
+       
+           
+        q.multiselect(mRoot.get("id"),
+                cRoot.get("firstName"),
+                cRoot.get("lastName"),
+                sRoot.get("name"),
+                sRoot.get("price"),
+                b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice"))),
+                b.sum(b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice"))), sRoot.get("price")));
+
+        Query query = session.createQuery(q);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public boolean payment(int idM, int idNurse, Date date) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        MedicalRecord m = getMedicalRecordByID(idM);
+        
+        Employee nurse = new Employee();
+        nurse.setId(idNurse);
+        m.setNurseId(nurse);
+        
+        m.setBillingDate(date);
+        try {
+            session.update(m);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 
 }

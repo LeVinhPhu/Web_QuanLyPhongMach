@@ -5,6 +5,7 @@
 package com.vpdq.service;
 
 import com.vpdq.pojo.MedicalRecord;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,4 +22,6 @@ public interface MedicalRecordService {
     MedicalRecord getMedicalRecordByID(int id);
     List<Object[]> getInfoMedicalRecordByID(int id);
     List<Object[]> getMedicalRecordForPayment();
+    List<Object[]> getMedicalRecordForPaymentByID(int id);
+    boolean payment(int idM, int idNurse, Date date);
 }

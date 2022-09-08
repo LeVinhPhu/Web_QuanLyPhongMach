@@ -189,4 +189,10 @@ public class ApiController {
     public ResponseEntity<List<Object[]>> listMedi() {
         return new ResponseEntity<>(this.medicalRecordService.getMedicalRecordForPayment(), HttpStatus.OK);
     }
+    
+    
+    @GetMapping("/medical")
+    public ResponseEntity<List<Object[]>> medical() {
+        return new ResponseEntity<>(this.medicalRecordService.getMedicalRecordForPaymentByID(43),HttpStatus.OK);
+    }
 }

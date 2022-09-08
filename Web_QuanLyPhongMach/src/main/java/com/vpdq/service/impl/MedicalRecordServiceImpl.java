@@ -7,6 +7,7 @@ package com.vpdq.service.impl;
 import com.vpdq.pojo.MedicalRecord;
 import com.vpdq.repository.MedicalRecordRepository;
 import com.vpdq.service.MedicalRecordService;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,6 +64,16 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     @Override
     public List<Object[]> getMedicalRecordForPayment() {
         return this.medicalRecordRepository.getMedicalRecordForPayment();
+    }
+
+    @Override
+    public List<Object[]> getMedicalRecordForPaymentByID(int id) {
+        return this.medicalRecordRepository.getMedicalRecordForPaymentByID(id);
+    }
+
+    @Override
+    public boolean payment(int idM, int idNurse, Date date) {
+        return this.medicalRecordRepository.payment(idM, idNurse, date);
     }
 
     
