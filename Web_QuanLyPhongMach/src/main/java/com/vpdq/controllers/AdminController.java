@@ -50,17 +50,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/admins")
 @ControllerAdvice //dung trong khai bao thuoc tinh dung chung 
 public class AdminController {
-//
-//    @Bean
-//    public Cloudinary cloudinary() {
-//        Cloudinary cloudinary
-//                = new Cloudinary(ObjectUtils.asMap(
-//                        "cloud_name", "vinhphuvtv2",
-//                        "api_key", "335115886111226",
-//                        "api_secret", "Y4A5vCe_8f-liruLKg5FRmjl9tw",
-//                        "secure", true));
-//        return cloudinary;
-//    }
+
+    @Bean
+    public Cloudinary cloudinary() {
+        Cloudinary cloudinary
+                = new Cloudinary(ObjectUtils.asMap(
+                        "cloud_name", "vinhphuvtv2",
+                        "api_key", "335115886111226",
+                        "api_secret", "Y4A5vCe_8f-liruLKg5FRmjl9tw",
+                        "secure", true));
+        return cloudinary;
+    }
 
     //Kết nối vs service
     @Autowired
@@ -92,6 +92,7 @@ public class AdminController {
 
     @Autowired
     private DepartmentService departmentService;
+
     //dung chung
     @ModelAttribute
     public void commonAttribute(Model model) {
@@ -347,16 +348,15 @@ public class AdminController {
     @GetMapping("/medicinesManager")
     public String listMedicine(Model model,
             @RequestParam(value = "kw", defaultValue = "", required = false) String kw,
-            @RequestParam Map<String, String> params
-    ) {
-        model.addAttribute("medicine", new Medicine());
+            @RequestParam Map<String, String> params) {
+        model.addAttribute("medicineUP", new Medicine());
 
         Search.setParam(params);
         return "medicinesManager";
     }
 
     @PostMapping("/medicinesManager")
-    public String addMedicine(@ModelAttribute(value = "medicine")
+    public String addMedicine(@ModelAttribute(value = "medicineUP")
             @Valid Medicine m,
             BindingResult rs) throws IOException {
         //nếu có ảnh thì upload lên cloudinary
@@ -388,15 +388,14 @@ public class AdminController {
 
     @GetMapping("/medicinesManager/{mID}")
     public String getMedicine(Model model, Medicine m,
-            @PathVariable(value = "mID") int id
-    ) {
-        model.addAttribute("medicine", this.medicineService.getMedicineByID(id));
+            @PathVariable(value = "mID") int id) {
+        model.addAttribute("medicine1", this.medicineService.getMedicineByID(id));
         return "updateMedicine";
     }
 
     @PostMapping("/medicinesManager/{mID}")
     public String updateMedicine(@PathVariable(value = "mID") int id,
-            @ModelAttribute(value = "medicine") @Valid Medicine m,
+            @ModelAttribute(value = "medicine1") @Valid Medicine m,
             BindingResult rs
     ) {
         Medicine me = this.medicineService.getMedicineByID(id);
@@ -437,7 +436,7 @@ public class AdminController {
     //Thêm lịch trực
     @PostMapping("/onCallManager")
     public String addOnCall(@ModelAttribute(value = "onCall") @Valid OnCall ocl,
-            BindingResult r ) {
+            BindingResult r) {
         if (r.hasErrors()) {
             return "onCallManager"; //return lổi
         }

@@ -207,7 +207,7 @@ public class EmployeeController {
     public String billsManagerByID (Model model,
              @PathVariable(value = "medicalRecordID") int medicalRecordID){
         model.addAttribute("medicalPayment", this.medicalRecordService.getMedicalRecordForPaymentByID(medicalRecordID));
-        
+        model.addAttribute("medicineInPrescription", this.prescriptionService.getPreByMedicalRecordID(medicalRecordID));
         return "billsManagerForPayment";
     }
     

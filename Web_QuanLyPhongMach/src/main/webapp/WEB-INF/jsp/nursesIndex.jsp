@@ -8,9 +8,6 @@
 <%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%--<c:if test="${currentUser != null}">
-    ${currentUser.firstName} - ${currentUser.phone} 
-</c:if>--%>
 <div class="row mt-5 mb-5">
     <div class="col-md-6 col-xs-12 mt-2 mb-2">
         <div class="">

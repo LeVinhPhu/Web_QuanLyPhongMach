@@ -8,13 +8,13 @@
 <%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<h3 style="text-align: center">${medicine.name}</h3>
+<h3 style="text-align: center">${medicine1.name}</h3>
 <div style="text-align: center">
-    <img src="${medicine.image}" width='150' />
+    <img src="${medicine1.image}" width='150' />
 </div>
 
-<c:url value="/admins/medicinesManager/${medicine.id}" var="action" />
-<form:form id="formUpdate" method="post" action="${action}" modelAttribute="medicine" enctype="multipart/form-data">
+<c:url value="/admins/medicinesManager/${medicine1.id}" var="action" />
+<form:form id="formUpdate" method="post" action="${action}" modelAttribute="medicine1" enctype="multipart/form-data">
     <div style="width: 50%; margin-left: 25%">
         <div class="form-floating input-row">
             <form:input type="text" path="name" class="form-control" id="mName" placeholder="Nhap ten" name="name" />
@@ -24,7 +24,7 @@
         </div>
         <div class="form-floating input-row">
             <form:select path="unitId" class="form-select" id="unit" name="unit">
-                <option selected="selected" value="${medicine.unitId.id}">Chọn đơn vị</option>
+                <option selected="selected" value="${medicine1.unitId.id}">Chọn đơn vị</option>
                 <c:forEach items="${units}" var="u">
                     <option value="${u.id}">${u.name}</option>
                 </c:forEach>
@@ -45,7 +45,7 @@
         </div>
         <div class="form-floating input-row">
             <form:select path="supplierId" class="form-select" id="sup" name="sup">
-                <option selected="selected" value="${medicine.supplierId.id}"}>Chọn nhà cung cấp</option>
+                <option selected="selected" value="${medicine1.supplierId.id}"}>Chọn nhà cung cấp</option>
                 <c:forEach items="${suppliers}" var="s">
                     <option value="${s.id}">${s.companyName}</option>
                 </c:forEach>

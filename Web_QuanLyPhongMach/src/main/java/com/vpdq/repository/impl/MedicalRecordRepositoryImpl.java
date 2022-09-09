@@ -53,7 +53,7 @@ public class MedicalRecordRepositoryImpl implements MedicalRecordRepository {
                 b.isNotNull(mRoot.get("billingDate")));
 
         q.multiselect(b.function("YEAR", Integer.class, mRoot.get("billingDate")), 
-                b.sum(b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice")), sRoot.get("price"))));
+                b.sum(b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice"))), sRoot.get("price")));
         
         q.groupBy(b.function("YEAR", Integer.class, mRoot.get("billingDate")));
         q.orderBy(b.asc(b.function("YEAR", Integer.class, mRoot.get("billingDate"))));
@@ -81,7 +81,7 @@ public class MedicalRecordRepositoryImpl implements MedicalRecordRepository {
                 b.equal(b.function("YEAR", Integer.class, mRoot.get("billingDate")), year));
 
         q.multiselect(b.function("QUARTER", Integer.class, mRoot.get("billingDate")), 
-                b.sum(b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice")), sRoot.get("price"))));
+                b.sum(b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice"))), sRoot.get("price")));
 
         q.groupBy(b.function("QUARTER", Integer.class, mRoot.get("billingDate")));
         q.orderBy(b.asc(b.function("QUARTER", Integer.class, mRoot.get("billingDate"))));
@@ -110,7 +110,7 @@ public class MedicalRecordRepositoryImpl implements MedicalRecordRepository {
                 b.equal(b.function("YEAR", Integer.class, mRoot.get("billingDate")), year));
 
         q.multiselect(b.function("MONTH", Integer.class, mRoot.get("billingDate")), 
-                b.sum(b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice")), sRoot.get("price"))));
+                b.sum(b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice"))), sRoot.get("price")));
 
         q.groupBy(b.function("MONTH", Integer.class, mRoot.get("billingDate")));
         q.orderBy(b.asc(b.function("MONTH", Integer.class, mRoot.get("billingDate"))));
@@ -137,7 +137,7 @@ public class MedicalRecordRepositoryImpl implements MedicalRecordRepository {
                 b.equal(mRoot.get("serviceId"), sRoot.get("id")),
                 b.isNotNull(mRoot.get("billingDate")));
 
-        q.multiselect(b.sum(b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice")), sRoot.get("price"))));
+        q.multiselect(b.sum(b.sum(b.prod(pRoot.get("quantity"), medicineRoot.get("unitPrice"))), sRoot.get("price")));
         Query query = session.createQuery(q);
         return query.getResultList();
     }

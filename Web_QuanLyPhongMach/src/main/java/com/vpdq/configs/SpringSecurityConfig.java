@@ -74,15 +74,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling()
                 .accessDeniedPage("/?accessDenied");
 
-//        http.authorizeRequests().antMatchers("/").permitAll();
-//        http.authorizeRequests().antMatchers("/admins/**").access("hasRole('ROLE_ADMIN')");
-//        http.authorizeRequests().antMatchers("/employees/nursesIndex").access("hasRole('ROLE_NURSE')");
-//        http.authorizeRequests().antMatchers("/employees/billsManager").access("hasRole('ROLE_NURSE')");
-//        http.authorizeRequests().antMatchers("/employees/appointmentsManager").access("hasRole('ROLE_NURSE')");
-//        http.authorizeRequests().antMatchers("/employees/doctorsIndex").access("hasRole('ROLE_DOCTOR')");
-//        http.authorizeRequests().antMatchers("/employees/medicalRecord").access("hasRole('ROLE_DOCTOR')");
-//        http.authorizeRequests().antMatchers("/employees/prescription").access("hasRole('ROLE_DOCTOR')");
-//        http.authorizeRequests().antMatchers("/customers/**").access("hasRole('ROLE_CUSTOMER')");
+        http.authorizeRequests().antMatchers("/").permitAll();
+        http.authorizeRequests().antMatchers("/admins/**").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/employees/nursesIndex").access("hasRole('ROLE_NURSE')");
+        http.authorizeRequests().antMatchers("/employees/billsManager").access("hasRole('ROLE_NURSE')");
+        http.authorizeRequests().antMatchers("/employees/appointmentsManager").access("hasRole('ROLE_NURSE')");
+        http.authorizeRequests().antMatchers("/employees/doctorsIndex").access("hasRole('ROLE_DOCTOR')");
+        http.authorizeRequests().antMatchers("/employees/medicalRecord").access("hasRole('ROLE_DOCTOR')");
+        http.authorizeRequests().antMatchers("/employees/prescription").access("hasRole('ROLE_DOCTOR')");
+        http.authorizeRequests().antMatchers("/customers/**").access("hasRole('ROLE_CUSTOMER')");
 
         http.csrf().disable();
     }

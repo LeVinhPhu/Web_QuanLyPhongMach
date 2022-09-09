@@ -46,17 +46,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class ApiController {
 
-    @Bean
-    public Cloudinary cloudinary() {
-        Cloudinary cloudinary
-                = new Cloudinary(ObjectUtils.asMap(
-                        "cloud_name", "vinhphuvtv2",
-                        "api_key", "335115886111226",
-                        "api_secret", "Y4A5vCe_8f-liruLKg5FRmjl9tw",
-                        "secure", true));
-        return cloudinary;
-    }
-
     @Autowired
     private MedicineService medicineService;
 

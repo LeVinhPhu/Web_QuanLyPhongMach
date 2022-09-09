@@ -133,7 +133,7 @@
             <div class="modal-body">
                 <div>
                     <c:url value="/admins/medicinesManager" var="action" />
-                    <form:form id="myForm" method="post" action="${action}" modelAttribute="medicine" enctype="multipart/form-data">
+                    <form:form id="myForm" method="post" action="${action}" modelAttribute="medicineUP" enctype="multipart/form-data">
 
                         <div class="form-floating input-row">
                             <form:input type="text" path="name" class="form-control" id="name" placeholder="Nhap ten" name="name" />
